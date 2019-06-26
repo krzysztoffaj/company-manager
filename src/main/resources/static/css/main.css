@@ -1,0 +1,22 @@
+body {
+  /*padding-top: 1rem;*/
+}
+
+.header {
+  /*padding: 3rem 1.5rem;*/
+  text-align: center;
+}
+
+.search-inputs {
+  /*padding-top: 1rem*/
+  text-align: center;
+}
+
+h1 {
+	color:#0000FF;
+}
+
+h2 {
+	color:#FF0000;
+	text-align: center;
+}
