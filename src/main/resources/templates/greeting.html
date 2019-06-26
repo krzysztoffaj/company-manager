@@ -20,12 +20,12 @@
 </main>
 
 <h2>Search for an employee</h2>
-<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+<form action="#" th:action="@{/employee}" th:object="${employee}" method="post">
     <div class="search-inputs">
         <p>First name: <input type="text" th:field="*{firstName}"/></p>
         <p>Last name: <input type="text" th:field="*{lastName}"/></p>
         <p>Position: <input type="text" th:field="*{position}"/></p>
-        <p><input type="submit" value="Search"/> <input type="reset" value="Reset"/></p>
+        <p><input type="submit" value="Search"/></p>
     </div>
 </form>
 
