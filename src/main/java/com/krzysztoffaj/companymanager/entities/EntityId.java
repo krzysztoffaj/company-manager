@@ -1,4 +1,4 @@
-package com.krzysztoffaj.companymanager.models;
+package com.krzysztoffaj.companymanager.entities;
 
 public interface EntityId {
     int getId();

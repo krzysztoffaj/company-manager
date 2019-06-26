@@ -1,4 +1,4 @@
-package com.krzysztoffaj.companymanager.models;
+package com.krzysztoffaj.companymanager.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;

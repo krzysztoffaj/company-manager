@@ -1,4 +1,4 @@
-package com.krzysztoffaj.companymanager.models;
+package com.krzysztoffaj.companymanager.entities;
 
 import com.krzysztoffaj.companymanager.infrastructure.competences.Competence;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
