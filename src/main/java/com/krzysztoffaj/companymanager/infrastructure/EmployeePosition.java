@@ -1,11 +1,16 @@
 package com.krzysztoffaj.companymanager.infrastructure;
 
 public enum EmployeePosition {
-    PO,
     PM,
+    PO,
     Scrummaster,
-    DevOps,
     Developer,
+    DevOps,
     Tester,
     Analyst
+
+//    public Employee getEmployeeFromDb() {
+//        CompetenceResolver resolver = new CompetenceResolver();
+//        Employee employee = new Employee();
+//        employee.setCompetence(resolver.getCompetence(employee));
 }

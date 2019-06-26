@@ -1,5 +1,6 @@
 package com.krzysztoffaj.companymanager.models;
 
+import com.krzysztoffaj.companymanager.infrastructure.competences.Competence;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 
 import javax.persistence.*;
@@ -34,6 +35,8 @@ public class Employee implements EntityId, Serializable {
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
     private Set<Team> teams;
+
+    private Competence competence;
 
     @Override
     public int getId() {
@@ -92,4 +95,13 @@ public class Employee implements EntityId, Serializable {
     public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
+
+    public Competence getCompetence() {
+        return competence;
+    }
+
+    public void setCompetence(Competence competence) {
+        this.competence = competence;
+    }
+
 }
