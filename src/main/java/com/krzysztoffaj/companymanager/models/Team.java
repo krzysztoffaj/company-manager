@@ -15,10 +15,7 @@ public class Team implements EntityId, Serializable {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "employee_team",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "team_id")})
+    @ManyToMany(mappedBy = "teams")
     private Set<Employee> members;
 
     public Team() {
