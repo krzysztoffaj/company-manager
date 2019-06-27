@@ -36,6 +36,7 @@ public class Employee implements EntityId, Serializable {
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
     private Set<Team> teams;
 
+    @Transient
     private Competence competence;
 
     @Override

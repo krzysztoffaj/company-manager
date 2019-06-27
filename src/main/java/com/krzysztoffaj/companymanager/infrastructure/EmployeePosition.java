@@ -8,9 +8,4 @@ public enum EmployeePosition {
     DevOps,
     Tester,
     Analyst
-
-//    public Employee getEmployeeFromDb() {
-//        CompetenceResolver resolver = new CompetenceResolver();
-//        Employee employee = new Employee();
-//        employee.setCompetence(resolver.getCompetence(employee));
 }
