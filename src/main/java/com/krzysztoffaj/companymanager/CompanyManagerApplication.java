@@ -1,15 +1,12 @@
 package com.krzysztoffaj.companymanager;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {
-        ErrorMvcAutoConfiguration.class
-})
+@EnableJpaAuditing
 public class CompanyManagerApplication {
 
 	public static void main(String[] args) {

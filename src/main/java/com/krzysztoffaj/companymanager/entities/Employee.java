@@ -22,13 +22,14 @@ public class Employee implements EntityId, Serializable {
     private String lastName;
 
     @Column(name = "position")
+    @Enumerated(EnumType.STRING)
     private EmployeePosition position;
 
     @Column(name = "salary")
     private double salary;
 
-    @Column(name = "boss_id")
-    private int boss_id;
+    @Column(name = "bossId")
+    private int bossId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employee_team",
@@ -81,12 +82,12 @@ public class Employee implements EntityId, Serializable {
         this.salary = salary;
     }
 
-    public int getBoss_id() {
-        return boss_id;
+    public int getBossId() {
+        return bossId;
     }
 
-    public void setBoss_id(int boss_id) {
-        this.boss_id = boss_id;
+    public void setBossId(int bossId) {
+        this.bossId = bossId;
     }
 
     public Set<Team> getTeams() {
