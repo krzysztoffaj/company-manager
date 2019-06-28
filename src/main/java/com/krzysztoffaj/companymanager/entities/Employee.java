@@ -28,8 +28,8 @@ public class Employee implements EntityId, Serializable {
     @Column(name = "salary")
     private double salary;
 
-    @Column(name = "bossId")
-    private int bossId;
+    @Column(name = "supervisor_id")
+    private int supervisorId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employee_team",
@@ -82,12 +82,12 @@ public class Employee implements EntityId, Serializable {
         this.salary = salary;
     }
 
-    public int getBossId() {
-        return bossId;
+    public int getSupervisorId() {
+        return supervisorId;
     }
 
-    public void setBossId(int bossId) {
-        this.bossId = bossId;
+    public void setSupervisorId(int supervisorId) {
+        this.supervisorId = supervisorId;
     }
 
     public Set<Team> getTeams() {
