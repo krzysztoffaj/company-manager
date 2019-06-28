@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.entities.Employee;
+import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,17 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findByInput(String input) {
-        throw new IllegalStateException();
+    public List<Employee> findByFirstName(String firstName) {
+        return employeeRepository.findEmployeeByFirstName(firstName);
+    }
+
+    @Override
+    public List<Employee> findByLastName(String lastName) {
+        return employeeRepository.findEmployeeByLastName(lastName);
+    }
+
+    @Override
+    public List<Employee> findByPosition(EmployeePosition position) {
+        return employeeRepository.findEmployeeByPosition(position);
     }
 }

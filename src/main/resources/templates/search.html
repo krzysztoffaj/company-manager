@@ -38,7 +38,7 @@
         <th>Position</th>
         <th>Salary</th>
         <th>Supervisor Id</th>
-        <!--<th>Teams</th>-->
+        <th>Teams</th>
         <!--<th>Competence</th>-->
     </tr>
     <tr th:each="employee : ${allEmployees}">
@@ -48,7 +48,9 @@
         <td th:text="${employee.position}"></td>
         <td th:text="${employee.salary}"></td>
         <td th:text="${employee.supervisorId}"></td>
-        <!--<td th:text="${employee.teams}"></td>-->
+        <!--<td th:each="team : ${employee.teams}" th:text="${team.name}"></td>-->
+        <td th:each="team, iterStat : ${employee.teams}"
+            th:text="!${iterStat.last} ? ${team.name} + ', ': ${team.name}"></td>
         <!--<td th:text="${employee.competence}"></td>-->
     </tr>
 </table>
