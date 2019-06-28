@@ -29,6 +29,30 @@
     </div>
 </form>
 
+
+<table id="search-results">
+    <tr>
+        <th>Id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Position</th>
+        <th>Salary</th>
+        <th>BossId</th>
+        <!--<th>Teams</th>-->
+        <!--<th>Competence</th>-->
+    </tr>
+    <tr th:each="employee : ${allEmployees}">
+        <td th:text="${employee.id}"></td>
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.position}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td th:text="${employee.bossId}"></td>
+        <!--<td th:text="${employee.teams}"></td>-->
+        <!--<td th:text="${employee.competence}"></td>-->
+    </tr>
+</table>
+
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </body>
 

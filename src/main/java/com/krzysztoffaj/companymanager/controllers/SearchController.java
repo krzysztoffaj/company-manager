@@ -23,10 +23,8 @@ public class SearchController {
     public String searchForm(Model model) {
         model.addAttribute("employee", new Employee());
 
-        final List<Employee> all = service.getAll();
-        for (Employee employee : all) {
-            System.out.println(employee.getLastName());
-        }
+        final List<Employee> allEmployees = service.getAll();
+        model.addAttribute("allEmployees", allEmployees);
 
         return "search";
     }
