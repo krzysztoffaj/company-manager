@@ -6,7 +6,10 @@ import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DefaultEmployeeService implements EmployeeService {
@@ -37,5 +40,71 @@ public class DefaultEmployeeService implements EmployeeService {
     @Override
     public List<Employee> findByPosition(EmployeePosition position) {
         return employeeRepository.findEmployeeByPosition(position);
+    }
+
+    @Override
+    public Set<Employee> handleSearching(String input) {
+        String[] words = getWordsExtractedFromInput(input);
+
+        Set<Employee> uniqueResultsFirstWord;
+        Set<Employee> uniqueResultsSecondWord;
+        Set<Employee> uniqueResultsThirdWord;
+
+        Set<Employee> results = new HashSet<>();
+
+        switch (words.length) {
+            case 0:
+                results = new HashSet<>(getAll());
+                break;
+            case 1:
+                results = getUniqueResults(words[0]);
+                break;
+            case 2:
+                uniqueResultsFirstWord = getUniqueResults(words[0]);
+                uniqueResultsSecondWord = getUniqueResults(words[1]);
+
+                results = new HashSet<>(uniqueResultsFirstWord);
+                results.retainAll(uniqueResultsSecondWord);
+                break;
+            case 3:
+                uniqueResultsFirstWord = getUniqueResults(words[0]);
+                uniqueResultsSecondWord = getUniqueResults(words[1]);
+                uniqueResultsThirdWord = getUniqueResults(words[2]);
+
+                results = new HashSet<>(uniqueResultsFirstWord);
+                results.retainAll(uniqueResultsSecondWord);
+                results.retainAll(uniqueResultsThirdWord);
+                break;
+        }
+
+        return results;
+    }
+
+    @Override
+    public Set<Employee> getUniqueResults(String word) {
+        List<Employee> foundByFirstName = findByFirstName(word);
+        List<Employee> foundByLastName = findByLastName(word);
+        List<Employee> foundByPosition;
+        try {
+            foundByPosition = findByPosition(EmployeePosition.valueOf(word));
+        } catch (IllegalArgumentException ex) {
+            foundByPosition = new ArrayList<>();
+        }
+
+        Set<Employee> uniqueResults = new HashSet<>();
+        uniqueResults.addAll(foundByFirstName);
+        uniqueResults.addAll(foundByLastName);
+        uniqueResults.addAll(foundByPosition);
+
+        return uniqueResults;
+    }
+
+    @Override
+    public String[] getWordsExtractedFromInput(String input) {
+        //TODO Only alphanumeric input. Cannot be more than 3 words
+        if (!input.matches(".*\\w.*")) {
+            return new String[0];
+        }
+        return input.trim().split("\\s+");
     }
 }

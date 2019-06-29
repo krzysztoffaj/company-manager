@@ -81,7 +81,7 @@ INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
 VALUES ('John', 'Campbell', 'Developer', 7800.25, 1);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('David', 'Jones', 'Developer', 9500.00, 2);
+VALUES ('John', 'Jones', 'Developer', 9500.00, 2);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
 VALUES ('Jacob', 'Kowalski', 'Developer', 11500.50, 3);
@@ -97,7 +97,7 @@ INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
 VALUES ('Aleksandra', 'Kłosińska', 'DevOps', 5222.00, 3);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('Thomas', 'Wood', 'DevOps', 4850.00, 1);
+VALUES ('Thomas', 'Martin', 'DevOps', 4850.00, 1);
 
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
@@ -110,10 +110,10 @@ INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
 VALUES ('Adam', 'Żmuda', 'Tester', 4500.00, 3);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('Kurt', 'Gallagher', 'Tester', 5000.00, 1);
+VALUES ('Walter', 'Gallagher', 'Tester', 5000.00, 1);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('Jerry', 'Ibelino', 'Tester', 4250.00, 2);
+VALUES ('John', 'Ibelino', 'Tester', 4250.00, 2);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
 VALUES ('Anastazja', 'Gerić', 'Tester', 3900.10, 3);

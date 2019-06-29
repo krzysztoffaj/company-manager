@@ -1,7 +1,6 @@
 package com.krzysztoffaj.companymanager.controllers;
 
 import com.krzysztoffaj.companymanager.entities.Employee;
-import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import java.util.Set;
 
 @Controller
 public class SearchController {
@@ -21,9 +20,7 @@ public class SearchController {
     @GetMapping("/search")
     public String searchForm(Model model) {
         model.addAttribute("employee", new Employee());
-
-//        final List<Employee> allEmployees = service.getAll();
-        final List<Employee> allEmployees = service.findByPosition(EmployeePosition.PM);
+        final Set<Employee> allEmployees = service.handleSearching("Developer Campbell John");
         model.addAttribute("allEmployees", allEmployees);
 
         return "search";
