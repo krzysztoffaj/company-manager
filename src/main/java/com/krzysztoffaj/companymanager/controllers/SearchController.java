@@ -20,7 +20,8 @@ public class SearchController {
     @GetMapping("/search")
     public String searchForm(Model model) {
         model.addAttribute("employee", new Employee());
-        final Set<Employee> allEmployees = service.handleSearching("Developer Campbell John");
+//        final Set<Employee> allEmployees = service.handleSearching("Developer Campbell John");
+        final Set<Employee> allEmployees = service.handleSearching("");
         model.addAttribute("allEmployees", allEmployees);
 
         return "search";
