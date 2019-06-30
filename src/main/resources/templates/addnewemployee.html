@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Company Manager: add new employee</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/addnewemployee.css}"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/addnewemployee.js"></script>
+</head>
+
+<body>
+<div th:replace="fragment/header :: header"></div>
+
+<table id="employee-table">
+    <tr>
+        <td>
+            <label><b>First name</b></label><br/>
+            <input name="first-name" type="text"/>
+        </td>
+        <td>
+            <label><b>Last name</b></label><br/>
+            <input name="last-name" type="text"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label><b>Position</b></label><br/>
+            <!--<input name="position" type="text"/>-->
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+        </td>
+        <td>
+            <label><b>Salary</b></label><br/>
+            <input name="salary" type="text"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label><b>Supervisor</b></label><br/>
+            <!--<input name="supervisor" type="text"/>-->
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+        </td>
+        <td>
+            <label><b>Teams</b></label><br/>
+            <!--<input name="teams" type="text"/>-->
+            <select multiple>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<div class="button-wrapper">
+    <input name="newemployeesubmit" type="submit" value="Submit"/>
+</div>
+
+</body>
+</html>

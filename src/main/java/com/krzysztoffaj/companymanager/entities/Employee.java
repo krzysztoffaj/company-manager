@@ -105,5 +105,4 @@ public class Employee implements EntityId, Serializable {
     public void setCompetence(Competence competence) {
         this.competence = competence;
     }
-
 }

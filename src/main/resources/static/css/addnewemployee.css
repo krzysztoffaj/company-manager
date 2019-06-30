@@ -1,0 +1,26 @@
+body {
+  padding-top: 6rem;
+}
+#employee-table {
+  border: 0px;
+  border-collapse: collapse;
+
+  width: 10%;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+#employee-table td, #employee-table th {
+  padding: 8px;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+.newemployeesubmit {
+    position: absolute;
+    top: 50%;
+}
