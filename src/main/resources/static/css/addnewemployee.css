@@ -1,6 +1,7 @@
 body {
   padding-top: 6rem;
 }
+
 #employee-table {
   border: 0px;
   border-collapse: collapse;
@@ -15,6 +16,11 @@ body {
 #employee-table td, #employee-table th {
   padding: 8px;
 }
+
+#position, #supervisor, #teams {
+  width: 100%;
+}
+
 
 .button-wrapper {
     text-align: center;
