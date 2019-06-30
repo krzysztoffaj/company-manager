@@ -6,28 +6,40 @@
 
     <title>Company Manager</title>
 
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/search.css}"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<main role="main" class="container">
+<div th:replace="partials/header :: header"></div>
 
-    <div class="header">
-        <h1>Company Manager</h1>
-    </div>
+<!--<h2>Search for an employee</h2>-->
+<!--<form action="#" th:action="@{/search}" th:object="${employee}" method="post">-->
+<!--<div class="search-inputs">-->
+<!--<p>First name, last name or position: <input type="text" th:field="*{firstName}"/></p>-->
+<!--<p><input type="submit" value="Search"/></p>-->
+<!--</div>-->
+<!--</form>-->
 
-</main>
-
-<h2>Search for an employee</h2>
-<form action="#" th:action="@{/search}" th:object="${employee}" method="post">
-    <div class="search-inputs">
-        <p>First name, last name or position: <input type="text" th:field="*{firstName}"/></p>
-        <!--<p>Last name: <input type="text" th:field="*{lastName}"/></p>-->
-        <!--<p>Position: <input type="text" th:field="*{position}"/></p>-->
-        <p><input type="submit" value="Search"/></p>
-    </div>
-</form>
+<input type="text" id="input" onkeyup="myFunction()"
+       placeholder="Search for employees by first name, last name or position...">
+<p>
+    Enter you name @Html.TextBox("Name")
+    <input type="submit" id="SubmitName" value="Submit"/>
+</p>
+<script type="text/jscript">
+    $('#SubmitName').click(function () {
+        var url = "/Home/WelcomeMsg";
+        var name = $('#Name').val();
+        $.get(url, { input: name }, function (data) {
+            $("#rData").html(data);
+        });
+    })
+</script>
 
 
 <table id="search-results">
@@ -57,8 +69,5 @@
         <!--<td th:text="${employee.competence}"></td>-->
     </tr>
 </table>
-
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </body>
-
 </html>
