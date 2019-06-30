@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -18,7 +19,7 @@ public class SearchController {
 
     @GetMapping("/search")
     public String searchInit(Model model) {
-        final Set<Employee> allEmployees = service.handleSearching("");
+        final List<Employee> allEmployees = service.getAll();
         model.addAttribute("allEmployees", allEmployees);
 
         return "search";
