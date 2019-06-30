@@ -18,8 +18,7 @@ public class SearchController {
     private EmployeeService service;
 
     @GetMapping("/search")
-    public String searchForm(Model model) {
-        model.addAttribute("employee", new Employee());
+    public String searchInit(Model model) {
         final Set<Employee> allEmployees = service.handleSearching("");
         model.addAttribute("allEmployees", allEmployees);
 
@@ -27,7 +26,7 @@ public class SearchController {
     }
 
     @PostMapping("/search")
-    public String searchSubmit(@ModelAttribute Employee employee, Model model, String input) {
+    public String searchSubmit(Model model, String input) {
         final Set<Employee> searchResults = service.handleSearching(input);
         model.addAttribute("allEmployees", searchResults);
 
