@@ -21,14 +21,18 @@ public class SearchController {
     public String searchForm(Model model) {
         model.addAttribute("employee", new Employee());
 //        final Set<Employee> allEmployees = service.handleSearching("Developer Campbell John");
-        final Set<Employee> allEmployees = service.handleSearching("");
+        final Set<Employee> allEmployees = service.handleSearching("Developer");
         model.addAttribute("allEmployees", allEmployees);
 
         return "search";
     }
 
     @PostMapping("/search")
-    public String searchSubmit(@ModelAttribute Employee employee) {
-        return "result";
+    public String searchSubmit(@ModelAttribute Employee employee, Model model, String input) {
+        final Set<Employee> allEmployees = service.handleSearching(input);
+        model.addAttribute("allEmployees", allEmployees);
+        System.out.println("elo");
+
+        return "search";
     }
 }

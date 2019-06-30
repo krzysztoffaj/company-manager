@@ -9,13 +9,17 @@
     <link rel="stylesheet" th:href="@{/css/search.css}"/>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="@{/js/search.js)"></script>
 </head>
 
 <body>
-<div th:replace="partials/header :: header"></div>
+<div th:replace="fragment/header :: header"></div>
 
 <!--<h2>Search for an employee</h2>-->
 <!--<form action="#" th:action="@{/search}" th:object="${employee}" method="post">-->
@@ -25,22 +29,45 @@
 <!--</div>-->
 <!--</form>-->
 
-<input type="text" id="input" onkeyup="myFunction()"
-       placeholder="Search for employees by first name, last name or position...">
-<p>
-    Enter you name @Html.TextBox("Name")
-    <input type="submit" id="SubmitName" value="Submit"/>
-</p>
-<script type="text/jscript">
-    $('#SubmitName').click(function () {
-        var url = "/Home/WelcomeMsg";
-        var name = $('#Name').val();
-        $.get(url, { input: name }, function (data) {
-            $("#rData").html(data);
-        });
-    })
-</script>
 
+<!--<form class="example" action="action_page.php">-->
+    <!--<input type="text" id="input" placeholder="Search for employees by first name, last name or position...">-->
+    <!--<input type="submit" value="Search">-->
+<!--</form>-->
+
+
+<!--<form th:object="${employee}" method="post">-->
+    <!--<div>-->
+        <!--<input type="text" name="lectureSearch" th:value="${searchSubmit}">-->
+        <!--<input type="submit" value="Search">-->
+    <!--</div>-->
+<!--</form>-->
+<!--<p>-->
+<!--Enter you name @Html.TextBox("Name")-->
+<!--<input type="submit" id="submit" value="Submit"/>-->
+<!--</p>-->
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <form class="form-horizontal" id="search-form">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="input"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search"
+                            class="btn btn-primary btn-lg">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <table id="search-results">
     <tr>
