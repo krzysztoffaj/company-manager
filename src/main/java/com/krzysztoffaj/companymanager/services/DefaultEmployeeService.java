@@ -136,7 +136,7 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     private Integer getIntFromStringOrNull(String input) {
-        if(input.equals("null")) {
+        if (input.equals("null")) {
             return null;
         } else {
             return Integer.parseInt(input);
