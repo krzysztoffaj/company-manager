@@ -24,5 +24,5 @@ public interface EmployeeService {
 
     String[] getWordsExtractedFromInput(String input);
 
-    Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, double salary, int supervisorId, int[] teams);
+    Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, int supervisorId, int[] teams);
 }

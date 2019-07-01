@@ -113,13 +113,12 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, double salary, int supervisorId, int[] teamsIds) {
-        System.out.println("Test");
+    public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, int supervisorId, int[] teamsIds) {
         Employee employee = new Employee();
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
         employee.setPosition(position);
-        employee.setSalary(salary);
+        employee.setSalary(Double.parseDouble(salary));
         employee.setSupervisorId(supervisorId);
 
         Set<Team> teams = new HashSet<>();

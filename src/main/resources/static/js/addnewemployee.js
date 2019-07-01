@@ -7,9 +7,11 @@ $(document).ready(function() {
         var supervisor = $('#supervisor').val();
         var teams = $('#teams').val();
 
-        alert(supervisor);
         $.ajax({
-            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName,
+//            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName,
+            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
+                                       "&salary=" + salary + "&supervisor=" + supervisor + "&teams=" + teams,
+//            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position,
             method: 'GET',
             success: function(result){
                 alert("Success!");

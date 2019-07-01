@@ -36,14 +36,14 @@ public class AddNewEmployeeController {
     @GetMapping("/addnewemployeesubmit")
     public String authenticateUser(@RequestParam("firstName") String firstName,
                                    @RequestParam("lastName") String lastName,
-//                                   @RequestParam("position") EmployeePosition position,
-//                                   @RequestParam("salary") double salary,
-//                                   @RequestParam("supervisorId") int supervisorId,
-//                                   @RequestParam("teams") int[] teams,
+                                   @RequestParam("position") EmployeePosition position,
+                                   @RequestParam("salary") String salary,
+                                   @RequestParam("supervisor") int supervisor,
+                                   @RequestParam("teams") int[] teams,
                                    Model model) {
-        System.out.println("dupa");
-//        employeeService.castInputsToEmployeeObject(firstName, lastName, null, 0, 1, null);
-//        employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teams);
+//        int[] tak = new int[0];
+//        employeeService.castInputsToEmployeeObject(firstName, lastName, position, 0, 1, tak);
+        final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisor, teams);
 
         return "search";
     }
