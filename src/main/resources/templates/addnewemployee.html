@@ -25,17 +25,16 @@
     <tr>
         <td>
             <label><b>First name</b></label><br/>
-            <input name="first-name" type="text"/>
+            <input id="firstName" type="text"/>
         </td>
         <td>
             <label><b>Last name</b></label><br/>
-            <input name="last-name" type="text"/>
+            <input id="lastName" type="text"/>
         </td>
     </tr>
     <tr>
         <td>
             <label><b>Position</b></label><br/>
-            <!--<input name="position" type="text"/>-->
             <select id="position">
                 <option th:each="position : ${T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).values()}"
                         th:value="${position}"
@@ -51,21 +50,19 @@
     <tr>
         <td>
             <label><b>Supervisor</b></label><br/>
-            <!--<input name="supervisor" type="text"/>-->
             <select id="supervisor">
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
-                        th:value="${employee.position}"
+                        th:value="${employee.id}"
                         th:text="${employee.firstName} + ' ' + ${employee.lastName}">
                 </option>
             </select>
         </td>
         <td>
             <label><b>Teams</b></label><br/>
-            <!--<input name="teams" type="text"/>-->
             <select multiple id="teams">
                 <option th:each="team : ${allTeams}"
-                        th:value="${team}"
+                        th:value="${team.id}"
                         th:text="${team.name}">
                 </option>
             </select>
@@ -73,7 +70,7 @@
     </tr>
 </table>
 <div class="button-wrapper">
-    <input name="newemployeesubmit" type="submit" value="Submit"/>
+    <input id="newemployeesubmit" type="submit" value="Submit"/>
 </div>
 
 </body>

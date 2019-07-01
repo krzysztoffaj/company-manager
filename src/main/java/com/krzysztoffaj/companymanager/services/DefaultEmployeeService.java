@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.entities.Employee;
+import com.krzysztoffaj.companymanager.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    TeamService teamService;
 
     @Override
     public Employee get(int id) {
@@ -106,5 +110,26 @@ public class DefaultEmployeeService implements EmployeeService {
             return new String[0];
         }
         return input.trim().split("\\s+");
+    }
+
+    @Override
+    public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, double salary, int supervisorId, int[] teamsIds) {
+        System.out.println("Test");
+        Employee employee = new Employee();
+        employee.setFirstName(firstName);
+        employee.setLastName(lastName);
+        employee.setPosition(position);
+        employee.setSalary(salary);
+        employee.setSupervisorId(supervisorId);
+
+        Set<Team> teams = new HashSet<>();
+        for (int teamsId : teamsIds) {
+            teams.add(teamService.get(teamsId));
+        }
+        employee.setTeams(teams);
+
+        System.out.println(employee.toString());
+
+        return employee;
     }
 }

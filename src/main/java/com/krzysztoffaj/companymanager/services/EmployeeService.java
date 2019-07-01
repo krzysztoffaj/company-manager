@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.entities.Employee;
+import com.krzysztoffaj.companymanager.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface EmployeeService {
     Set<Employee> getUniqueResults(String word);
 
     String[] getWordsExtractedFromInput(String input);
+
+    Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, double salary, int supervisorId, int[] teams);
 }
