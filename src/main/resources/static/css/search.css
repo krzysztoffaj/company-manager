@@ -44,6 +44,7 @@ form.search-elements button:hover {
 
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 100px;
 }
 
 #search-results td, #search-results th {

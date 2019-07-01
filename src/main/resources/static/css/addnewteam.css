@@ -18,7 +18,7 @@ body {
   width: 100%;
 }
 
-#teamName, #pm, #po, #scrummaster {
+#teamName, #pmId, #poId, #scrummasterId {
   width: 100%;
 }
 

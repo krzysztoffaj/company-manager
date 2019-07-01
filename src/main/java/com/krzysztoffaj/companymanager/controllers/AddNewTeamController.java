@@ -2,7 +2,6 @@ package com.krzysztoffaj.companymanager.controllers;
 
 import com.krzysztoffaj.companymanager.entities.Employee;
 import com.krzysztoffaj.companymanager.entities.Team;
-import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,10 @@ public class AddNewTeamController {
 
     @GetMapping("/addnewteamsubmit")
     public String addNewTeamSubmit(@RequestParam("teamName") String teamName,
-                                   @RequestParam("pm") int pm,
-                                   @RequestParam("po") int po,
-                                   @RequestParam("scrummaster") int scrummaster) {
-        final Team team = teamService.castInputToTeamObject(teamName, pm, po, scrummaster);
+                                   @RequestParam("pmId") int pmId,
+                                   @RequestParam("poId") int poId,
+                                   @RequestParam("scrummasterId") int scrummasterId) {
+        final Team team = teamService.castInputToTeamObject(teamName, pmId, poId, scrummasterId);
         teamService.save(team);
 
         return "search";

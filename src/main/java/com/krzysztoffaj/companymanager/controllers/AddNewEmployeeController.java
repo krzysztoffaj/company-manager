@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class AddNewEmployeeController {
@@ -38,9 +36,9 @@ public class AddNewEmployeeController {
                                        @RequestParam("lastName") String lastName,
                                        @RequestParam("position") EmployeePosition position,
                                        @RequestParam("salary") String salary,
-                                       @RequestParam("supervisor") int supervisor,
+                                       @RequestParam("supervisorId") int supervisorId,
                                        @RequestParam("teams") int[] teams) {
-        final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisor, teams);
+        final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teams);
         employeeService.save(employee);
 
         return "search";

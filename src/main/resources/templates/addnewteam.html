@@ -31,7 +31,7 @@
     <tr>
         <td>
             <label><b>PM</b></label><br/>
-            <select id="pm">
+            <select id="pmId">
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
                         th:value="${employee.id}"
@@ -43,7 +43,7 @@
     <tr>
         <td>
             <label><b>PO</b></label><br/>
-            <select id="po">
+            <select id="poId">
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PO}"
                         th:value="${employee.id}"
@@ -55,7 +55,7 @@
     <tr>
         <td>
             <label><b>Scrummaster</b></label><br/>
-            <select id="scrummaster">
+            <select id="scrummasterId">
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).Scrummaster}"
                         th:value="${employee.id}"
@@ -66,7 +66,7 @@
     </tr>
 </table>
 <div class="button-wrapper">
-    <input id="newemployeesubmit" type="submit" value="Submit"/>
+    <input id="newteamsubmit" type="submit" value="Submit"/>
 </div>
 
 </body>
