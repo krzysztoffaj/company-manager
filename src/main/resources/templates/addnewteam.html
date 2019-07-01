@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Company Manager: add new team</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/addnewteam.css}"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/addnewteam.js"></script>
+</head>
+
+<body>
+<div th:replace="fragment/header :: header"></div>
+
+<table id="team-table">
+    <tr>
+        <td>
+            <label><b>Team's name</b></label><br/>
+            <input id="teamName" type="text"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label><b>PM</b></label><br/>
+            <select id="pm">
+                <option th:each="employee : ${allEmployees}"
+                        th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                </option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label><b>PM</b></label><br/>
+            <select id="po">
+                <option th:each="employee : ${allEmployees}"
+                        th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PO}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                </option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label><b>PM</b></label><br/>
+            <select id="scrummaster">
+                <option th:each="employee : ${allEmployees}"
+                        th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).Scrummaster}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                </option>
+            </select>
+        </td>
+    </tr>
+</table>
+<div class="button-wrapper">
+    <input id="newemployeesubmit" type="submit" value="Submit"/>
+</div>
+
+</body>
+</html>

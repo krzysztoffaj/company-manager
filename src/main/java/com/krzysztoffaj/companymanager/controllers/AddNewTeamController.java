@@ -9,22 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
-public class AddNewEmployeeController {
+public class AddNewTeamController {
 
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private TeamService teamService;
 
-    @GetMapping("/addnewemployee")
-    public String addNewEmployeeInit(Model model) {
+    @GetMapping("/addnewteam")
+    public String addNewTeamInit(Model model) {
         final List<Employee> allEmployees = employeeService.getAll();
         final List<Team> allTeams = teamService.getAll();
         model.addAttribute("allEmployees", allEmployees);
@@ -33,13 +31,11 @@ public class AddNewEmployeeController {
         return "addnewemployee";
     }
 
-    @GetMapping("/addnewemployeesubmit")
-    public String addNewEmployeeSubmit(@RequestParam("firstName") String firstName,
-                                       @RequestParam("lastName") String lastName,
-                                       @RequestParam("position") EmployeePosition position,
-                                       @RequestParam("salary") String salary,
-                                       @RequestParam("supervisor") int supervisor,
-                                       @RequestParam("teams") int[] teams) {
+    @GetMapping("/addnewteamsubmit")
+    public String addNewTeamSubmit(@RequestParam("teamName") String teamName,
+                                   @RequestParam("pm") EmployeePosition pm,
+                                   @RequestParam("po") EmployeePosition po,
+                                   @RequestParam("scrummaster") EmployeePosition scrummaster) {
         final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisor, teams);
         employeeService.save(employee);
 

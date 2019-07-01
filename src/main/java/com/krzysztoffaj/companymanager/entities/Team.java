@@ -15,6 +15,10 @@ public class Team implements EntityId, Serializable {
     @Column(name = "name")
     private String name;
 
+    private Employee pm;
+
+    private
+
     @ManyToMany(mappedBy = "teams")
     private Set<Employee> members;
 
