@@ -28,16 +28,16 @@ public class AddNewTeamController {
         model.addAttribute("allEmployees", allEmployees);
         model.addAttribute("allTeams", allTeams);
 
-        return "addnewemployee";
+        return "addnewteam";
     }
 
     @GetMapping("/addnewteamsubmit")
     public String addNewTeamSubmit(@RequestParam("teamName") String teamName,
-                                   @RequestParam("pm") EmployeePosition pm,
-                                   @RequestParam("po") EmployeePosition po,
-                                   @RequestParam("scrummaster") EmployeePosition scrummaster) {
-        final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisor, teams);
-        employeeService.save(employee);
+                                   @RequestParam("pm") int pm,
+                                   @RequestParam("po") int po,
+                                   @RequestParam("scrummaster") int scrummaster) {
+        final Team team = teamService.castInputToTeamObject(teamName, pm, po, scrummaster);
+        teamService.save(team);
 
         return "search";
     }

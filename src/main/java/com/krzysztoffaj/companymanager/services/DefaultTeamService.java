@@ -30,9 +30,13 @@ public class DefaultTeamService implements TeamService {
     }
 
     @Override
-    public Team castInputToTeamObject(String teamName, EmployeePosition pm, EmployeePosition po, EmployeePosition scrummaster) {
+    public Team castInputToTeamObject(String teamName, int pmId, int poId, int scrummasterId) {
         Team team = new Team();
         team.setName(teamName);
+        team.setPmId(pmId);
+        team.setPoId(poId);
+        team.setScrummasterId(scrummasterId);
 
+        return team;
     }
 }

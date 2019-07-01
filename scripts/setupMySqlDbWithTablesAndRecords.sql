@@ -18,8 +18,12 @@ CREATE TABLE employee
 
 CREATE TABLE team
 (
-  team_id   INT NOT NULL AUTO_INCREMENT,
-  name      NVARCHAR(255) NOT NULL,
+  team_id         INT NOT NULL AUTO_INCREMENT,
+  name            NVARCHAR(255) NOT NULL,
+  pm_id           INT NOT NULL,
+  po_id           INT NOT NULL,
+  scrummaster_id  INT NOT NULL,
+
 
   PRIMARY KEY (team_id)
 );
@@ -141,14 +145,14 @@ VALUES ('Jennifer', 'Parker', 'Analyst', 3000.00, 3);
 
 -- Set up values for team table
 
-INSERT INTO team (name)
-VALUES ('Technical Architecture');
+INSERT INTO team (name, pm_id, po_id, scrummaster_id)
+VALUES ('Technical Architecture', 1, 4, 7);
 
-INSERT INTO team (name)
-VALUES ('Mobile');
+INSERT INTO team (name, pm_id, po_id, scrummaster_id)
+VALUES ('Mobile', 2, 6, 9);
 
-INSERT INTO team (name)
-VALUES ('Customer Relationship Management');
+INSERT INTO team (name, pm_id, po_id, scrummaster_id)
+VALUES ('Customer Relationship Management', 3, 5, 8);
 
 
 

@@ -15,9 +15,14 @@ public class Team implements EntityId, Serializable {
     @Column(name = "name")
     private String name;
 
-    private Employee pm;
+    @Column(name = "pm_id")
+    private int pmId;
 
-    private
+    @Column(name = "po_id")
+    private int poId;
+
+    @Column(name = "scrummaster_id")
+    private int scrummasterId;
 
     @ManyToMany(mappedBy = "teams")
     private Set<Employee> members;
@@ -45,6 +50,30 @@ public class Team implements EntityId, Serializable {
 
     public Set<Employee> getMembers() {
         return members;
+    }
+
+    public int getPmId() {
+        return pmId;
+    }
+
+    public void setPmId(int pmId) {
+        this.pmId = pmId;
+    }
+
+    public int getPoId() {
+        return poId;
+    }
+
+    public void setPoId(int poId) {
+        this.poId = poId;
+    }
+
+    public int getScrummasterId() {
+        return scrummasterId;
+    }
+
+    public void setScrummasterId(int scrummasterId) {
+        this.scrummasterId = scrummasterId;
     }
 
     public void setMembers(Set<Employee> members) {

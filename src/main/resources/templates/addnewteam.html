@@ -42,7 +42,7 @@
     </tr>
     <tr>
         <td>
-            <label><b>PM</b></label><br/>
+            <label><b>PO</b></label><br/>
             <select id="po">
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PO}"
@@ -54,7 +54,7 @@
     </tr>
     <tr>
         <td>
-            <label><b>PM</b></label><br/>
+            <label><b>Scrummaster</b></label><br/>
             <select id="scrummaster">
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).Scrummaster}"
