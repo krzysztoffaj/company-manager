@@ -13,7 +13,7 @@ $(document).ready(function() {
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location("/search");
+                window.location.replace("/search");
         }});
     });
 });

@@ -132,8 +132,6 @@ public class DefaultEmployeeService implements EmployeeService {
         }
         employee.setTeams(teams);
 
-        System.out.println(employee.toString());
-
         return employee;
     }
 }
