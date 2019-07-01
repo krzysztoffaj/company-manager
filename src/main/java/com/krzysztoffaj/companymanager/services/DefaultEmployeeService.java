@@ -47,6 +47,11 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
+    public void save(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    @Override
     public Set<Employee> handleSearching(String input) {
         String[] words = getWordsExtractedFromInput(input);
 

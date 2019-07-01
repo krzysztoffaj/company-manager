@@ -39,11 +39,9 @@ public class AddNewEmployeeController {
                                    @RequestParam("position") EmployeePosition position,
                                    @RequestParam("salary") String salary,
                                    @RequestParam("supervisor") int supervisor,
-                                   @RequestParam("teams") int[] teams,
-                                   Model model) {
-//        int[] tak = new int[0];
-//        employeeService.castInputsToEmployeeObject(firstName, lastName, position, 0, 1, tak);
+                                   @RequestParam("teams") int[] teams) {
         final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisor, teams);
+        employeeService.save(employee);
 
         return "search";
     }

@@ -16,6 +16,8 @@ public interface EmployeeService {
 
     List<Employee> findByLastName(String lastName);
 
+    void save(Employee employee);
+
     List<Employee> findByPosition(EmployeePosition position);
 
     Set<Employee> handleSearching(String input);

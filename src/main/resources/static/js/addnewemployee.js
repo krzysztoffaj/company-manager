@@ -8,10 +8,8 @@ $(document).ready(function() {
         var teams = $('#teams').val();
 
         $.ajax({
-//            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName,
             url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
                                        "&salary=" + salary + "&supervisor=" + supervisor + "&teams=" + teams,
-//            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position,
             method: 'GET',
             success: function(result){
                 alert("Success!");
