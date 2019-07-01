@@ -11,7 +11,7 @@ CREATE TABLE employee
   last_name         NVARCHAR(255) NOT NULL,
   position          ENUM('PO','PM','Scrummaster','DevOps','Developer','Tester','Analyst') NOT NULL,
   salary            DOUBLE(12,2) NOT NULL,
-  supervisor_id     INT NOT NULL,
+  supervisor_id     INT,
 
   PRIMARY KEY (employee_id)
 );
@@ -20,9 +20,9 @@ CREATE TABLE team
 (
   team_id         INT NOT NULL AUTO_INCREMENT,
   name            NVARCHAR(255) NOT NULL,
-  pm_id           INT NOT NULL,
-  po_id           INT NOT NULL,
-  scrummaster_id  INT NOT NULL,
+  pm_id           INT,
+  po_id           INT,
+  scrummaster_id  INT,
 
 
   PRIMARY KEY (team_id)
@@ -43,13 +43,13 @@ CREATE TABLE employee_team
 -- Set up values for employee table
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('Mack', 'Knife', 'PM', 100000.00, 0);
+VALUES ('Mack', 'Knife', 'PM', 100000.00, NULL);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('Louis', 'Crosby', 'PM', 89500.99, 0);
+VALUES ('Louis', 'Crosby', 'PM', 89500.99, NULL);
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)
-VALUES ('Anna', 'Frąckowiak', 'PM', 95000.75, 0);
+VALUES ('Anna', 'Frąckowiak', 'PM', 95000.75, NULL);
 
 
 INSERT INTO employee (first_name, last_name, position, salary, supervisor_id)

@@ -32,9 +32,9 @@ public class AddNewTeamController {
 
     @GetMapping("/addnewteamsubmit")
     public String addNewTeamSubmit(@RequestParam("teamName") String teamName,
-                                   @RequestParam("pmId") int pmId,
-                                   @RequestParam("poId") int poId,
-                                   @RequestParam("scrummasterId") int scrummasterId) {
+                                   @RequestParam("pmId") String pmId,
+                                   @RequestParam("poId") String poId,
+                                   @RequestParam("scrummasterId") String scrummasterId) {
         final Team team = teamService.castInputToTeamObject(teamName, pmId, poId, scrummasterId);
         teamService.save(team);
 

@@ -29,13 +29,21 @@ public class DefaultTeamService implements TeamService {
     }
 
     @Override
-    public Team castInputToTeamObject(String teamName, int pmId, int poId, int scrummasterId) {
+    public Team castInputToTeamObject(String teamName, String pmId, String poId, String scrummasterId) {
         Team team = new Team();
         team.setName(teamName);
-        team.setPmId(pmId);
-        team.setPoId(poId);
-        team.setScrummasterId(scrummasterId);
+        team.setPmId(getIntFromStringOrNull(pmId));
+        team.setPoId(getIntFromStringOrNull(poId));
+        team.setScrummasterId(getIntFromStringOrNull(scrummasterId));
 
         return team;
+    }
+
+    private Integer getIntFromStringOrNull(String input) {
+        if(input.equals("null")) {
+            return null;
+        } else {
+            return Integer.parseInt(input);
+        }
     }
 }

@@ -118,13 +118,13 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, int supervisorId, int[] teamsIds) {
+    public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teamsIds) {
         Employee employee = new Employee();
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
         employee.setPosition(position);
         employee.setSalary(Double.parseDouble(salary));
-        employee.setSupervisorId(supervisorId);
+        employee.setSupervisorId(getIntFromStringOrNull(supervisorId));
 
         Set<Team> teams = new HashSet<>();
         for (int teamsId : teamsIds) {
@@ -133,5 +133,13 @@ public class DefaultEmployeeService implements EmployeeService {
         employee.setTeams(teams);
 
         return employee;
+    }
+
+    private Integer getIntFromStringOrNull(String input) {
+        if(input.equals("null")) {
+            return null;
+        } else {
+            return Integer.parseInt(input);
+        }
     }
 }

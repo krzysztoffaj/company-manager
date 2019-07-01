@@ -36,7 +36,7 @@ public class AddNewEmployeeController {
                                        @RequestParam("lastName") String lastName,
                                        @RequestParam("position") EmployeePosition position,
                                        @RequestParam("salary") String salary,
-                                       @RequestParam("supervisorId") int supervisorId,
+                                       @RequestParam("supervisorId") String supervisorId,
                                        @RequestParam("teams") int[] teams) {
         final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teams);
         employeeService.save(employee);

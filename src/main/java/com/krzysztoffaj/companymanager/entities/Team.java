@@ -16,13 +16,13 @@ public class Team implements EntityId, Serializable {
     private String name;
 
     @Column(name = "pm_id")
-    private int pmId;
+    private Integer pmId;
 
     @Column(name = "po_id")
-    private int poId;
+    private Integer poId;
 
     @Column(name = "scrummaster_id")
-    private int scrummasterId;
+    private Integer scrummasterId;
 
     @ManyToMany(mappedBy = "teams")
     private Set<Employee> members;
@@ -52,27 +52,27 @@ public class Team implements EntityId, Serializable {
         return members;
     }
 
-    public int getPmId() {
+    public Integer getPmId() {
         return pmId;
     }
 
-    public void setPmId(int pmId) {
+    public void setPmId(Integer pmId) {
         this.pmId = pmId;
     }
 
-    public int getPoId() {
+    public Integer getPoId() {
         return poId;
     }
 
-    public void setPoId(int poId) {
+    public void setPoId(Integer poId) {
         this.poId = poId;
     }
 
-    public int getScrummasterId() {
+    public Integer getScrummasterId() {
         return scrummasterId;
     }
 
-    public void setScrummasterId(int scrummasterId) {
+    public void setScrummasterId(Integer scrummasterId) {
         this.scrummasterId = scrummasterId;
     }
 

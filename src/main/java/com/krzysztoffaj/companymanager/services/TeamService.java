@@ -12,5 +12,5 @@ public interface TeamService {
 
     void save(Team team);
 
-    Team castInputToTeamObject(String teamName, int pmId, int poId, int scrummasterId);
+    Team castInputToTeamObject(String teamName, String pmId, String poId, String scrummasterId);
 }

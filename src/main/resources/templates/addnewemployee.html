@@ -51,6 +51,7 @@
         <td>
             <label><b>Supervisor</b></label><br/>
             <select id="supervisorId">
+                <option selected value=null>-- Unassigned --</option>
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
                         th:value="${employee.id}"

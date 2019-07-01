@@ -32,6 +32,7 @@
         <td>
             <label><b>PM</b></label><br/>
             <select id="pmId">
+                <option selected value=null>-- Unassigned --</option>
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
                         th:value="${employee.id}"
@@ -44,6 +45,7 @@
         <td>
             <label><b>PO</b></label><br/>
             <select id="poId">
+                <option selected value=null>-- Unassigned --</option>
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PO}"
                         th:value="${employee.id}"
@@ -56,6 +58,7 @@
         <td>
             <label><b>Scrummaster</b></label><br/>
             <select id="scrummasterId">
+                <option selected value=null>-- Unassigned --</option>
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).Scrummaster}"
                         th:value="${employee.id}"
