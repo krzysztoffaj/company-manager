@@ -17,7 +17,7 @@ function fire_ajax_submit() {
         url: "/search",
         data: search,
         success: function(result){
-//            $("#search-results").html(result);
-            $("#search-form")[0].reset();
+            $("#search-results").html(result);
+//            $("#search-form")[0].reset();
     }});
 }
