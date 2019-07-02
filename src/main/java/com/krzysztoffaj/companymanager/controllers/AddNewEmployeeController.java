@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -47,8 +48,8 @@ public class AddNewEmployeeController {
         return "search";
     }
 
-    @GetMapping("/editemployee")
-    public String editEmployeeInit(@RequestParam("employeeId") Integer employeeId,
+    @GetMapping("/editemployee/{employeeId}")
+    public String editEmployeeInit(@PathVariable("employeeId") Integer employeeId,
                                    Model model) {
         final List<Employee> allEmployees = employeeService.getAll();
         final List<Team> allTeams = teamService.getAll();

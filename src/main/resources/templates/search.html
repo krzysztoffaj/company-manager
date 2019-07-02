@@ -52,10 +52,7 @@
             </th:block>
         </td>
         <td>
-            <form action="#" th:action="@{/dashboard/myEntries/} + ${{employee.id}}" method="get">
-                <!--<button th:id="'table_entry_childs_button_' + ${employee.id}" type="submit">-->
-                    <!--<b><i>Edit</i></b>-->
-                <!--</button>-->
+            <form th:action="@{/editemployee/} + ${{employee.id}}" method="get">
                 <input id="editemployee" type="submit" value="Edit"/>
             </form>
         </td>
