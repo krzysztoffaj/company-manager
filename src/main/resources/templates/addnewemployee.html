@@ -39,15 +39,11 @@
     <tr>
         <td>
             <label><b>Position</b></label><br/>
-            <!--<select id="position"-->
-                    <!--th:if="${employee != null}"-->
-                    <!--th:value="${employee.position}">-->
-            <!--<option selected hidden value=${employee.position}-->
-                    <!--th:value="${employee != null} ? ${employee.position} : '&#45;&#45; Unassigned &#45;&#45;'"></option>-->
             <select id="position">
                 <option th:each="position : ${T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).values()}"
                         th:value="${position}"
-                        th:text="${position}">
+                        th:text="${position}"
+                        th:selected="${employee != null && employee.position == position}">
                 </option>
             </select>
         </td>
@@ -65,7 +61,8 @@
                 <option th:each="existingEmployee : ${allEmployees}"
                         th:if="${existingEmployee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
                         th:value="${existingEmployee.id}"
-                        th:text="${existingEmployee.firstName} + ' ' + ${existingEmployee.lastName}">
+                        th:text="${existingEmployee.firstName} + ' ' + ${existingEmployee.lastName}"
+                        th:selected="${employee != null && employee.supervisorId == existingEmployee.id}">
                 </option>
             </select>
         </td>
@@ -75,6 +72,7 @@
                 <option th:each="team : ${allTeams}"
                         th:value="${team.id}"
                         th:text="${team.name}">
+                <!--th:if="${employee.teams contains team}">-->
                 </option>
             </select>
         </td>
