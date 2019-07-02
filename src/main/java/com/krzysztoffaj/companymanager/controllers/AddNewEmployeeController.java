@@ -28,6 +28,9 @@ public class AddNewEmployeeController {
         model.addAttribute("allEmployees", allEmployees);
         model.addAttribute("allTeams", allTeams);
 
+        Employee employee = null;
+        model.addAttribute("employee", employee);
+
         return "addnewemployee";
     }
 
@@ -42,5 +45,19 @@ public class AddNewEmployeeController {
         employeeService.save(employee);
 
         return "search";
+    }
+
+    @GetMapping("/editemployee")
+    public String editEmployeeInit(@RequestParam("employeeId") Integer employeeId,
+                                   Model model) {
+        final List<Employee> allEmployees = employeeService.getAll();
+        final List<Team> allTeams = teamService.getAll();
+        model.addAttribute("allEmployees", allEmployees);
+        model.addAttribute("allTeams", allTeams);
+
+        Employee editedEmployee = employeeService.get(employeeId);
+        model.addAttribute("employee", editedEmployee);
+
+        return "addnewemployee";
     }
 }

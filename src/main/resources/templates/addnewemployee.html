@@ -25,16 +25,25 @@
     <tr>
         <td>
             <label><b>First name</b></label><br/>
-            <input id="firstName" type="text"/>
+            <input id="firstName" type="text"
+                   th:value="${employee != null} ? ${employee.firstName} : ''"
+                   th:disabled="${employee != null}? true : false"/>
         </td>
         <td>
             <label><b>Last name</b></label><br/>
-            <input id="lastName" type="text"/>
+            <input id="lastName" type="text"
+                   th:value="${employee != null} ? ${employee.lastName} : ''"
+                   th:disabled="${employee != null}? true : false"/>
         </td>
     </tr>
     <tr>
         <td>
             <label><b>Position</b></label><br/>
+            <!--<select id="position"-->
+                    <!--th:if="${employee != null}"-->
+                    <!--th:value="${employee.position}">-->
+            <!--<option selected hidden value=${employee.position}-->
+                    <!--th:value="${employee != null} ? ${employee.position} : '&#45;&#45; Unassigned &#45;&#45;'"></option>-->
             <select id="position">
                 <option th:each="position : ${T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).values()}"
                         th:value="${position}"
@@ -44,7 +53,8 @@
         </td>
         <td>
             <label><b>Salary</b></label><br/>
-            <input id="salary" type="number" step="0.01"/>
+            <input id="salary" type="number" step="0.01"
+                   th:value="${employee != null} ? ${employee.salary} : ''"/>
         </td>
     </tr>
     <tr>
@@ -52,10 +62,10 @@
             <label><b>Supervisor</b></label><br/>
             <select id="supervisorId">
                 <option selected value=null>-- Unassigned --</option>
-                <option th:each="employee : ${allEmployees}"
-                        th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
-                        th:value="${employee.id}"
-                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                <option th:each="existingEmployee : ${allEmployees}"
+                        th:if="${existingEmployee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
+                        th:value="${existingEmployee.id}"
+                        th:text="${existingEmployee.firstName} + ' ' + ${existingEmployee.lastName}">
                 </option>
             </select>
         </td>

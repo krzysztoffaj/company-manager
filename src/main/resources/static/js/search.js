@@ -1,12 +1,11 @@
 $(document).ready(function () {
     $("#search-form").submit(function (event) {
         event.preventDefault();
-        fire_ajax_submit();
+        search();
     });
 });
 
-function fire_ajax_submit() {
-
+function search() {
     var search = {}
     search["input"] = $("#input").val();
 

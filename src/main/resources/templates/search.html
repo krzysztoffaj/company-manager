@@ -36,6 +36,7 @@
         <th>Salary</th>
         <th>Supervisor Id</th>
         <th>Teams</th>
+        <th>Modify</th>
         <!--<th>Competence</th>-->
     </tr>
     <tr th:each="employee : ${allEmployees}">
@@ -49,6 +50,14 @@
             <th:block th:each="team, iterStat : ${employee.teams}">
                 <span th:text="!${iterStat.last} ? ${team.name} + ', ': ${team.name}"></span>
             </th:block>
+        </td>
+        <td>
+            <form action="#" th:action="@{/dashboard/myEntries/} + ${{employee.id}}" method="get">
+                <!--<button th:id="'table_entry_childs_button_' + ${employee.id}" type="submit">-->
+                    <!--<b><i>Edit</i></b>-->
+                <!--</button>-->
+                <input id="editemployee" type="submit" value="Edit"/>
+            </form>
         </td>
         <!--<td th:text="${employee.competence}"></td>-->
     </tr>
