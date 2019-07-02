@@ -109,15 +109,6 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public String[] getWordsExtractedFromInput(String input) {
-        //TODO Only alphanumeric input. Cannot be more than 3 words
-        if (!input.matches(".*\\w.*")) {
-            return new String[0];
-        }
-        return input.trim().split("\\s+");
-    }
-
-    @Override
     public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teamsIds) {
         Employee employee = new Employee();
         employee.setFirstName(firstName);
@@ -133,6 +124,14 @@ public class DefaultEmployeeService implements EmployeeService {
         employee.setTeams(teams);
 
         return employee;
+    }
+
+    private String[] getWordsExtractedFromInput(String input) {
+        //TODO Only alphanumeric input. Cannot be more than 3 words
+        if (!input.matches(".*\\w.*")) {
+            return new String[0];
+        }
+        return input.trim().split("\\s+");
     }
 
     private Integer getIntFromStringOrNull(String input) {

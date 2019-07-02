@@ -24,7 +24,5 @@ public interface EmployeeService {
 
     Set<Employee> getUniqueResults(String word);
 
-    String[] getWordsExtractedFromInput(String input);
-
     Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teams);
 }
