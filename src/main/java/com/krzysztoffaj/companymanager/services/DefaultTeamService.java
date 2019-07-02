@@ -14,7 +14,10 @@ public class DefaultTeamService implements TeamService {
     TeamRepository teamRepository;
 
     @Override
-    public Team get(int id) {
+    public Team get(Integer id) {
+        if (id == null) {
+            return null;
+        }
         return teamRepository.getOne(id);
     }
 

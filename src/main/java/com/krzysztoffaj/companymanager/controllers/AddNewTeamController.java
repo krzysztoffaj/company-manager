@@ -37,6 +37,7 @@ public class AddNewTeamController {
                                    @RequestParam("scrummasterId") String scrummasterId) {
         final Team team = teamService.castInputToTeamObject(teamName, pmId, poId, scrummasterId);
         teamService.save(team);
+        employeeService.addTeamToManagingEmployees(team);
 
         return "search";
     }

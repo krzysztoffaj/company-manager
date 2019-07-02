@@ -22,7 +22,10 @@ public class DefaultEmployeeService implements EmployeeService {
     TeamService teamService;
 
     @Override
-    public Employee get(int id) {
+    public Employee get(Integer id) {
+        if (id == null) {
+            return null;
+        }
         return employeeRepository.getOne(id);
     }
 
@@ -124,6 +127,21 @@ public class DefaultEmployeeService implements EmployeeService {
         employee.setTeams(teams);
 
         return employee;
+    }
+
+    @Override
+    public void addTeamToManagingEmployees(Team newTeam) {
+        Employee pm = get(newTeam.getPmId());
+        Employee po = get(newTeam.getPoId());
+        Employee scrummaster = get(newTeam.getScrummasterId());
+
+        Employee[] employees = {pm, po, scrummaster};
+        for (Employee employee : employees) {
+            if (employee != null) {
+                employee.getTeams().add(newTeam);
+                save(employee);
+            }
+        }
     }
 
     private String[] getWordsExtractedFromInput(String input) {

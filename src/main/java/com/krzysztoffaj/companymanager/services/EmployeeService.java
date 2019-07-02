@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface EmployeeService {
-    Employee get(int id);
+    Employee get(Integer id);
 
     List<Employee> getAll();
 
@@ -25,4 +25,6 @@ public interface EmployeeService {
     Set<Employee> getUniqueResults(String word);
 
     Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teams);
+
+    void addTeamToManagingEmployees(Team newTeam);
 }

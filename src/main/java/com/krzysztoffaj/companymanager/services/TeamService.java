@@ -6,7 +6,7 @@ import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import java.util.List;
 
 public interface TeamService {
-    Team get(int id);
+    Team get(Integer id);
 
     List<Team> getAll();
 
