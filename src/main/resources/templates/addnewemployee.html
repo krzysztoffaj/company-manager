@@ -71,8 +71,8 @@
             <select multiple id="teams">
                 <option th:each="team : ${allTeams}"
                         th:value="${team.id}"
-                        th:text="${team.name}">
-                <!--th:if="${employee.teams contains team}">-->
+                        th:text="${team.name}"
+                        th:selected="${employee != null && employee.teams.contains(team)}">
                 </option>
             </select>
         </td>
