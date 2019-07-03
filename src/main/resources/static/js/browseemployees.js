@@ -13,7 +13,7 @@ function search() {
 
     $.ajax({
         type: "POST",
-        url: "/search",
+        url: "/browseemployees",
         data: search,
         success: function(result){
             $("#search-results").html(result);

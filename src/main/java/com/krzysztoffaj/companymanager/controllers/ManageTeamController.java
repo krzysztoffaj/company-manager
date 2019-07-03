@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class AddNewTeamController {
+public class ManageTeamController {
 
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private TeamService teamService;
 
-    @GetMapping("/addnewteam")
+    @GetMapping("/manageteam/add")
     public String addNewTeamInit(Model model) {
         final List<Employee> allEmployees = employeeService.getAll();
         final List<Team> allTeams = teamService.getAll();
@@ -31,10 +31,10 @@ public class AddNewTeamController {
         Team team = null;
         model.addAttribute("team", team);
 
-        return "addnewteam";
+        return "manageteam";
     }
 
-    @GetMapping("/addnewteamsubmit")
+    @GetMapping("/manageteam/add/submit")
     public String addNewTeamSubmit(@RequestParam("teamName") String teamName,
                                    @RequestParam("pmId") String pmId,
                                    @RequestParam("poId") String poId,
@@ -43,10 +43,10 @@ public class AddNewTeamController {
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
 
-        return "search";
+        return "browseemployees";
     }
 
-    @GetMapping("/editteam/{teamId}")
+    @GetMapping("/manageteam/edit/{teamId}")
     public String editEmployeeInit(@PathVariable("teamId") Integer teamId,
                                    Model model) {
         final List<Employee> allEmployees = employeeService.getAll();
@@ -57,10 +57,10 @@ public class AddNewTeamController {
         Team editedTeam = teamService.get(teamId);
         model.addAttribute("team", editedTeam);
 
-        return "addnewteam";
+        return "manageteam";
     }
 
-    @GetMapping("/editteamsubmit")
+    @GetMapping("/manageteam/edit/submit")
     public String editEmployeeSubmit(@RequestParam("teamId") Integer teamId,
                                      @RequestParam("pmId") String pmId,
                                      @RequestParam("poId") String poId,
@@ -68,6 +68,6 @@ public class AddNewTeamController {
         teamService.updateTeamInfo(teamId, pmId, poId, scrummasterId);
         employeeService.addTeamToManagingEmployees(teamService.get(teamId));
 
-        return "teams";
+        return "browseemployees";
     }
 }

@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class AddNewEmployeeController {
+public class ManageEmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private TeamService teamService;
 
-    @GetMapping("/addnewemployee")
+    @GetMapping("/manageemployee/add")
     public String addNewEmployeeInit(Model model) {
         final List<Employee> allEmployees = employeeService.getAll();
         final List<Team> allTeams = teamService.getAll();
@@ -34,10 +34,10 @@ public class AddNewEmployeeController {
         Employee employee = null;
         model.addAttribute("employee", employee);
 
-        return "addnewemployee";
+        return "manageemployee";
     }
 
-    @GetMapping("/addnewemployeesubmit")
+    @GetMapping("/manageemployee/add/submit")
     public String addNewEmployeeSubmit(@RequestParam("firstName") String firstName,
                                        @RequestParam("lastName") String lastName,
                                        @RequestParam("position") EmployeePosition position,
@@ -47,10 +47,10 @@ public class AddNewEmployeeController {
         final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teamIds);
         employeeService.save(employee);
 
-        return "search";
+        return "browseemployees";
     }
 
-    @GetMapping("/editemployee/{employeeId}")
+    @GetMapping("/manageemployee/edit/{employeeId}")
     public String editEmployeeInit(@PathVariable("employeeId") Integer employeeId,
                                    Model model) {
         final List<Employee> allEmployees = employeeService.getAll();
@@ -61,10 +61,10 @@ public class AddNewEmployeeController {
         Employee editedEmployee = employeeService.get(employeeId);
         model.addAttribute("employee", editedEmployee);
 
-        return "addnewemployee";
+        return "manageemployee";
     }
 
-    @GetMapping("/editemployeesubmit")
+    @GetMapping("/manageemployee/edit/submit")
     public String editEmployeeSubmit(@RequestParam("employeeId") Integer employeeId,
                                      @RequestParam("position") EmployeePosition position,
                                      @RequestParam("salary") String salary,
@@ -72,6 +72,6 @@ public class AddNewEmployeeController {
                                      @RequestParam("teamIds") int[] teamIds) {
         employeeService.updateEmployeeInfo(employeeId, position, salary, supervisorId, teamIds);
 
-        return "search";
+        return "browseemployees";
     }
 }

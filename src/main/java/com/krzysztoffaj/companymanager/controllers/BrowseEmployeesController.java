@@ -12,24 +12,24 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-public class SearchController {
+public class BrowseEmployeesController {
 
     @Autowired
     private EmployeeService service;
 
-    @GetMapping("/search")
-    public String searchInit(Model model) {
+    @GetMapping("/browseemployees")
+    public String browseEmployeesInit(Model model) {
         final List<Employee> allEmployees = service.getAll();
         model.addAttribute("allEmployees", allEmployees);
 
-        return "search";
+        return "browseemployees";
     }
 
-    @PostMapping("/search")
-    public String searchSubmit(Model model, String input) {
+    @PostMapping("/browseemployees")
+    public String browseEmployeesSubmit(Model model, String input) {
         final Set<Employee> searchResults = service.handleSearching(input);
         model.addAttribute("allEmployees", searchResults);
 
-        return "search";
+        return "browseemployees";
     }
 }

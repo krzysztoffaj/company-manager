@@ -19,13 +19,13 @@ public class BrowseTeamsController {
     @Autowired
     private TeamService teamService;
 
-    @GetMapping("/teams")
+    @GetMapping("/browseteams")
     public String browseTeamsInit(Model model) {
         final List<Team> allTeams = teamService.getAll();
         final List<Employee> allEmployees = employeeService.getAll();
         model.addAttribute("allTeams", allTeams);
         model.addAttribute("allEmployees", allEmployees);
 
-        return "teams";
+        return "browseteams";
     }
 }

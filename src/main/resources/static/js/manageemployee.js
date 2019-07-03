@@ -8,21 +8,21 @@ function submitemployee(employeeId) {
 
     if (employeeId === "null") {
         $.ajax({
-            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
+            url: "/manageemployee/add/submit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
                                        "&salary=" + salary + "&supervisorId=" + supervisorId + "&teamIds=" + teamIds,
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location.replace("/search");
+                window.location.replace("/");
         }});
     } else {
         $.ajax({
-            url: "/editemployeesubmit?employeeId=" + employeeId + "&position=" + position + "&salary=" + salary +
+            url: "/manageemployee/edit/submit?employeeId=" + employeeId + "&position=" + position + "&salary=" + salary +
                                     "&supervisorId=" + supervisorId + "&teamIds=" + teamIds,
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location.replace("/search");
+                window.location.replace("/");
         }});
     }
 }

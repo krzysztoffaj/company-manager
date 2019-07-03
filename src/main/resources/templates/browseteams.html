@@ -4,24 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Company Manager: search</title>
+    <title>Company Manager: browse teams</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" th:href="@{/css/search.css}"/>
+    <link rel="stylesheet" th:href="@{/css/browseteams.css}"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="/js/browseteams.js"></script>
 </head>
 
 <body>
 <div th:replace="fragment/header :: header"></div>
 
-<table id="search-results">
+<table id="teams">
     <tr>
         <th>Id</th>
         <th>Name</th>
@@ -49,7 +49,7 @@
             </th:block>
         </td>
         <td>
-            <form th:action="@{/editteam/} + ${{team.id}}" th:method="GET">
+            <form th:action="@{/manageteam/edit/} + ${{team.id}}" th:method="GET">
                 <input id="editteam" type="submit" value="Edit"/>
             </form>
         </td>
