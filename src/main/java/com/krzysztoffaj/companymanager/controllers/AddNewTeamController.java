@@ -66,7 +66,8 @@ public class AddNewTeamController {
                                      @RequestParam("poId") String poId,
                                      @RequestParam("scrummasterId") String scrummasterId) {
         teamService.updateTeamInfo(teamId, pmId, poId, scrummasterId);
+        employeeService.addTeamToManagingEmployees(teamService.get(teamId));
 
-        return "search";
+        return "teams";
     }
 }

@@ -6,7 +6,6 @@ function submitemployee(employeeId) {
     var supervisorId = $('#supervisorId').val();
     var teamIds = $('#teamIds').val();
 
-
     if (employeeId === "null") {
         $.ajax({
             url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
