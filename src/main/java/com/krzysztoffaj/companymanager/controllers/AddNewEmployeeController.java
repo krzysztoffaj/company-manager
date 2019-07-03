@@ -65,14 +65,12 @@ public class AddNewEmployeeController {
     }
 
     @GetMapping("/editemployeesubmit")
-    public String editEmployeeSubmit(@RequestParam("position") EmployeePosition position,
+    public String editEmployeeSubmit(@RequestParam("employeeId") Integer employeeId,
+                                     @RequestParam("position") EmployeePosition position,
                                      @RequestParam("salary") String salary,
                                      @RequestParam("supervisorId") String supervisorId,
-                                     @RequestParam("teamIds") int[] teamIds,
-                                     Model model) {
-        Employee employee =(Employee) model.asMap().get("employee");
-        System.out.println(employee.toString());
-        employeeService.updateEmployeeInfo(employee.getId(), position, salary, supervisorId, teamIds);
+                                     @RequestParam("teamIds") int[] teamIds) {
+        employeeService.updateEmployeeInfo(employeeId, position, salary, supervisorId, teamIds);
 
         return "search";
     }

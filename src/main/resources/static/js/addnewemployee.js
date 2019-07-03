@@ -7,9 +7,16 @@ $(document).ready(function() {
         var supervisorId = $('#supervisorId').val();
         var teamIds = $('#teamIds').val();
 
+//        $.ajax({
+//            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
+//                                       "&salary=" + salary + "&supervisorId=" + supervisorId + "&teamIds=" + teamIds,
+//            method: 'GET',
+//            success: function(result){
+//                alert("Success!");
+//                window.location.replace("/search");
+//        }});
         $.ajax({
-            url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
-                                       "&salary=" + salary + "&supervisorId=" + supervisorId + "&teamIds=" + teamIds,
+            url: "/editemployeesubmit?position=" + position + "&salary=" + salary + "&supervisorId=" + supervisorId + "&teamIds=" + teamIds,
             method: 'GET',
             success: function(result){
                 alert("Success!");
