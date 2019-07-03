@@ -43,7 +43,7 @@ public class ManageTeamController {
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
 
-        return "browseemployees";
+        return "browseteams";
     }
 
     @GetMapping("/manageteam/edit/{teamId}")
@@ -54,8 +54,13 @@ public class ManageTeamController {
         model.addAttribute("allEmployees", allEmployees);
         model.addAttribute("allTeams", allTeams);
 
-        Team editedTeam = teamService.get(teamId);
-        model.addAttribute("team", editedTeam);
+        try {
+            Team editedTeam = teamService.get(teamId);
+            System.out.println(editedTeam);
+            model.addAttribute("team", editedTeam);
+        } catch (Exception e) {
+            return "entitynotfound";
+        }
 
         return "manageteam";
     }
@@ -68,6 +73,6 @@ public class ManageTeamController {
         teamService.updateTeamInfo(teamId, pmId, poId, scrummasterId);
         employeeService.addTeamToManagingEmployees(teamService.get(teamId));
 
-        return "browseemployees";
+        return "browseteams";
     }
 }

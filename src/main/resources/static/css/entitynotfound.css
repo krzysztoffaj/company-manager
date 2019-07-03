@@ -1,0 +1,10 @@
+body {
+  padding-top: 10rem;
+}
+
+#alert {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  text-align: center;
+  font-weight: bold;
+}

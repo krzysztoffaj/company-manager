@@ -10,7 +10,7 @@ function submitteam(teamId) {
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location.replace("/");
+                window.location.replace("/browseteams");
         }});
     } else {
         $.ajax({
@@ -18,7 +18,7 @@ function submitteam(teamId) {
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location.replace("/");
+                window.location.replace("/browseteams");
         }});
     }
 }

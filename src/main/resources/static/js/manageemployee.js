@@ -13,7 +13,7 @@ function submitemployee(employeeId) {
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location.replace("/");
+                window.location.replace("/browseemployees");
         }});
     } else {
         $.ajax({
@@ -22,7 +22,7 @@ function submitemployee(employeeId) {
             method: 'GET',
             success: function(result){
                 alert("Success!");
-                window.location.replace("/");
+                window.location.replace("/browseemployees");
         }});
     }
 }
