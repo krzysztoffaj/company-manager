@@ -18,7 +18,7 @@ body {
   width: 100%;
 }
 
-#position, #supervisorId, #teams, #salary {
+#position, #supervisorId, #teamIds, #salary {
   width: 100%;
 }
 
@@ -27,7 +27,7 @@ body {
     text-align: center;
 }
 
-.newemployeesubmit {
+.employeesubmit {
     position: absolute;
     top: 50%;
 }

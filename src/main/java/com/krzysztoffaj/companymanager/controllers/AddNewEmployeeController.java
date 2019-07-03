@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AddNewEmployeeController {
@@ -41,8 +43,8 @@ public class AddNewEmployeeController {
                                        @RequestParam("position") EmployeePosition position,
                                        @RequestParam("salary") String salary,
                                        @RequestParam("supervisorId") String supervisorId,
-                                       @RequestParam("teams") int[] teams) {
-        final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teams);
+                                       @RequestParam("teamIds") int[] teamIds) {
+        final Employee employee = employeeService.castInputsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teamIds);
         employeeService.save(employee);
 
         return "search";
@@ -60,5 +62,18 @@ public class AddNewEmployeeController {
         model.addAttribute("employee", editedEmployee);
 
         return "addnewemployee";
+    }
+
+    @GetMapping("/editemployeesubmit")
+    public String editEmployeeSubmit(@RequestParam("position") EmployeePosition position,
+                                     @RequestParam("salary") String salary,
+                                     @RequestParam("supervisorId") String supervisorId,
+                                     @RequestParam("teamIds") int[] teamIds,
+                                     Model model) {
+        Employee employee =(Employee) model.asMap().get("employee");
+        System.out.println(employee.toString());
+        employeeService.updateEmployeeInfo(employee.getId(), position, salary, supervisorId, teamIds);
+
+        return "search";
     }
 }

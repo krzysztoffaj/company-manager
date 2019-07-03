@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#newteamsubmit").click(function() {
+    $("#teamsubmit").click(function() {
         var teamName = $('#teamName').val();
         var pmId = $('#pmId').val();
         var poId = $('#poId').val();

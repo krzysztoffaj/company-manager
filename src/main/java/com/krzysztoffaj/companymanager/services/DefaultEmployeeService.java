@@ -144,6 +144,23 @@ public class DefaultEmployeeService implements EmployeeService {
         }
     }
 
+    @Override
+    public void updateEmployeeInfo(Integer employeeId, EmployeePosition position, String salary, String supervisorId, int[] teamIds) {
+        Employee employee = get(employeeId);
+
+        employee.setPosition(position);
+        employee.setSalary(Double.parseDouble(salary));
+        employee.setSupervisorId(getIntFromStringOrNull(supervisorId));
+
+        Set<Team> teams = new HashSet<>();
+        for (int teamId : teamIds) {
+            teams.add(teamService.get(teamId));
+        }
+        employee.setTeams(teams);
+
+        save(employee);
+    }
+
     private String[] getWordsExtractedFromInput(String input) {
         //TODO Only alphanumeric input. Cannot be more than 3 words
         if (!input.matches(".*\\w.*")) {

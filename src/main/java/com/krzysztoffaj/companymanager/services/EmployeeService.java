@@ -27,4 +27,6 @@ public interface EmployeeService {
     Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teams);
 
     void addTeamToManagingEmployees(Team newTeam);
+
+    void updateEmployeeInfo(Integer employeeId, EmployeePosition position, String salary, String supervisorId, int[] teamIds);
 }

@@ -52,7 +52,7 @@
             </th:block>
         </td>
         <td>
-            <form th:action="@{/editemployee/} + ${{employee.id}}" method="get">
+            <form th:action="@{/editemployee/} + ${{employee.id}}" th:method="GET">
                 <input id="editemployee" type="submit" value="Edit"/>
             </form>
         </td>

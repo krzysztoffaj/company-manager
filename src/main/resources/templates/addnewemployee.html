@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="js/addnewemployee.js"></script>
+    <script type="text/javascript" src="/js/addnewemployee.js"></script>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
         </td>
         <td>
             <label><b>Teams</b></label><br/>
-            <select multiple id="teams">
+            <select multiple id="teamIds">
                 <option th:each="team : ${allTeams}"
                         th:value="${team.id}"
                         th:text="${team.name}"
@@ -79,7 +79,7 @@
     </tr>
 </table>
 <div class="button-wrapper">
-    <input id="newemployeesubmit" type="submit" value="Submit"/>
+    <input id="employeesubmit" type="submit" value="Submit"/>
 </div>
 
 </body>

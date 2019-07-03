@@ -1,15 +1,15 @@
 $(document).ready(function() {
-    $("#newemployeesubmit").click(function() {
+    $("#employeesubmit").click(function() {
         var firstName = $('#firstName').val();
         var lastName = $('#lastName').val();
         var position = $('#position').val();
         var salary = $('#salary').val();
         var supervisorId = $('#supervisorId').val();
-        var teams = $('#teams').val();
+        var teamIds = $('#teamIds').val();
 
         $.ajax({
             url: "/addnewemployeesubmit?firstName=" + firstName + "&lastName=" + lastName + "&position=" + position +
-                                       "&salary=" + salary + "&supervisorId=" + supervisorId + "&teams=" + teams,
+                                       "&salary=" + salary + "&supervisorId=" + supervisorId + "&teamIds=" + teamIds,
             method: 'GET',
             success: function(result){
                 alert("Success!");
