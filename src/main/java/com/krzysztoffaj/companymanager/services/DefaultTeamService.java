@@ -42,6 +42,17 @@ public class DefaultTeamService implements TeamService {
         return team;
     }
 
+    @Override
+    public void updateTeamInfo(Integer teamId, String pmId, String poId, String scrummasterId) {
+        Team team = get(teamId);
+
+        team.setPmId(getIntFromStringOrNull(pmId));
+        team.setPoId(getIntFromStringOrNull(poId));
+        team.setScrummasterId(getIntFromStringOrNull(scrummasterId));
+
+        save(team);
+    }
+
     private Integer getIntFromStringOrNull(String input) {
         if (input.equals("null")) {
             return null;

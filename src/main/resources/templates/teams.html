@@ -28,6 +28,7 @@
         <th>PM</th>
         <th>PO</th>
         <th>Scrummaster</th>
+        <th>Modify</th>
     </tr>
     <tr th:each="team : ${allTeams}">
         <td th:text="${team.id}"></td>
@@ -47,15 +48,11 @@
                 <span th:text="${employee.id == team.scrummasterId ? employee.firstName + ' ' + employee.lastName : ''}"></span>
             </th:block>
         </td>
-        <!--<option th:each="employee : ${allEmployees}"-->
-                <!--th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"-->
-                <!--th:value="${employee.id}"-->
-                <!--th:text="${employee.firstName} + ' ' + ${employee.lastName}">-->
-        <!--<td>-->
-            <!--<form th:action="@{/editemployee/} + ${{team.id}}" th:method="GET">-->
-                <!--<input id="editemployee" type="submit" value="Edit"/>-->
-            <!--</form>-->
-        <!--</td>-->
+        <td>
+            <form th:action="@{/editteam/} + ${{team.id}}" th:method="GET">
+                <input id="editteam" type="submit" value="Edit"/>
+            </form>
+        </td>
     </tr>
 </table>
 </body>

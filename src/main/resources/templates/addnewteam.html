@@ -25,7 +25,9 @@
     <tr>
         <td>
             <label><b>Team's name</b></label><br/>
-            <input id="teamName" type="text"/>
+            <input id="teamName" type="text"
+                   th:value="${team != null} ? ${team.Name} : ''"
+                   th:disabled="${team != null}? true : false"/>
         </td>
     </tr>
     <tr>
@@ -36,7 +38,8 @@
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
                         th:value="${employee.id}"
-                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                        th:text="${employee.firstName} + ' ' + ${employee.lastName}"
+                        th:selected="${team != null && team.pmId == employee.id}">
                 </option>
             </select>
         </td>
@@ -49,7 +52,8 @@
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PO}"
                         th:value="${employee.id}"
-                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                        th:text="${employee.firstName} + ' ' + ${employee.lastName}"
+                        th:selected="${team != null && team.poId == employee.id}">
                 </option>
             </select>
         </td>
@@ -62,7 +66,8 @@
                 <option th:each="employee : ${allEmployees}"
                         th:if="${employee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).Scrummaster}"
                         th:value="${employee.id}"
-                        th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+                        th:text="${employee.firstName} + ' ' + ${employee.lastName}"
+                        th:selected="${team != null && team.scrummasterId == employee.id}">
                 </option>
             </select>
         </td>

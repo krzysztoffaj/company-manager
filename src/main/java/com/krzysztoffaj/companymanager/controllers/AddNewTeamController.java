@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -27,6 +28,9 @@ public class AddNewTeamController {
         model.addAttribute("allEmployees", allEmployees);
         model.addAttribute("allTeams", allTeams);
 
+        Team team = null;
+        model.addAttribute("team", team);
+
         return "addnewteam";
     }
 
@@ -38,6 +42,30 @@ public class AddNewTeamController {
         final Team team = teamService.castInputToTeamObject(teamName, pmId, poId, scrummasterId);
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
+
+        return "search";
+    }
+
+    @GetMapping("/editteam/{teamId}")
+    public String editEmployeeInit(@PathVariable("teamId") Integer teamId,
+                                   Model model) {
+        final List<Employee> allEmployees = employeeService.getAll();
+        final List<Team> allTeams = teamService.getAll();
+        model.addAttribute("allEmployees", allEmployees);
+        model.addAttribute("allTeams", allTeams);
+
+        Team editedTeam = teamService.get(teamId);
+        model.addAttribute("team", editedTeam);
+
+        return "addnewteam";
+    }
+
+    @GetMapping("/editteamsubmit")
+    public String editEmployeeSubmit(@RequestParam("teamId") Integer teamId,
+                                     @RequestParam("pmId") String pmId,
+                                     @RequestParam("poId") String poId,
+                                     @RequestParam("scrummasterId") String scrummasterId) {
+        teamService.updateTeamInfo(teamId, pmId, poId, scrummasterId);
 
         return "search";
     }
