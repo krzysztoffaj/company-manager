@@ -59,7 +59,8 @@
             <select id="supervisorId">
                 <option selected value=null>-- Unassigned --</option>
                 <option th:each="existingEmployee : ${allEmployees}"
-                        th:if="${existingEmployee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM}"
+                        th:if="${existingEmployee.position == T(com.krzysztoffaj.companymanager.infrastructure.EmployeePosition).PM
+                                    && employee != null && employee.id != existingEmployee.id}"
                         th:value="${existingEmployee.id}"
                         th:text="${existingEmployee.firstName} + ' ' + ${existingEmployee.lastName}"
                         th:selected="${employee != null && employee.supervisorId == existingEmployee.id}">
