@@ -4,6 +4,12 @@ function submitteam(teamId) {
     var poId = $('#poId').val();
     var scrummasterId = $('#scrummasterId').val();
 
+    if(isEmptyOrSpaces(teamName)) {
+        alert("Please provide team name.");
+        return;
+    }
+
+
     if (teamId === "null") {
         $.ajax({
             url: "/manageteam/add/submit?teamName=" + teamName + "&pmId=" + pmId + "&poId=" + poId + "&scrummasterId=" + scrummasterId,
@@ -21,4 +27,8 @@ function submitteam(teamId) {
                 window.location.replace("/browseteams");
         }});
     }
+}
+
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
 }
