@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.entities;
 
-import com.krzysztoffaj.companymanager.infrastructure.competences.Competence;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 
 import javax.persistence.*;
@@ -35,6 +36,9 @@ public class Employee implements EntityId, Serializable {
     @JoinTable(name = "employee_team",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private Set<Team> teams;
 
 //    @Transient

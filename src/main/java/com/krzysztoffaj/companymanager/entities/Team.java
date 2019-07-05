@@ -1,5 +1,8 @@
 package com.krzysztoffaj.companymanager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -25,6 +28,9 @@ public class Team implements EntityId, Serializable {
     private Integer scrummasterId;
 
     @ManyToMany(mappedBy = "teams")
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     private Set<Employee> members;
 
     public Team() {
