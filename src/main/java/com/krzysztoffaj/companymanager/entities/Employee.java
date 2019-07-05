@@ -37,8 +37,8 @@ public class Employee implements EntityId, Serializable {
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
     private Set<Team> teams;
 
-    @Transient
-    private Competence competence;
+//    @Transient
+//    private Competence competence;
 
     @Override
     public int getId() {
@@ -98,11 +98,11 @@ public class Employee implements EntityId, Serializable {
         this.teams = teams;
     }
 
-    public Competence getCompetence() {
-        return competence;
-    }
-
-    public void setCompetence(Competence competence) {
-        this.competence = competence;
-    }
+//    public Competence getCompetence() {
+//        return competence;
+//    }
+//
+//    public void setCompetence(Competence competence) {
+//        this.competence = competence;
+//    }
 }

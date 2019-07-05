@@ -15,11 +15,11 @@ import java.util.Set;
 public class BrowseEmployeesController {
 
     @Autowired
-    private EmployeeService service;
+    private EmployeeService employeeService;
 
     @GetMapping("/browseemployees")
     public String browseEmployeesInit(Model model) {
-        final List<Employee> allEmployees = service.getAll();
+        final List<Employee> allEmployees = employeeService.getAll();
         model.addAttribute("allEmployees", allEmployees);
 
         return "browseemployees";
@@ -27,7 +27,7 @@ public class BrowseEmployeesController {
 
     @PostMapping("/browseemployees")
     public String browseEmployeesSubmit(Model model, String input) {
-        final Set<Employee> searchResults = service.handleSearching(input);
+        final Set<Employee> searchResults = employeeService.handleSearching(input);
         model.addAttribute("allEmployees", searchResults);
 
         return "browseemployees";
