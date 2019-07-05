@@ -7,11 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Set;
 
-@Controller
+@RestController
 public class BrowseEmployeesController {
 
     @Autowired
@@ -23,6 +24,11 @@ public class BrowseEmployeesController {
         model.addAttribute("allEmployees", allEmployees);
 
         return "browseemployees";
+    }
+
+    @GetMapping("/employees")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAll();
     }
 
     @PostMapping("/browseemployees")

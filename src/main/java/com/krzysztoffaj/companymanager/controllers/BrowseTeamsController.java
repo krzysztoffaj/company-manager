@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class BrowseTeamsController {
 
     @Autowired
@@ -27,5 +28,10 @@ public class BrowseTeamsController {
         model.addAttribute("allEmployees", allEmployees);
 
         return "browseteams";
+    }
+
+    @GetMapping("/teams")
+    public List<Team> getAllTeams() {
+        return teamService.getAll();
     }
 }
