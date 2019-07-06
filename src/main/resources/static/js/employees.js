@@ -9,7 +9,8 @@ $(document).ready(function () {
             var salary  = element.salary;
             var supervisorId = element.supervisorId;
             var supervisor = data[supervisorId] || null;
-            var teams = element.teams;
+            var teams = element.teams.map(x => x.name).join(', ');
+//            var teams = element.teams[0].name;
 
             $("#employeesTable").append(
                 "<tr><td>"+ id +
