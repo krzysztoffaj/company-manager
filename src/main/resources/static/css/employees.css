@@ -1,0 +1,64 @@
+body {
+  padding-top: 7rem;
+}
+
+
+form.search-elements input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.search-elements {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  margin: auto;
+  width: 30%;
+  margin-bottom: 7rem;
+}
+
+form.search-elements button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+form.search-elements button:hover {
+  background: #0b7dda;
+}
+
+
+#search-results {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+}
+
+#employeesTable td, #employeesTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#employeesTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#employeesTable tr:nth-child(even){background-color: #f2f2f2;}
+#employeesTable tr:hover {background-color: #ddd;}

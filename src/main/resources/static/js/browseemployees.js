@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function search() {
     var search = {}
-    search["input"] = $("#input").val();
+    search["query"] = $("#query").val();
 
     $("#btn-search").prop("disabled", true);
 

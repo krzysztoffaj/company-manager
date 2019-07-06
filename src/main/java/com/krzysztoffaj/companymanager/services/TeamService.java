@@ -12,7 +12,7 @@ public interface TeamService {
 
     void save(Team team);
 
-    Team castInputToTeamObject(String teamName, String pmId, String poId, String scrummasterId);
+    Team castQueryParamsToTeamObject(String teamName, String pmId, String poId, String scrummasterId);
 
     void updateTeamInfo(Integer teamId, String pmId, String poId, String scrummasterId);
 }

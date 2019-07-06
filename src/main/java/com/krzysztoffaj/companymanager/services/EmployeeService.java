@@ -20,11 +20,11 @@ public interface EmployeeService {
 
     List<Employee> findByPosition(EmployeePosition position);
 
-    Set<Employee> handleSearching(String input);
+    Set<Employee> handleSearching(String query);
 
     Set<Employee> getUniqueResults(String word);
 
-    Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teams);
+    Employee castQueryParamsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teams);
 
     void addTeamToManagingEmployees(Team newTeam);
 

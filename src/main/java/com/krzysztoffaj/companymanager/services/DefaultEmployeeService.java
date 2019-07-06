@@ -55,8 +55,8 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public Set<Employee> handleSearching(String input) {
-        String[] words = getWordsExtractedFromInput(input);
+    public Set<Employee> handleSearching(String query) {
+        String[] words = getWordsExtractedFromQuery(query);
 
         Set<Employee> uniqueResultsFirstWord;
         Set<Employee> uniqueResultsSecondWord;
@@ -112,7 +112,7 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public Employee castInputsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teamsIds) {
+    public Employee castQueryParamsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teamsIds) {
         Employee employee = new Employee();
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
@@ -161,12 +161,12 @@ public class DefaultEmployeeService implements EmployeeService {
         save(employee);
     }
 
-    private String[] getWordsExtractedFromInput(String input) {
-        //TODO Only alphanumeric input. Cannot be more than 3 words
-        if (!input.matches(".*\\w.*")) {
+    private String[] getWordsExtractedFromQuery(String query) {
+        //TODO Only alphanumeric query. Cannot be more than 3 words
+        if (!query.matches(".*\\w.*")) {
             return new String[0];
         }
-        return input.trim().split("\\s+");
+        return query.trim().split("\\s+");
     }
 
     private Integer getIntFromStringOrNull(String input) {

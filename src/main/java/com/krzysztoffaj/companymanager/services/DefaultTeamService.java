@@ -32,7 +32,7 @@ public class DefaultTeamService implements TeamService {
     }
 
     @Override
-    public Team castInputToTeamObject(String teamName, String pmId, String poId, String scrummasterId) {
+    public Team castQueryParamsToTeamObject(String teamName, String pmId, String poId, String scrummasterId) {
         Team team = new Team();
         team.setName(teamName);
         team.setPmId(getIntFromStringOrNull(pmId));
