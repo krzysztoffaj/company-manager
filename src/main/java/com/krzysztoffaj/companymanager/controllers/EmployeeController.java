@@ -34,7 +34,7 @@ public class EmployeeController {
 
     @GetMapping("/employees/search")
     public Set<Employee> search(@RequestParam("query") String query) {
-        return employeeService.getUniqueResults(query);
+        return employeeService.handleSearching(query);
     }
 
     @GetMapping("/employees/add")

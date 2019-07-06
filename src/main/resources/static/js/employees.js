@@ -14,52 +14,15 @@ $(document).ready(function () {
 //			]
 //	 }
 
-//    $.ajax({
-//        type    : "GET",
-//        url     : "/employees/list-all",
-//        dataType: "json",
-//        data: {
-//            get_param: 'value'
-////            action:"search",
-////            type: 'employees',
-////            parameter: parameter,
-////            parameterContent: parameterContent,
-//        },
-//        success:function(data) {
-//            alert(data);
-//            $('#employeesTable').show();
-//
-//            var len = data.length;
-//            for (var i = 0; i< len; i++) {
-//                var id  = data[i].id;
-//                var firstName  = data[i].firstName;
-//                var lastName  = data[i].lastName;
-//                var position  = data[i].position;
-//                var salary  = data[i].salary;
-//                var supervisorId  = data[i].supervisorId;
-//                var teams = data[i].teams;
-//
-//                $("#employeesTable").append(
-//                    "<tr><td>"+ id +
-//                    "</td><td>"+ firstName +
-//                    "</td><td>"+ lastName +
-//                    "</td><td>"+ position +
-//                    "</td><td>"+ salary +
-//                    "</td><td>"+ supervisorId +
-//                    "</td><td>"+ teams
-//                );
-//            }
-//        }
-//    });
-
     $.getJSON('/employees/list-all', { get_param: 'value' }, function(data) {
+        $("#employeesTable").append("<tbody>");
         $.each(data, function(index, element) {
             var id  = element.id;
             var firstName  = element.firstName;
             var lastName  = element.lastName;
             var position  = element.position;
             var salary  = element.salary;
-            var supervisorId  = element.supervisorId;
+            var supervisor  = getSupervisorInfo(element.supervisorId, data);
             var teams = element.teams;
 
             $("#employeesTable").append(
@@ -68,10 +31,52 @@ $(document).ready(function () {
                 "</td><td>"+ lastName +
                 "</td><td>"+ position +
                 "</td><td>"+ salary +
-                "</td><td>"+ supervisorId +
+                "</td><td>"+ supervisor +
                 "</td><td>"+ teams +
-                "</td>"
+                "</td></tr>"
+            );
+        });
+        $("#employeesTable").append("</tbody>");
+    });
+
+    $("#search-form").submit(function (event) {
+        event.preventDefault();
+        search();
+    });
+});
+
+function getSupervisorInfo(supervisorId, data) {
+    $.each(data, function(index, element) {
+        if (index === supervisorId) {
+            return true;
+        }
+    });
+}
+
+function search() {
+    var query = $("#query").val();
+
+    $.getJSON('/employees/search?query=' + query, { get_param: 'value' }, function(data) {
+        $("#employeesTable").find("tbody").empty();
+        $.each(data, function(index, element) {
+            var id  = element.id;
+            var firstName  = element.firstName;
+            var lastName  = element.lastName;
+            var position  = element.position;
+            var salary  = element.salary;
+            var supervisor  = getSupervisorInfo(element.supervisorId, data);
+            var teams = element.teams;
+
+            $("#employeesTable").append(
+                "<tr><td>"+ id +
+                "</td><td>"+ firstName +
+                "</td><td>"+ lastName +
+                "</td><td>"+ position +
+                "</td><td>"+ salary +
+                "</td><td>"+ supervisor +
+                "</td><td>"+ teams +
+                "</td></tr>"
             );
         });
     });
-});
+}
