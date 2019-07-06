@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @GetMapping("/")
-    public String index() {
+    public String goHome() {
         return "redirect:/employees";
     }
 }
