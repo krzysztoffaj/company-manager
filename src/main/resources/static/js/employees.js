@@ -1,19 +1,4 @@
 $(document).ready(function () {
-//	 var table = $('#employeesTable').DataTable({
-//			"sAjaxSource": "/employees/list-all",
-//			"sAjaxDataProp": "",
-//			"order": [[ 0, "asc" ]],
-//			"aoColumns": [
-//                  { "mData": "id"},
-//                  { "mData": "firstName" },
-//                  { "mData": "lastName" },
-//                  { "mData": "position" },
-//                  { "mData": "salary" },
-//                  { "mData": "supervisorId" },
-//                  { "mData": "teams" }
-//			]
-//	 }
-
     $.getJSON('/employees/list-all', { get_param: 'value' }, function(data) {
         $("#employeesTable").append("<tbody>");
         $.each(data, function(index, element) {
@@ -22,7 +7,8 @@ $(document).ready(function () {
             var lastName  = element.lastName;
             var position  = element.position;
             var salary  = element.salary;
-            var supervisor  = getSupervisorInfo(element.supervisorId, data);
+            var supervisorId = element.supervisorId;
+            var supervisor = data[supervisorId] || null;
             var teams = element.teams;
 
             $("#employeesTable").append(
@@ -31,7 +17,7 @@ $(document).ready(function () {
                 "</td><td>"+ lastName +
                 "</td><td>"+ position +
                 "</td><td>"+ salary +
-                "</td><td>"+ supervisor +
+                "</td><td>"+ getSupervisorInfo(supervisor) +
                 "</td><td>"+ teams +
                 "</td></tr>"
             );
@@ -45,12 +31,12 @@ $(document).ready(function () {
     });
 });
 
-function getSupervisorInfo(supervisorId, data) {
-    $.each(data, function(index, element) {
-        if (index === supervisorId) {
-            return true;
-        }
-    });
+function getSupervisorInfo(supervisor) {
+    if(supervisor === null) {
+        return '';
+    } else {
+        return supervisor.firstName + ' ' + supervisor.lastName;
+    }
 }
 
 function search() {
