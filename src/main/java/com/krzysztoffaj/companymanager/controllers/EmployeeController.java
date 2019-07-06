@@ -53,20 +53,19 @@ public class EmployeeController {
 
     @GetMapping("/employees/edit/{id}")
     public ModelAndView setupEditEmployeeView(@PathVariable("id") Integer id) {
-//        try {
-//            Employee editedEmployee = employeeService.get(employeeId);
-//            System.out.println(editedEmployee);
-//            model.addAttribute("employee", editedEmployee);
-//        } catch (Exception e) {
-//            return "entitynotfound";
-//        }
-        modelAndView.setViewName("add-or-edit-employee");
+        try {
+            Employee editedEmployee = employeeService.get(id);
+            System.out.println(editedEmployee);
+            modelAndView.setViewName("add-or-edit-employee");
+        } catch (Exception e) {
+            modelAndView.setViewName("entity-not-found");
+        }
         return modelAndView;
     }
 
     @PutMapping("/employees/edit/{id}")
     public Employee editEmployee(@PathVariable("id") Integer id,
-                               Employee employee) {
+                                 Employee employee) {
 //        employeeService.updateEmployeeInfo(id, position, salary, supervisorId, teamIds);
         employeeService.save(employee);
 

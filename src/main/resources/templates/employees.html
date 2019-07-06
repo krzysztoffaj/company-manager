@@ -36,33 +36,10 @@
         <th>Salary</th>
         <th>Supervisor</th>
         <th>Teams</th>
-        <!--<th>Modify</th>-->
+        <th>Modify</th>
         <!--<th>Competence</th>-->
     </tr>
     </thead>
-    <!--<tr th:each="employee : ${allEmployees}">-->
-    <!--<td th:text="${employee.id}"></td>-->
-    <!--<td th:text="${employee.firstName}"></td>-->
-    <!--<td th:text="${employee.lastName}"></td>-->
-    <!--<td th:text="${employee.position}"></td>-->
-    <!--<td th:text="${employee.salary}"></td>-->
-    <!--<td>-->
-    <!--<th:block th:each="existingEmployee : ${allEmployees}">-->
-    <!--<span th:text="${existingEmployee.id == employee.supervisorId ? existingEmployee.firstName + ' ' + existingEmployee.lastName : ''}"></span>-->
-    <!--</th:block>-->
-    <!--</td>-->
-    <!--<td>-->
-    <!--<th:block th:each="team, iterStat : ${employee.teams}">-->
-    <!--<span th:text="!${iterStat.last} ? ${team.name} + ', ': ${team.name}"></span>-->
-    <!--</th:block>-->
-    <!--</td>-->
-    <!--<td>-->
-    <!--<form th:action="@{/manageemployee/edit/} + ${{employee.id}}" th:method="GET">-->
-    <!--<input id="editemployee" type="submit" value="Edit"/>-->
-    <!--</form>-->
-    <!--</td>-->
-    <!--<td th:text="${employee.competence}"></td>-->
-    <!--</tr>-->
 </table>
 </body>
 </html>

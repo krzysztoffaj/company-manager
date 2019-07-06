@@ -1,28 +1,7 @@
 $(document).ready(function () {
     $.getJSON('/employees/list-all', { get_param: 'value' }, function(data) {
         $("#employeesTable").append("<tbody>");
-        $.each(data, function(index, element) {
-            var id  = element.id;
-            var firstName  = element.firstName;
-            var lastName  = element.lastName;
-            var position  = element.position;
-            var salary  = element.salary;
-            var supervisorId = element.supervisorId;
-            var supervisor = data[supervisorId] || null;
-            var teams = element.teams.map(x => x.name).join(', ');
-//            var teams = element.teams[0].name;
-
-            $("#employeesTable").append(
-                "<tr><td>"+ id +
-                "</td><td>"+ firstName +
-                "</td><td>"+ lastName +
-                "</td><td>"+ position +
-                "</td><td>"+ salary +
-                "</td><td>"+ getSupervisorInfo(supervisor) +
-                "</td><td>"+ teams +
-                "</td></tr>"
-            );
-        });
+        fillTable(data);
         $("#employeesTable").append("</tbody>");
     });
 
@@ -42,28 +21,37 @@ function getSupervisorInfo(supervisor) {
 
 function search() {
     var query = $("#query").val();
-
     $.getJSON('/employees/search?query=' + query, { get_param: 'value' }, function(data) {
         $("#employeesTable").find("tbody").empty();
-        $.each(data, function(index, element) {
-            var id  = element.id;
-            var firstName  = element.firstName;
-            var lastName  = element.lastName;
-            var position  = element.position;
-            var salary  = element.salary;
-            var supervisor  = getSupervisorInfo(element.supervisorId, data);
-            var teams = element.teams;
+        fillTable(data);
+    });
+}
 
-            $("#employeesTable").append(
-                "<tr><td>"+ id +
-                "</td><td>"+ firstName +
-                "</td><td>"+ lastName +
-                "</td><td>"+ position +
-                "</td><td>"+ salary +
-                "</td><td>"+ supervisor +
-                "</td><td>"+ teams +
-                "</td></tr>"
-            );
-        });
+function fillTable(data) {
+    $.each(data, function(index, element) {
+        var id  = element.id;
+        var firstName  = element.firstName;
+        var lastName  = element.lastName;
+        var position  = element.position;
+        var salary  = element.salary;
+        var supervisorId = element.supervisorId;
+        var supervisor = data[supervisorId] || null;
+        var teams = element.teams.map(team => "<a href=/teams/edit/" + team.id + ">" + team.name + "</a>").join(', ');
+
+        $("#employeesTable").append(
+            "<tr>" +
+                "<td>" + id + "</td>" +
+                "<td>" + firstName + "</td>" +
+                "<td>" + lastName + "</td>" +
+                "<td>" + position + "</td>" +
+                "<td>" + salary + "</td>" +
+                "<td>" + getSupervisorInfo(supervisor) + "</td>" +
+                "<td>" + teams + "</td>" +
+                "<td>" +
+                    "<a href='/employees/edit/" + id + "'>" +
+                        "<input id='editEmployee' type='button' value='Edit'/>" +
+                    "</a>" +
+                "</td>" +
+            "</tr>");
     });
 }
