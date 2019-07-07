@@ -149,10 +149,10 @@ INSERT INTO team (name, pm_id, po_id, scrummaster_id)
 VALUES ('Technical Architecture', 1, 4, 7);
 
 INSERT INTO team (name, pm_id, po_id, scrummaster_id)
-VALUES ('Mobile', 2, 6, 9);
+VALUES ('Mobile', 2, 5, NULL);
 
 INSERT INTO team (name, pm_id, po_id, scrummaster_id)
-VALUES ('Customer Relationship Management', 3, 5, 8);
+VALUES ('Customer Relationship Management', 3, NULL, 8);
 
 
 
@@ -188,10 +188,10 @@ INSERT INTO employee_team (employee_id, team_id)
 VALUES (7, 1);
 
 INSERT INTO employee_team (employee_id, team_id)
-VALUES (8, 2);
+VALUES (8, 3);
 
 INSERT INTO employee_team (employee_id, team_id)
-VALUES (9, 3);
+VALUES (9, 2);
 
 
 -- Developer

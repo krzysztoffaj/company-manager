@@ -1,12 +1,11 @@
 package com.krzysztoffaj.companymanager.controllers;
 
-import com.krzysztoffaj.companymanager.entities.Employee;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.entities.Team;
+import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,11 +28,13 @@ public class TeamController {
     }
 
     @GetMapping("/teams/list-all")
+    @JsonView(View.DetailedTeamsInfo.class)
     public List<Team> getAllTeams() {
         return teamService.getAll();
     }
 
     @GetMapping("/teams/add")
+    @JsonView(View.DetailedTeamsInfo.class)
     public ModelAndView setupAddNewTeamView() {
         modelAndView.setViewName("add-or-edit-team");
         return modelAndView;
@@ -50,14 +51,13 @@ public class TeamController {
 
     @GetMapping("/teams/edit/{id}")
     public ModelAndView setupEditTeamView(@PathVariable("id") Integer id) {
-//        try {
-//            Team editedTeam = teamService.get(id);
-//            System.out.println(editedTeam);
-//            model.addAttribute("team", editedTeam);
-//        } catch (Exception e) {
-//            return "entitynotfound";
-//        }
-        modelAndView.setViewName("add-or-edit-team");
+        try {
+            Team editedTeam = teamService.get(id);
+            System.out.println(editedTeam);
+            modelAndView.setViewName("add-or-edit-team");
+        } catch (Exception e) {
+            modelAndView.setViewName("entity-not-found");
+        }
         return modelAndView;
     }
 

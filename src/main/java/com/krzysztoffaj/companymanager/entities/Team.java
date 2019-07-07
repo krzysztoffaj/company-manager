@@ -1,9 +1,7 @@
 package com.krzysztoffaj.companymanager.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
+import com.krzysztoffaj.companymanager.infrastructure.View;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,26 +13,27 @@ public class Team implements EntityId, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
+    @JsonView(View.BasicInfo.class)
     private int id;
 
     @Column(name = "name")
+    @JsonView(View.BasicInfo.class)
     private String name;
 
     @Column(name = "pm_id")
+    @JsonView(View.DetailedTeamsInfo.class)
     private Integer pmId;
 
     @Column(name = "po_id")
+    @JsonView(View.DetailedTeamsInfo.class)
     private Integer poId;
 
     @Column(name = "scrummaster_id")
+    @JsonView(View.DetailedTeamsInfo.class)
     private Integer scrummasterId;
 
     @ManyToMany(mappedBy = "teams")
-//    @JsonIdentityInfo(
-//            generator = ObjectIdGenerators.PropertyGenerator.class,
-//            property = "id")
-//    @JsonIgnore
-    @JsonBackReference
+    @JsonView(View.DetailedTeamsInfo.class)
     private Set<Employee> members;
 
     public Team() {

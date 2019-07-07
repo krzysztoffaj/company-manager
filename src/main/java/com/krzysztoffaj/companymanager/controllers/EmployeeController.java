@@ -1,12 +1,10 @@
 package com.krzysztoffaj.companymanager.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.entities.Employee;
-import com.krzysztoffaj.companymanager.entities.Team;
-import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
+import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,11 +26,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/list-all")
+    @JsonView(View.DetailedEmployeesInfo.class)
     public List<Employee> getAllEmployees() {
         return employeeService.getAll();
     }
 
     @GetMapping("/employees/search")
+    @JsonView(View.DetailedEmployeesInfo.class)
     public Set<Employee> search(@RequestParam("query") String query) {
         return employeeService.handleSearching(query);
     }
@@ -43,7 +43,7 @@ public class EmployeeController {
         return modelAndView;
     }
 
-    @PostMapping("/manageemployee/add")
+    @PostMapping("/employees/add")
     public Employee addNewEmployee(Employee employee) {
 //        final Employee employee = employeeService.castQueryParamsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teamIds);
         employeeService.save(employee);

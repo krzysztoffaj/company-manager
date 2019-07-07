@@ -34,8 +34,7 @@ function fillTable(data) {
         var lastName  = element.lastName;
         var position  = element.position;
         var salary  = element.salary;
-        var supervisorId = element.supervisorId;
-        var supervisor = data[supervisorId] || null;
+        var supervisor = data[element.supervisorId] || null;
         var teams = element.teams.map(team => "<a href=/teams/edit/" + team.id + ">" + team.name + "</a>").join(', ');
 
         $("#employeesTable").append(

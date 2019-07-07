@@ -9,51 +9,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" th:href="@{/css/browseteams.css}"/>
+    <link rel="stylesheet" th:href="@{/css/teams.css}"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="/js/browseteams.js"></script>
+    <script type="text/javascript" src="/js/teams.js"></script>
 </head>
 
 <body>
 <div th:replace="fragment/header :: header"></div>
 
-<table id="teams">
+<table id="teamsTable">
+    <thead>
     <tr>
         <th>Id</th>
         <th>Name</th>
         <th>PM</th>
         <th>PO</th>
         <th>Scrummaster</th>
+        <th>Members</th>
         <th>Modify</th>
     </tr>
-    <tr th:each="team : ${allTeams}">
-        <td th:text="${team.id}"></td>
-        <td th:text="${team.name}"></td>
-        <td>
-            <th:block th:each="employee : ${allEmployees}">
-                <span th:text="${employee.id == team.pmId ? employee.firstName + ' ' + employee.lastName : ''}"></span>
-            </th:block>
-        </td>
-        <td>
-            <th:block th:each="employee : ${allEmployees}">
-                <span th:text="${employee.id == team.poId ? employee.firstName + ' ' + employee.lastName : ''}"></span>
-            </th:block>
-        </td>
-        <td>
-            <th:block th:each="employee : ${allEmployees}">
-                <span th:text="${employee.id == team.scrummasterId ? employee.firstName + ' ' + employee.lastName : ''}"></span>
-            </th:block>
-        </td>
-        <td>
-            <form th:action="@{/manageteam/edit/} + ${{team.id}}" th:method="GET">
-                <input id="editteam" type="submit" value="Edit"/>
-            </form>
-        </td>
-    </tr>
+    </thead>
 </table>
 </body>
 </html>
