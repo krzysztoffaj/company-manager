@@ -1,4 +1,4 @@
-function submitemployee(employeeId) {
+function submitEmployee(employeeId) {
     var firstName = $('#firstName').val();
     var lastName = $('#lastName').val();
     var position = $('#position').val();

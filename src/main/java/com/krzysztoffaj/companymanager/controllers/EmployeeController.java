@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.entities.Employee;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
+import com.krzysztoffaj.companymanager.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +17,8 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private TeamService teamService;
 
     private ModelAndView modelAndView = new ModelAndView();
 
@@ -39,15 +42,16 @@ public class EmployeeController {
 
     @GetMapping("/employees/add")
     public ModelAndView setupAddEmployeeView() {
-        modelAndView.setViewName("add-or-edit-employee");
+        modelAndView.addObject("allEmployees", employeeService.getAll());
+        modelAndView.addObject("allTeams", teamService.getAll());
+        modelAndView.setViewName("add-employee");
         return modelAndView;
     }
 
     @PostMapping("/employees/add")
-    public Employee addNewEmployee(Employee employee) {
-//        final Employee employee = employeeService.castQueryParamsToEmployeeObject(firstName, lastName, position, salary, supervisorId, teamIds);
+    public Employee addNewEmployee(@RequestBody Employee employee) {
+        System.out.println(employee.getFirstName());
         employeeService.save(employee);
-
         return employee;
     }
 
