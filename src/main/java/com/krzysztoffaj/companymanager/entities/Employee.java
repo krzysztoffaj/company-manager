@@ -3,6 +3,7 @@ package com.krzysztoffaj.companymanager.entities;
 import com.fasterxml.jackson.annotation.*;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.View;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,6 +40,7 @@ public class Employee implements EntityId, Serializable {
     private Integer supervisorId;
 
     @ManyToMany(fetch = FetchType.EAGER)
+//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinTable(name = "employee_team",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
