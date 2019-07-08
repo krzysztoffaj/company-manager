@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.*;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -17,6 +21,9 @@ public class Team implements EntityId, Serializable {
     private int id;
 
     @Column(name = "name")
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @Size(min = 2, max = 100)
     @JsonView(View.BasicInfo.class)
     private String name;
 

@@ -9,11 +9,14 @@ import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,7 +64,7 @@ public class EmployeeController {
 
     @PostMapping("/employees/add")
     @JsonView(View.BasicInfo.class)
-    public Employee addNewEmployee(@RequestBody EmployeeWithTeamIds employeeWithTeamIds) {
+    public Employee addNewEmployee(@Valid @RequestBody EmployeeWithTeamIds employeeWithTeamIds) {
         return employeeService.saveEmployee(employeeWithTeamIds);
     }
 
@@ -83,7 +86,14 @@ public class EmployeeController {
     @PutMapping("/employees/edit/{id}")
     @JsonView(View.BasicInfo.class)
     public Employee editEmployee(@PathVariable("id") Integer id,
-                                 @RequestBody EmployeeWithTeamIds employeeWithTeamIds) {
+                                 @Valid @RequestBody EmployeeWithTeamIds employeeWithTeamIds) {
         return employeeService.saveEmployee(employeeWithTeamIds);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public void handleValidationError(MethodArgumentNotValidException ex) {
+        System.out.println("Validation error occured!");
     }
 }

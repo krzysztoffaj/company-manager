@@ -6,9 +6,14 @@ import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,7 +46,7 @@ public class TeamController {
     }
 
     @PostMapping("/teams/add")
-    public Team addNewTeamSubmit(@RequestBody Team team) {
+    public Team addNewTeamSubmit(@Valid @RequestBody Team team) {
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
 
@@ -64,10 +69,17 @@ public class TeamController {
 
     @PutMapping("/teams/edit/{id}")
     public Team editTeam(@PathVariable("id") Integer id,
-                         @RequestBody Team team) {
+                         @Valid @RequestBody Team team) {
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
 
         return team;
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public void handleValidationError(MethodArgumentNotValidException ex) {
+        System.out.println("Validation error occured!");
     }
 }

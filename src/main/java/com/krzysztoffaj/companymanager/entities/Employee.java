@@ -6,6 +6,7 @@ import com.krzysztoffaj.companymanager.infrastructure.View;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -19,10 +20,16 @@ public class Employee implements EntityId, Serializable {
     private int id;
 
     @Column(name = "first_name")
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @Size(min = 2, max = 50)
     @JsonView(View.BasicInfo.class)
     private String firstName;
 
     @Column(name = "last_name")
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z\\s]*$")
+    @Size(min = 2, max = 50)
     @JsonView(View.BasicInfo.class)
     private String lastName;
 
@@ -32,6 +39,8 @@ public class Employee implements EntityId, Serializable {
     private EmployeePosition position;
 
     @Column(name = "salary")
+    @NotNull
+    @Digits(fraction = 2, integer = 15)
     @JsonView(View.BasicInfo.class)
     private double salary;
 
@@ -40,7 +49,6 @@ public class Employee implements EntityId, Serializable {
     private Integer supervisorId;
 
     @ManyToMany(fetch = FetchType.EAGER)
-//    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinTable(name = "employee_team",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
