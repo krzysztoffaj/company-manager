@@ -5,6 +5,7 @@ import com.krzysztoffaj.companymanager.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -56,6 +57,8 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Override
     public Set<Employee> handleSearching(String query) {
+        getQuery(query);
+
         String[] words = getWordsExtractedFromQuery(query);
 
         Set<Employee> uniqueResultsFirstWord;
@@ -162,18 +165,45 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     private String[] getWordsExtractedFromQuery(String query) {
-        //TODO Only alphanumeric query. Cannot be more than 3 words
+        //TODO Only alphanumeric query. Cannot be more than 3 words. Not case sensitive
         if (!query.matches(".*\\w.*")) {
             return new String[0];
         }
         return query.trim().split("\\s+");
     }
 
+    @Override
+    public String getQuery(String input) {
+        //TODO clenup
+        StringBuilder query = new StringBuilder();
+        final String[] words = getWordsExtractedFromQuery(input);
+
+        query.append("FROM Employee WHERE ");
+        for (int i = 0; i < words.length - 1; i++) {
+            query.append("first_name LIKE '%").append(words[i]).append("%' OR ");
+            query.append("last_name LIKE '%").append(words[i]).append("%' OR ");
+            query.append("position LIKE '%").append(words[i]).append("%' AND ");
+        }
+        query.append("first_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
+        query.append("last_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
+        query.append("position LIKE '%").append(words[words.length - 1]).append("%' OR ");
+        query.append("1=0");
+        System.out.println(query.toString());
+
+        return query.toString();
+    }
+
+    @Query()
     private Integer getIntFromStringOrNull(String input) {
         if (input.equals("null")) {
             return null;
         } else {
             return Integer.parseInt(input);
         }
+    }
+
+    @Override
+    public List<Employee> getAllTemp() {
+        return employeeRepository.findEmployees();
     }
 }

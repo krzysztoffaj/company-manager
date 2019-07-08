@@ -29,4 +29,8 @@ public interface EmployeeService {
     void addTeamToManagingEmployees(Team newTeam);
 
     void updateEmployeeInfo(Integer employeeId, EmployeePosition position, String salary, String supervisorId, int[] teamIds);
+
+    List<Employee> getAllTemp();
+
+    String getQuery(String input);
 }

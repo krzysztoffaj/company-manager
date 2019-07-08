@@ -9,10 +9,12 @@ import com.krzysztoffaj.companymanager.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +29,9 @@ public class EmployeeController {
     @Autowired
     private TeamService teamService;
 
+    @Autowired
+    private EntityManager entityManager;
+
     private ModelAndView modelAndView = new ModelAndView();
 
     @GetMapping("/employees")
@@ -35,28 +40,29 @@ public class EmployeeController {
         return modelAndView;
     }
 
-//    @GetMapping("/employees/get-by-id/{id}")
-//    @JsonView(View.BasicInfo.class)
-//    public Employee getEmployeeById(@PathVariable("id") Integer id) {
-//        return employeeService.get(id);
-//    }
-//
-    @GetMapping("/employees/get-by-id/{id}")
-    @JsonView(View.BasicInfo.class)
-    public List<Employee> getEmployeeById(@PathVariable("id") Integer id) {
-        return Collections.singletonList(employeeService.get(id));
-    }
-
     @GetMapping("/employees/list-all")
     @JsonView(View.DetailedEmployeesInfo.class)
     public List<Employee> getAllEmployees() {
+        employeeService.getAllTemp().forEach(e -> System.out.println(e.getTeams()));
+        System.out.println(entityManager.toString());
+
         return employeeService.getAll();
     }
 
     @GetMapping("/employees/search")
     @JsonView(View.DetailedEmployeesInfo.class)
-    public Set<Employee> search(@RequestParam("query") String query) {
-        return employeeService.handleSearching(query);
+    public List<Employee> search(@RequestParam("query") String query) {
+//        employeeService.getAllTemp();
+
+        Session session = entityManager.unwrap(org.hibernate.Session.class);
+
+//        final List<Employee> resultList = session.createSQLQuery(employeeService.getQuery(query)).getResultList();
+
+        final List<Employee> resultList = session.createQuery(employeeService.getQuery(query), Employee.class).getResultList();
+        session.close();
+
+//        return employeeService.handleSearching(query);
+        return resultList;
     }
 
     @GetMapping("/employees/add")

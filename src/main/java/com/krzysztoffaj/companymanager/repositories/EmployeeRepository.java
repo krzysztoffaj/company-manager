@@ -3,8 +3,12 @@ package com.krzysztoffaj.companymanager.repositories;
 import com.krzysztoffaj.companymanager.entities.Employee;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.competences.CompetenceResolver;
+import com.krzysztoffaj.companymanager.services.DefaultEmployeeService;
+import com.krzysztoffaj.companymanager.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +18,15 @@ import java.util.List;
 @Transactional
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-
     List<Employee> findEmployeeByFirstName(String firstName);
 
     List<Employee> findEmployeeByLastName(String lastName);
 
     List<Employee> findEmployeeByPosition(EmployeePosition position);
+
+        @Query("from Employee where first_name like '%Dev%' or last_name like '%Dev%' or position like '%Dev%' or 1=0")
+//    @Query()
+    List<Employee> findEmployees();
 
 //    public Employee get(int id) {
 //        Employee employee = super.(id);
