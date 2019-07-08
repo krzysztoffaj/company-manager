@@ -1,7 +1,10 @@
+let allEmployees;
+
 $(document).ready(function () {
     $.getJSON('/employees/list-all', { get_param: 'value' }, function(data) {
         $("#employeesTable").append("<tbody>");
-        fillTable(data);
+        allEmployees = data;
+        fillTable(data, allEmployees);
         $("#employeesTable").append("</tbody>");
     });
 
@@ -23,18 +26,18 @@ function search() {
     var query = $("#query").val();
     $.getJSON('/employees/search?query=' + query, { get_param: 'value' }, function(data) {
         $("#employeesTable").find("tbody").empty();
-        fillTable(data);
+        fillTable(data, allEmployees);
     });
 }
 
-function fillTable(data) {
+function fillTable(data, allEmployees) {
     $.each(data, function(index, element) {
         var id  = element.id;
         var firstName  = element.firstName;
         var lastName  = element.lastName;
         var position  = element.position;
         var salary  = element.salary;
-        var supervisor = data[element.supervisorId] || null;
+        var supervisor = allEmployees[element.supervisorId - 1] || null;
         var teams = element.teams.map(team => "<a href=/teams/edit/" + team.id + ">" + team.name + "</a>").join(', ');
 
         $("#employeesTable").append(
