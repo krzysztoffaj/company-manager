@@ -36,14 +36,12 @@ public class TeamController {
     @GetMapping("/teams/add")
     public ModelAndView setupAddNewTeamView() {
         modelAndView.addObject("allEmployees", employeeService.getAll());
-        modelAndView.addObject("allTeams", teamService.getAll());
         modelAndView.setViewName("add-team");
         return modelAndView;
     }
 
     @PostMapping("/teams/add")
     public Team addNewTeamSubmit(@RequestBody Team team) {
-//        final Team team = teamService.castQueryParamsToTeamObject(teamName, pmId, poId, scrummasterId);
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
 
@@ -55,7 +53,9 @@ public class TeamController {
         try {
             Team editedTeam = teamService.get(id);
             System.out.println(editedTeam);
-            modelAndView.setViewName("add-or-edit-team");
+            modelAndView.addObject("editedTeam", editedTeam);
+            modelAndView.addObject("allEmployees", employeeService.getAll());
+            modelAndView.setViewName("edit-team");
         } catch (Exception e) {
             modelAndView.setViewName("entity-not-found");
         }
@@ -64,10 +64,9 @@ public class TeamController {
 
     @PutMapping("/teams/edit/{id}")
     public Team editTeam(@PathVariable("id") Integer id,
-                           Team team) {
-//        teamService.updateTeamInfo(id, pmId, poId, scrummasterId);
-//        teamService.save(id);
-        employeeService.addTeamToManagingEmployees(teamService.get(id));
+                         @RequestBody Team team) {
+        teamService.save(team);
+        employeeService.addTeamToManagingEmployees(team);
 
         return team;
     }
