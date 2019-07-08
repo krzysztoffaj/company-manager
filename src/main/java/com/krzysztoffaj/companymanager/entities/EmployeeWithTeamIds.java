@@ -5,10 +5,10 @@ import com.krzysztoffaj.companymanager.infrastructure.View;
 
 import java.util.List;
 
-public class EmployeeWithTeams {
+public class EmployeeWithTeamIds {
     @JsonView(View.BasicInfo.class)
-    Employee employee;
-    List<Integer> teams;
+    private Employee employee;
+    private List<Integer> teams;
 
     public Employee getEmployee() {
         return employee;

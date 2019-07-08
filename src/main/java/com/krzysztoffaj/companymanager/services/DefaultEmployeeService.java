@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.entities.Employee;
+import com.krzysztoffaj.companymanager.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
@@ -17,10 +18,9 @@ import java.util.Set;
 public class DefaultEmployeeService implements EmployeeService {
 
     @Autowired
-    EmployeeRepository employeeRepository;
-
+    private EmployeeRepository employeeRepository;
     @Autowired
-    TeamService teamService;
+    private TeamService teamService;
 
     @Override
     public Employee get(Integer id) {
@@ -36,100 +36,8 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findByFirstName(String firstName) {
-        return employeeRepository.findEmployeeByFirstName(firstName);
-    }
-
-    @Override
-    public List<Employee> findByLastName(String lastName) {
-        return employeeRepository.findEmployeeByLastName(lastName);
-    }
-
-    @Override
-    public List<Employee> findByPosition(EmployeePosition position) {
-        return employeeRepository.findEmployeeByPosition(position);
-    }
-
-    @Override
     public void save(Employee employee) {
         employeeRepository.save(employee);
-    }
-
-    @Override
-    public Set<Employee> handleSearching(String query) {
-        getQuery(query);
-
-        String[] words = getWordsExtractedFromQuery(query);
-
-        Set<Employee> uniqueResultsFirstWord;
-        Set<Employee> uniqueResultsSecondWord;
-        Set<Employee> uniqueResultsThirdWord;
-
-        Set<Employee> results = new HashSet<>();
-
-        switch (words.length) {
-            case 0:
-                results = new HashSet<>(getAll());
-                break;
-            case 1:
-                results = getUniqueResults(words[0]);
-                break;
-            case 2:
-                uniqueResultsFirstWord = getUniqueResults(words[0]);
-                uniqueResultsSecondWord = getUniqueResults(words[1]);
-
-                results = new HashSet<>(uniqueResultsFirstWord);
-                results.retainAll(uniqueResultsSecondWord);
-                break;
-            case 3:
-                uniqueResultsFirstWord = getUniqueResults(words[0]);
-                uniqueResultsSecondWord = getUniqueResults(words[1]);
-                uniqueResultsThirdWord = getUniqueResults(words[2]);
-
-                results = new HashSet<>(uniqueResultsFirstWord);
-                results.retainAll(uniqueResultsSecondWord);
-                results.retainAll(uniqueResultsThirdWord);
-                break;
-        }
-
-        return results;
-    }
-
-    @Override
-    public Set<Employee> getUniqueResults(String word) {
-        List<Employee> foundByFirstName = findByFirstName(word);
-        List<Employee> foundByLastName = findByLastName(word);
-        List<Employee> foundByPosition;
-        try {
-            foundByPosition = findByPosition(EmployeePosition.valueOf(word));
-        } catch (IllegalArgumentException ex) {
-            foundByPosition = new ArrayList<>();
-        }
-
-        Set<Employee> uniqueResults = new HashSet<>();
-        uniqueResults.addAll(foundByFirstName);
-        uniqueResults.addAll(foundByLastName);
-        uniqueResults.addAll(foundByPosition);
-
-        return uniqueResults;
-    }
-
-    @Override
-    public Employee castQueryParamsToEmployeeObject(String firstName, String lastName, EmployeePosition position, String salary, String supervisorId, int[] teamsIds) {
-        Employee employee = new Employee();
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
-        employee.setPosition(position);
-        employee.setSalary(Double.parseDouble(salary));
-        employee.setSupervisorId(getIntFromStringOrNull(supervisorId));
-
-        Set<Team> teams = new HashSet<>();
-        for (int teamsId : teamsIds) {
-            teams.add(teamService.get(teamsId));
-        }
-        employee.setTeams(teams);
-
-        return employee;
     }
 
     @Override
@@ -147,25 +55,8 @@ public class DefaultEmployeeService implements EmployeeService {
         }
     }
 
-    @Override
-    public void updateEmployeeInfo(Integer employeeId, EmployeePosition position, String salary, String supervisorId, int[] teamIds) {
-        Employee employee = get(employeeId);
-
-        employee.setPosition(position);
-        employee.setSalary(Double.parseDouble(salary));
-        employee.setSupervisorId(getIntFromStringOrNull(supervisorId));
-
-        Set<Team> teams = new HashSet<>();
-        for (int teamId : teamIds) {
-            teams.add(teamService.get(teamId));
-        }
-        employee.setTeams(teams);
-
-        save(employee);
-    }
-
     private String[] getWordsExtractedFromQuery(String query) {
-        //TODO Only alphanumeric query. Cannot be more than 3 words. Not case sensitive
+        //TODO Only alphanumeric query. Cannot be more than 3 words
         if (!query.matches(".*\\w.*")) {
             return new String[0];
         }
@@ -173,37 +64,35 @@ public class DefaultEmployeeService implements EmployeeService {
     }
 
     @Override
-    public String getQuery(String input) {
+    public String prepareTypedQuery(String input) {
         //TODO clenup
         StringBuilder query = new StringBuilder();
         final String[] words = getWordsExtractedFromQuery(input);
 
         query.append("FROM Employee WHERE ");
         for (int i = 0; i < words.length - 1; i++) {
-            query.append("first_name LIKE '%").append(words[i]).append("%' OR ");
+            query.append("(first_name LIKE '%").append(words[i]).append("%' OR ");
             query.append("last_name LIKE '%").append(words[i]).append("%' OR ");
-            query.append("position LIKE '%").append(words[i]).append("%' AND ");
+            query.append("position LIKE '%").append(words[i]).append("%') AND ");
         }
-        query.append("first_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
+        query.append("(first_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
         query.append("last_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
-        query.append("position LIKE '%").append(words[words.length - 1]).append("%' OR ");
-        query.append("1=0");
-        System.out.println(query.toString());
+        query.append("position LIKE '%").append(words[words.length - 1]).append("%')");
 
         return query.toString();
     }
 
-    @Query()
-    private Integer getIntFromStringOrNull(String input) {
-        if (input.equals("null")) {
-            return null;
-        } else {
-            return Integer.parseInt(input);
-        }
-    }
-
     @Override
-    public List<Employee> getAllTemp() {
-        return employeeRepository.findEmployees();
+    public Employee saveEmployee(EmployeeWithTeamIds employeeWithTeamIds) {
+        final Employee employee = employeeWithTeamIds.getEmployee();
+
+        Set<Team> teams = new HashSet<>();
+        for (int teamId : employeeWithTeamIds.getTeams()) {
+            teams.add(teamService.get(teamId));
+        }
+        employee.setTeams(teams);
+
+        save(employee);
+        return employee;
     }
 }

@@ -1,10 +1,8 @@
 package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.krzysztoffaj.companymanager.entities.Employee;
-import com.krzysztoffaj.companymanager.entities.EmployeeWithTeams;
+import com.krzysztoffaj.companymanager.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,26 +40,15 @@ public class EmployeeController {
     @GetMapping("/employees/list-all")
     @JsonView(View.DetailedEmployeesInfo.class)
     public List<Employee> getAllEmployees() {
-        employeeService.getAllTemp().forEach(e -> System.out.println(e.getTeams()));
-        System.out.println(entityManager.toString());
-
         return employeeService.getAll();
     }
 
     @GetMapping("/employees/search")
     @JsonView(View.DetailedEmployeesInfo.class)
     public List<Employee> search(@RequestParam("query") String query) {
-//        employeeService.getAllTemp();
-
         Session session = entityManager.unwrap(org.hibernate.Session.class);
 
-//        final List<Employee> resultList = session.createSQLQuery(employeeService.getQuery(query)).getResultList();
-
-        final List<Employee> resultList = session.createQuery(employeeService.getQuery(query), Employee.class).getResultList();
-        session.close();
-
-//        return employeeService.handleSearching(query);
-        return resultList;
+        return session.createQuery(employeeService.prepareTypedQuery(query), Employee.class).getResultList();
     }
 
     @GetMapping("/employees/add")
@@ -74,17 +60,15 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/add")
-    public Employee addNewEmployee(@RequestBody Employee employee) {
-        System.out.println(employee.getFirstName());
-        employeeService.save(employee);
-        return employee;
+    @JsonView(View.BasicInfo.class)
+    public Employee addNewEmployee(@RequestBody EmployeeWithTeamIds employeeWithTeamIds) {
+        return employeeService.saveEmployee(employeeWithTeamIds);
     }
 
     @GetMapping("/employees/edit/{id}")
     public ModelAndView setupEditEmployeeView(@PathVariable("id") Integer id) {
         try {
             Employee editedEmployee = employeeService.get(id);
-//            Employee editedEmployee = getEmployeeById(id);
             System.out.println(editedEmployee);
             modelAndView.addObject("editedEmployee", editedEmployee);
             modelAndView.addObject("allEmployees", employeeService.getAll());
@@ -99,18 +83,7 @@ public class EmployeeController {
     @PutMapping("/employees/edit/{id}")
     @JsonView(View.BasicInfo.class)
     public Employee editEmployee(@PathVariable("id") Integer id,
-                                 @RequestBody EmployeeWithTeams employeeWithTeams) {
-        System.out.println(employeeWithTeams.toString());
-//        employeeService.updateEmployeeInfo(id, position, salary, supervisorId, teamIds);
-        final Employee employee = employeeWithTeams.getEmployee();
-        Set<Team> teams = new HashSet<>();
-        for (int teamId : employeeWithTeams.getTeams()) {
-            teams.add(teamService.get(teamId));
-        }
-        employee.setTeams(teams);
-
-        employeeService.save(employee);
-
-        return employee;
+                                 @RequestBody EmployeeWithTeamIds employeeWithTeamIds) {
+        return employeeService.saveEmployee(employeeWithTeamIds);
     }
 }

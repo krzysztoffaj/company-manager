@@ -1,37 +1,42 @@
 function addEmployee() {
-    var employee = {};
+    let employee = {};
 
     employee["firstName"] = $("#firstName").val();
     employee["lastName"] = $("#lastName").val();
     employee["position"] = $("#position").val();
-    employee["salary"] = $("#salary").val();
-    employee["supervisorId"] = $("#supervisorId").val();
-    employee["teams"] = $("#teams").val();
+    employee["salary"] = Number($("#salary").val());
+    employee["supervisorId"] = Number($("#supervisorId").val());
+    let teams = $("#teams").val().map(x => Number(x));
 
-    if(isEmptyOrSpaces(employee["firstName"])) {
-        swal("Invalid input!", "Please provide valid first name", "warning");
-        return;
-    }
-    if(isEmptyOrSpaces(employee["lastName"])) {
-        swal("Invalid input!", "Please provide valid last name", "warning");
-        return;
-    }
-    if(!isOnlyNumbersAndOptionallyDot(employee["salary"])) {
-        swal("Invalid input!", "Please provide valid salary", "warning");
-        return;
-    }
+//    if(isEmptyOrSpaces(employee["firstName"])) {
+//        swal("Invalid input!", "Please provide valid first name", "warning");
+//        return;
+//    }
+//    if(isEmptyOrSpaces(employee["lastName"])) {
+//        swal("Invalid input!", "Please provide valid last name", "warning");
+//        return;
+//    }
+//    if(!isOnlyNumbersAndOptionallyDot(employee["salary"])) {
+//        swal("Invalid input!", "Please provide valid salary", "warning");
+//        return;
+//    }
 
     $.ajax({
         type: "POST",
         contentType: "application/json",
         url: "/employees/add",
-        data: JSON.stringify(employee),
+        data: JSON.stringify({"employee": employee, "teams": teams}),
         dataType: 'json',
         cache: false,
         timeout: 600000,
         success: function (data) {
-            swal("Success!", "Employee added", "success");
-            window.location.replace("/employees");
+            swal({
+                    title: "Success!",
+                    text: "Employee added",
+                    icon: "success"
+            }).then(function() {
+                window.location = "/employees";
+            });
         },
         error: function (e) {
             swal("Error!", "Something went wrong", "error");
@@ -39,10 +44,10 @@ function addEmployee() {
     });
 }
 
-function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
-}
-
-function isOnlyNumbersAndOptionallyDot(str){
-    return str.match(/(?<=^| )\d+(\.\d+)?(?=$| )/);
-}
+//function isEmptyOrSpaces(str){
+//    return str === null || str.match(/^ *$/) !== null;
+//}
+//
+//function isOnlyNumbersAndOptionallyDot(str){
+//    return str.match(/(?<=^| )\d+(\.\d+)?(?=$| )/);
+//}

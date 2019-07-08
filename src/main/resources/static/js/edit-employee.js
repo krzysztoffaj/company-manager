@@ -1,25 +1,3 @@
-$(document).ready(function() {
-//    var editedEmployee;
-//
-//    $.getJSON('/employees/get-by-id/1', { get_param: 'value' }, function(data) {
-//        fillTable(data[0]);
-//    });
-//
-//    $("#employeeSubmit").click(function() {
-//        swal(editedEmployee);
-//    })
-})
-
-
-function fillTable(element) {
-//    $.each(data, function(index, element) {
-        var id  = element.id;
-        var firstName  = element.firstName;
-        var lastName  = element.lastName;
-
-        console.log(firstName);
-}
-
 function editEmployee(id) {
     let editedEmployee = {};
 
@@ -40,8 +18,13 @@ function editEmployee(id) {
         cache: false,
         timeout: 600000,
         success: function (data) {
-            swal("Success!", "Employee edited", "success");
-            window.location.replace("/employees");
+            swal({
+                    title: "Success!",
+                    text: "Employee edited",
+                    icon: "success"
+            }).then(function() {
+                window.location = "/employees";
+            });
         },
         error: function (e) {
             swal("Error!", "Something went wrong", "error");

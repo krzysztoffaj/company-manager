@@ -18,16 +18,6 @@ import java.util.List;
 @Transactional
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    List<Employee> findEmployeeByFirstName(String firstName);
-
-    List<Employee> findEmployeeByLastName(String lastName);
-
-    List<Employee> findEmployeeByPosition(EmployeePosition position);
-
-        @Query("from Employee where first_name like '%Dev%' or last_name like '%Dev%' or position like '%Dev%' or 1=0")
-//    @Query()
-    List<Employee> findEmployees();
-
 //    public Employee get(int id) {
 //        Employee employee = super.(id);
 //
@@ -36,4 +26,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 //
 //        return employee;
 //    }
+
 }
