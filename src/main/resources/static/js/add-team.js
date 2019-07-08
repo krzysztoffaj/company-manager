@@ -1,3 +1,13 @@
+$(document).ready(function(){
+    $('#teamSubmit').attr('disabled', true);
+    $('#teamName').keyup(function(){
+        if($(this).val().length !=0)
+            $('#teamSubmit').attr('disabled', false);
+        else
+            $('#teamSubmit').attr('disabled',true);
+    })
+});
+
 function addTeam() {
     let team = {};
 

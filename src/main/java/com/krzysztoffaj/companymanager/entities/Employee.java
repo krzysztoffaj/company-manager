@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import com.krzysztoffaj.companymanager.infrastructure.BadSalaryValueException;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import org.hibernate.annotations.Cascade;
@@ -97,6 +98,9 @@ public class Employee implements EntityId, Serializable {
     }
 
     public void setSalary(double salary) {
+        if (salary < 0) {
+            throw new BadSalaryValueException();
+        }
         this.salary = salary;
     }
 

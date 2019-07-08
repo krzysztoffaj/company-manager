@@ -1,3 +1,12 @@
+$(document).ready(function(){
+    $('#salary').keyup(function(){
+        if($(this).val().length !=0)
+            $('#employeeSubmit').attr('disabled', false);
+        else
+            $('#employeeSubmit').attr('disabled',true);
+    })
+});
+
 function editEmployee(id) {
     let editedEmployee = {};
 

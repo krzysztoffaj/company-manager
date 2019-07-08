@@ -2,6 +2,7 @@ package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.entities.Team;
+import com.krzysztoffaj.companymanager.infrastructure.BadSalaryValueException;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
@@ -81,5 +82,12 @@ public class TeamController {
     @ResponseBody
     public void handleValidationError(MethodArgumentNotValidException ex) {
         System.out.println("Validation error occured!");
+    }
+
+    @ExceptionHandler(BadSalaryValueException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public void handleBadSalaryValueException(BadSalaryValueException ex) {
+        System.out.println("Invalid salary provided!");
     }
 }

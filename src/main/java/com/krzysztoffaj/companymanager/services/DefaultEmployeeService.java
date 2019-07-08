@@ -65,9 +65,13 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Override
     public String prepareTypedQuery(String input) {
-        //TODO clenup
-        StringBuilder query = new StringBuilder();
+        //TODO cleanup
         final String[] words = getWordsExtractedFromQuery(input);
+        if(words.length == 0) {
+            return "FROM Employee";
+        }
+
+        StringBuilder query = new StringBuilder();
 
         query.append("FROM Employee WHERE ");
         for (int i = 0; i < words.length - 1; i++) {

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -90,10 +91,10 @@ public class EmployeeController {
         return employeeService.saveEmployee(employeeWithTeamIds);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public void handleValidationError(MethodArgumentNotValidException ex) {
+    public void handleValidationError(IllegalStateException ex) {
         System.out.println("Validation error occured!");
     }
 }

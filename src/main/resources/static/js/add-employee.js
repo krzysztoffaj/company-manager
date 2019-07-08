@@ -1,3 +1,16 @@
+$(document).ready(function(){
+    $('#employeeSubmit').prop('disabled', true);
+
+    function validateNextButton() {
+        var buttonDisabled = $('#firstName').val().trim() === '' || $('#lastName').val().trim() === '' || $('#salary').val().trim() === '';
+        $('#employeeSubmit').prop('disabled', buttonDisabled);
+    }
+
+    $('#firstName').on('keyup', validateNextButton);
+    $('#lastName').on('keyup', validateNextButton);
+    $('#salary').on('keyup', validateNextButton);
+});
+
 function addEmployee() {
     let employee = {};
 
