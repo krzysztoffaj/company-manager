@@ -34,14 +34,15 @@ public class TeamController {
     }
 
     @GetMapping("/teams/add")
-    @JsonView(View.DetailedTeamsInfo.class)
     public ModelAndView setupAddNewTeamView() {
-        modelAndView.setViewName("add-or-edit-team");
+        modelAndView.addObject("allEmployees", employeeService.getAll());
+        modelAndView.addObject("allTeams", teamService.getAll());
+        modelAndView.setViewName("add-team");
         return modelAndView;
     }
 
     @PostMapping("/teams/add")
-    public Team addNewTeamSubmit(Team team) {
+    public Team addNewTeamSubmit(@RequestBody Team team) {
 //        final Team team = teamService.castQueryParamsToTeamObject(teamName, pmId, poId, scrummasterId);
         teamService.save(team);
         employeeService.addTeamToManagingEmployees(team);
