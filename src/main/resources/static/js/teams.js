@@ -1,8 +1,13 @@
 $(document).ready(function () {
     $.getJSON('/teams/list-all', { get_param: 'value' }, function(data) {
-        $("#teamsTable").append("<tbody>");
-        fillTable(data);
-        $("#teamsTable").append("</tbody>");
+        $('.pagination').pagination({
+            dataSource: data,
+            pageSize: 10,
+            callback: function(data, pagination){
+                $("#teamsTable").find("tbody").empty();
+                fillTable(data);
+            }
+        });
     });
 });
 

@@ -37,6 +37,7 @@ form.search-elements button:hover {
 }
 
 
+
 #employeesTable {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -44,7 +45,7 @@ form.search-elements button:hover {
 
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 100px;
+  margin-bottom: 25px;
 }
 
 #employeesTable td, #employeesTable th {
@@ -62,3 +63,37 @@ form.search-elements button:hover {
 
 #employeesTable tr:nth-child(even){background-color: #f2f2f2;}
 #employeesTable tr:hover {background-color: #ddd;}
+
+
+
+.center {
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.center ul li {
+  display: inline;
+}
+
+.pagination li {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a {
+  color: black;
+}
+
+.pagination li.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination li:hover:not(.active):not(.disabled) {background-color: #ddd;}

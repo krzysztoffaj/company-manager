@@ -2,10 +2,15 @@ let allEmployees;
 
 $(document).ready(function () {
     $.getJSON('/employees/list-all', { get_param: 'value' }, function(data) {
-        $("#employeesTable").append("<tbody>");
         allEmployees = data;
-        fillTable(data, allEmployees);
-        $("#employeesTable").append("</tbody>");
+        $('.pagination').pagination({
+            dataSource: data,
+            pageSize: 10,
+            callback: function(data, pagination){
+                $("#employeesTable").find("tbody").empty();
+                fillTable(data, allEmployees);
+            }
+        });
     });
 
     $("#search-form").submit(function (event) {
@@ -25,8 +30,14 @@ function getSupervisorInfo(supervisor) {
 function search() {
     var query = $("#query").val();
     $.getJSON('/employees/search?query=' + query, { get_param: 'value' }, function(data) {
-        $("#employeesTable").find("tbody").empty();
-        fillTable(data, allEmployees);
+        $('.pagination').pagination({
+            dataSource: data,
+            pageSize: 10,
+            callback: function(data, pagination){
+                $("#employeesTable").find("tbody").empty();
+                fillTable(data, allEmployees);
+            }
+        });
     });
 }
 
