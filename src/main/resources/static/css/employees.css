@@ -3,6 +3,8 @@ body {
 }
 
 
+/* Search bar and button */
+
 form.search-elements input[type=text] {
   padding: 10px;
   font-size: 17px;
@@ -37,6 +39,7 @@ form.search-elements button:hover {
 }
 
 
+/* Table */
 
 #employeesTable {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -65,6 +68,7 @@ form.search-elements button:hover {
 #employeesTable tr:hover {background-color: #ddd;}
 
 
+/* Pagination */
 
 .center {
   text-align: center;

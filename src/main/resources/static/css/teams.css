@@ -3,6 +3,8 @@ body {
 }
 
 
+/* Table */
+
 #teamsTable {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -30,6 +32,7 @@ body {
 #teamsTable tr:hover {background-color: #ddd;}
 
 
+/* Pagination */
 
 .center {
   text-align: center;
