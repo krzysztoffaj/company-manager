@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/windows,maven,intellij,java,angular
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,maven,intellij,java,angular
+# Created by https://www.toptal.com/developers/gitignore/api/maven,java,intellij,windows,angular
+# Edit at https://www.toptal.com/developers/gitignore?templates=maven,java,intellij,windows,angular
 
 ### Angular ###
 ## Angular ##
@@ -200,4 +200,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,maven,intellij,java,angular
+# End of https://www.toptal.com/developers/gitignore/api/maven,java,intellij,windows,angular
