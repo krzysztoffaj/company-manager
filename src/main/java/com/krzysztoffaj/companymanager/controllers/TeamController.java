@@ -77,6 +77,11 @@ public class TeamController {
         return team;
     }
 
+    @DeleteMapping("/teams/delete/{id}")
+    public void deleteTeam(@PathVariable("id") Integer id) {
+        teamService.deleteTeam(teamService.get(id));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody

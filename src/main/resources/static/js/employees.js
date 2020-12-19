@@ -65,6 +65,29 @@ function fillTable(data, allEmployees) {
                         "<input id='editEmployee' type='button' value='Edit'/>" +
                     "</a>" +
                 "</td>" +
+                "<td>" +
+                    "<input id='deleteEmployee' type='button' value='Delete' onclick='deleteEmployee(" + id + ")'/>" +
+                "</td>" +
             "</tr>");
+    });
+}
+
+function deleteEmployee(id) {
+    $.ajax({
+        type: "DELETE",
+        url: "/employees/delete/" + id,
+        timeout: 600000,
+        success: function (data) {
+            swal({
+                    title: "Success!",
+                    text: "Employee deleted",
+                    icon: "success"
+            }).then(function() {
+                window.location = "/employees";
+            });
+        },
+        error: function (e) {
+            swal("Error!", "Something went wrong", "error");
+        }
     });
 }

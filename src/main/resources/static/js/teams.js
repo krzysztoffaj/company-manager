@@ -42,6 +42,29 @@ function fillTable(data) {
                         "<input id='editTeam' type='button' value='Edit'/>" +
                     "</a>" +
                 "</td>" +
+                "<td>" +
+                    "<input id='deleteTeam' type='button' value='Delete' onclick='deleteTeam(" + id + ")'/>" +
+                "</td>" +
             "</tr>");
+    });
+}
+
+function deleteTeam(id) {
+    $.ajax({
+        type: "DELETE",
+        url: "/teams/delete/" + id,
+        timeout: 600000,
+        success: function (data) {
+            swal({
+                    title: "Success!",
+                    text: "Team deleted",
+                    icon: "success"
+            }).then(function() {
+                window.location = "/teams";
+            });
+        },
+        error: function (e) {
+            swal("Error!", "Something went wrong", "error");
+        }
     });
 }

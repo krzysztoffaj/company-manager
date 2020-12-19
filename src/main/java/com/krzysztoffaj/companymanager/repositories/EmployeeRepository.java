@@ -17,14 +17,4 @@ import java.util.List;
 @Repository
 @Transactional
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-
-//    public Employee get(int id) {
-//        Employee employee = super.(id);
-//
-//        CompetenceResolver resolver = new CompetenceResolver();
-//        employee.setCompetence(resolver.getCompetence(employee));
-//
-//        return employee;
-//    }
-
 }

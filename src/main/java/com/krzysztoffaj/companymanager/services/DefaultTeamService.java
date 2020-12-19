@@ -53,6 +53,11 @@ public class DefaultTeamService implements TeamService {
         save(team);
     }
 
+    @Override
+    public void deleteTeam(Team team) {
+        teamRepository.delete(team);
+    }
+
     private Integer getIntFromStringOrNull(String input) {
         if (input.equals("null")) {
             return null;

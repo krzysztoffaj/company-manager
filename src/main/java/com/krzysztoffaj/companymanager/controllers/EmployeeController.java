@@ -91,6 +91,11 @@ public class EmployeeController {
         return employeeService.saveEmployee(employeeWithTeamIds);
     }
 
+    @DeleteMapping("/employees/delete/{id}")
+    public void deleteEmployee(@PathVariable("id") Integer id) {
+        employeeService.deleteEmployee(employeeService.get(id));
+    }
+
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody

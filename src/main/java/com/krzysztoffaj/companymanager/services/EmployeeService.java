@@ -20,4 +20,6 @@ public interface EmployeeService {
     String prepareTypedQuery(String input);
 
     Employee saveEmployee(EmployeeWithTeamIds employeeWithTeamIds);
+
+    void deleteEmployee(Employee employee);
 }
