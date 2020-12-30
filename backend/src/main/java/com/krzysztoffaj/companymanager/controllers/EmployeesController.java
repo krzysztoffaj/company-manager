@@ -1,24 +1,18 @@
 package com.krzysztoffaj.companymanager.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.mappers.EmployeesMapper;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
-import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
-import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.model.web.dtos.EmployeeDto;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
 import com.krzysztoffaj.companymanager.services.EmployeesService;
-import com.krzysztoffaj.companymanager.services.TeamsService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;

@@ -9,9 +9,9 @@ public class TeamDto {
 
     private int id;
     private String name;
-    private int projectManagerId;
-    private int productOwnerId;
-    private int scrumMasterId;
-    private List<Integer> membersIds;
+    private EmployeeDto projectManager;
+    private EmployeeDto productOwner;
+    private EmployeeDto scrumMaster;
+    private List<EmployeeDto> members;
 
 }

@@ -12,7 +12,7 @@ public class EmployeeDto {
     private String lastName;
     private double salary;
     private String position;
-    private int supervisorId;
-    private List<Integer> teamsIds;
+    private EmployeeBasicDto supervisor;
+    private List<TeamBasicDto> teams;
 
 }

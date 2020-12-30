@@ -25,12 +25,13 @@ public class TeamsService {
         return teamsRepository.findAll();
     }
 
-    public void createTeam(CreateTeamRequest team) {
-        teamsRepository.save(team);
-        employeesService.addTeamToManagingEmployees(team);
+    public Team createTeam(CreateTeamRequest team) {
+//        teamsRepository.save(team);
+//        employeesService.addTeamToManagingEmployees(team);
+        return null;
     }
 
-    public void editTeam(EditTeamRequest request) {
+    public void editTeam(int id, EditTeamRequest request) {
 
     }
 
