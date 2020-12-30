@@ -3,6 +3,7 @@ package com.krzysztoffaj.companymanager.model.web.requests;
 import lombok.Getter;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Getter
 public class CreateEmployeeRequest {
@@ -19,5 +20,10 @@ public class CreateEmployeeRequest {
     @Digits(fraction = 2, integer = 15)
     private double salary;
 
+    @NotBlank
+    private String position;
+
+    private int supervisorId;
+    private List<Integer> teamsIds;
 
 }

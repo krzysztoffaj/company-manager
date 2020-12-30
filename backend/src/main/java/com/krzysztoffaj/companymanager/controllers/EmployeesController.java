@@ -41,7 +41,7 @@ public class EmployeesController {
 
     @GetMapping("/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") int id) {
-        return employeeService.getEmployee(id)
+        return employeeService.getEmployee(id);
     }
 
     @GetMapping("/employees/list-all")
@@ -94,8 +94,8 @@ public class EmployeesController {
     @PutMapping("/employees/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void editEmployee(@PathVariable("id") int id,
-                                 @RequestBody @Valid EditEmployeeRequest request) {
-        employeeService.editEmployee(request);
+                             @RequestBody @Valid EditEmployeeRequest request) {
+        employeeService.editEmployee(id, request);
     }
 
     @DeleteMapping("/employees/{id}")

@@ -99,8 +99,8 @@ public class EmployeesService {
         return null;
     }
 
-    public Employee editEmployee(EditEmployeeRequest request) {
-        return null;
+    public void editEmployee(int id, EditEmployeeRequest request) {
+
     }
 
 }
