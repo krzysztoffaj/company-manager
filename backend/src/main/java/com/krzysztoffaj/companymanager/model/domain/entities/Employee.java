@@ -55,9 +55,6 @@ public class Employee implements EntityId, Serializable {
     @JsonView(View.DetailedEmployeesInfo.class)
     private Set<Team> teams;
 
-//    @Transient
-//    private Competence competence;
-
     @Override
     public int getId() {
         return id;
