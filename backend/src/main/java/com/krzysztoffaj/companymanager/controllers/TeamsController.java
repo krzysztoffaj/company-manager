@@ -39,6 +39,7 @@ public class TeamsController {
     public TeamDto getTeam(@PathVariable("id") int id) {
         return teamsMapper.mapToDto(teamsService.getTeam(id));
     }
+
     @GetMapping("/teams/list-all")
     public List<Team> getAllTeams() {
         return teamsService.getAllTeams();
