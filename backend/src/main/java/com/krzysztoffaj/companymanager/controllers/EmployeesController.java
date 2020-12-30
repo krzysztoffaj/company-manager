@@ -9,12 +9,10 @@ import com.krzysztoffaj.companymanager.services.EmployeesService;
 import com.krzysztoffaj.companymanager.services.TeamsService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
@@ -66,7 +64,7 @@ public class EmployeesController {
     @GetMapping("/employees/edit/{id}")
     public ModelAndView setupEditEmployeeView(@PathVariable("id") Integer id) {
         try {
-            Employee editedEmployee = employeeService.get(id);
+            Employee editedEmployee = employeeService.getEmployee(id);
             System.out.println(editedEmployee);
             modelAndView.addObject("editedEmployee", editedEmployee);
             modelAndView.addObject("allEmployees", employeeService.getAll());
@@ -85,15 +83,10 @@ public class EmployeesController {
         return employeeService.saveEmployee(employeeWithTeamIds);
     }
 
-    @DeleteMapping("/employees/delete/{id}")
-    public void deleteEmployee(@PathVariable("id") Integer id) {
-        employeeService.deleteEmployee(employeeService.get(id));
+    @DeleteMapping("/employees/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable("id") int id) {
+        employeeService.deleteEmployee(id);
     }
 
-    @ExceptionHandler(IllegalStateException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public void handleValidationError(IllegalStateException ex) {
-        System.out.println("Validation error occured!");
-    }
 }

@@ -1,44 +1,45 @@
 package com.krzysztoffaj.companymanager.model.domain.entities;
 
 import com.fasterxml.jackson.annotation.*;
-import com.krzysztoffaj.companymanager.exceptions.InvalidSalaryException;
+import com.krzysztoffaj.companymanager.exceptions.badrequest.InvalidSalaryException;
 import com.krzysztoffaj.companymanager.model.domain.enums.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.View;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "employee")
-public class Employee implements EntityId, Serializable {
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "employees")
+public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
     @JsonView(View.BasicInfo.class)
     private int id;
 
-    @Column(name = "first_name")
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @Size(min = 2, max = 50)
     @JsonView(View.BasicInfo.class)
     private String firstName;
 
-    @Column(name = "last_name")
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z\\s]*$")
     @Size(min = 2, max = 50)
     @JsonView(View.BasicInfo.class)
     private String lastName;
 
-    @Column(name = "position")
     @Enumerated(EnumType.STRING)
     @JsonView(View.BasicInfo.class)
     private EmployeePosition position;
 
-    @Column(name = "salary")
     @NotNull
     @Digits(fraction = 2, integer = 15)
     @JsonView(View.BasicInfo.class)

@@ -2,6 +2,9 @@ package com.krzysztoffaj.companymanager.model.domain.entities;
 
 import com.fasterxml.jackson.annotation.*;
 import com.krzysztoffaj.companymanager.infrastructure.View;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,8 +14,12 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name = "team")
-public class Team implements EntityId, Serializable {
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "teams")
+public class Team {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
@@ -42,56 +49,4 @@ public class Team implements EntityId, Serializable {
     @JsonView(View.DetailedTeamsInfo.class)
     private Set<Employee> members;
 
-    public Team() {
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Employee> getMembers() {
-        return members;
-    }
-
-    public Integer getPmId() {
-        return pmId;
-    }
-
-    public void setPmId(Integer pmId) {
-        this.pmId = pmId;
-    }
-
-    public Integer getPoId() {
-        return poId;
-    }
-
-    public void setPoId(Integer poId) {
-        this.poId = poId;
-    }
-
-    public Integer getScrummasterId() {
-        return scrummasterId;
-    }
-
-    public void setScrummasterId(Integer scrummasterId) {
-        this.scrummasterId = scrummasterId;
-    }
-
-    public void setMembers(Set<Employee> members) {
-        this.members = members;
-    }
 }

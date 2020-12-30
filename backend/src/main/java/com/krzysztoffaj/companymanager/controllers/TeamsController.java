@@ -2,11 +2,11 @@ package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
-import com.krzysztoffaj.companymanager.exceptions.InvalidSalaryException;
+import com.krzysztoffaj.companymanager.exceptions.badrequest.InvalidSalaryException;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeesService;
 import com.krzysztoffaj.companymanager.services.TeamsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +16,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/teams")
 public class TeamsController {
 
-    @Autowired
-    private EmployeesService employeeService;
-    @Autowired
-    private TeamsService teamService;
+    private final EmployeesService employeeService;
+    private final TeamsService teamService;
 
-    private ModelAndView modelAndView = new ModelAndView();
 
     @GetMapping("/teams")
     public ModelAndView setupTeamsView() {
@@ -55,7 +55,7 @@ public class TeamsController {
     @GetMapping("/teams/edit/{id}")
     public ModelAndView setupEditTeamView(@PathVariable("id") Integer id) {
         try {
-            Team editedTeam = teamService.get(id);
+            Team editedTeam = teamService.getTeam(id);
             System.out.println(editedTeam);
             modelAndView.addObject("editedTeam", editedTeam);
             modelAndView.addObject("allEmployees", employeeService.getAll());
@@ -77,7 +77,7 @@ public class TeamsController {
 
     @DeleteMapping("/teams/delete/{id}")
     public void deleteTeam(@PathVariable("id") Integer id) {
-        teamService.deleteTeam(teamService.get(id));
+        teamService.deleteTeam(teamService.getTeam(id));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

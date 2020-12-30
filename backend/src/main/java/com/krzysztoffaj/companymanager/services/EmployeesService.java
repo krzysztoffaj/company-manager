@@ -1,5 +1,6 @@
 package com.krzysztoffaj.companymanager.services;
 
+import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeeNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
@@ -19,11 +20,8 @@ public class EmployeesService {
     private final EmployeesRepository employeeRepository;
 
 
-    public Employee get(Integer id) {
-        if (id == null) {
-            return null;
-        }
-        return employeeRepository.getOne(id);
+    public Employee getEmployee(int id) {
+        return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
     public List<Employee> getAll() {
@@ -35,9 +33,9 @@ public class EmployeesService {
     }
 
     public void addTeamToManagingEmployees(Team newTeam) {
-        Employee pm = get(newTeam.getPmId());
-        Employee po = get(newTeam.getPoId());
-        Employee scrummaster = get(newTeam.getScrummasterId());
+        Employee pm = getEmployee(newTeam.getPmId());
+        Employee po = getEmployee(newTeam.getPoId());
+        Employee scrummaster = getEmployee(newTeam.getScrummasterId());
 
         Employee[] employees = {pm, po, scrummaster};
         for (Employee employee : employees) {
@@ -83,7 +81,7 @@ public class EmployeesService {
 
         Set<Team> teams = new HashSet<>();
         for (int teamId : employeeWithTeamIds.getTeams()) {
-            teams.add(teamService.get(teamId));
+            teams.add(teamService.getTeam(teamId));
         }
         employee.setTeams(teams);
 
@@ -91,8 +89,8 @@ public class EmployeesService {
         return employee;
     }
 
-    public void deleteEmployee(Employee employee) {
-        employeeRepository.delete(employee);
+    public void deleteEmployee(int id) {
+        employeeRepository.delete(this.getEmployee(id));
     }
 
 }

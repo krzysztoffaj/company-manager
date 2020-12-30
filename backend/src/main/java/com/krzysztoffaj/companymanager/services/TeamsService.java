@@ -1,9 +1,9 @@
 package com.krzysztoffaj.companymanager.services;
 
+import com.krzysztoffaj.companymanager.exceptions.notfound.TeamNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.repositories.TeamsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +15,8 @@ public class TeamsService {
     private final TeamsRepository teamRepository;
 
 
-    public Team get(Integer id) {
-        if (id == null) {
-            return null;
-        }
-        return teamRepository.getOne(id);
+    public Team getTeam(int id) {
+        return teamRepository.findById(id).orElseThrow(TeamNotFoundException::new);
     }
 
     public List<Team> getAll() {
@@ -41,7 +38,7 @@ public class TeamsService {
     }
 
     public void updateTeamInfo(Integer teamId, String pmId, String poId, String scrummasterId) {
-        Team team = get(teamId);
+        Team team = getTeam(teamId);
 
         team.setPmId(getIntFromStringOrNull(pmId));
         team.setPoId(getIntFromStringOrNull(poId));
