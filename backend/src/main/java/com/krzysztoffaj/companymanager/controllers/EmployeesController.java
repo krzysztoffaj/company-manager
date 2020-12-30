@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.infrastructure.View;
+import com.krzysztoffaj.companymanager.model.web.dtos.EmployeeDto;
 import com.krzysztoffaj.companymanager.services.EmployeesService;
 import com.krzysztoffaj.companymanager.services.TeamsService;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,20 +20,17 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/employees")
 public class EmployeesController {
 
-    @Autowired
-    private EmployeesService employeeService;
-    @Autowired
-    private TeamsService teamService;
+    private final EmployeesService employeeService;
+    private final TeamsService teamService;
 
-    @Autowired
-    private EntityManager entityManager;
 
-    private ModelAndView modelAndView = new ModelAndView();
-
-    @GetMapping("/employees")
-    public ModelAndView setupEmployeesView() {
+    @GetMapping
+    public List<EmployeeDto> setupEmployeesView() {
         modelAndView.setViewName("employees");
         return modelAndView;
     }
