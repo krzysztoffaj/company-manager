@@ -4,6 +4,8 @@ import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeeNotFoundExcep
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
+import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
+import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
 import com.krzysztoffaj.companymanager.repositories.EmployeesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -91,6 +93,14 @@ public class EmployeesService {
 
     public void deleteEmployee(int id) {
         employeeRepository.delete(this.getEmployee(id));
+    }
+
+    public Employee createEmployee(CreateEmployeeRequest request) {
+        return null;
+    }
+
+    public Employee editEmployee(EditEmployeeRequest request) {
+        return null;
     }
 
 }

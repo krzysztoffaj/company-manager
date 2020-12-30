@@ -3,6 +3,7 @@ package com.krzysztoffaj.companymanager.services;
 import com.krzysztoffaj.companymanager.exceptions.notfound.TeamNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateTeamRequest;
+import com.krzysztoffaj.companymanager.model.web.requests.EditTeamRequest;
 import com.krzysztoffaj.companymanager.repositories.TeamsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class TeamsService {
 
     public void createTeam(CreateTeamRequest team) {
         teamRepository.save(team);
+        employeeService.addTeamToManagingEmployees(team);
+    }
+
+    public void editTeam(EditTeamRequest request) {
+
     }
 
     public void deleteTeam(int id) {
