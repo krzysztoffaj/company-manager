@@ -1,7 +1,7 @@
 package com.krzysztoffaj.companymanager.model.domain.entities;
 
 import com.fasterxml.jackson.annotation.*;
-import com.krzysztoffaj.companymanager.infrastructure.BadSalaryValueException;
+import com.krzysztoffaj.companymanager.exceptions.InvalidSalaryException;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 
@@ -95,7 +95,7 @@ public class Employee implements EntityId, Serializable {
 
     public void setSalary(double salary) {
         if (salary < 0) {
-            throw new BadSalaryValueException();
+            throw new InvalidSalaryException();
         }
         this.salary = salary;
     }
