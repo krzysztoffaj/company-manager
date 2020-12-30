@@ -2,15 +2,10 @@ package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
-import com.krzysztoffaj.companymanager.exceptions.badrequest.InvalidSalaryException;
-import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeesService;
 import com.krzysztoffaj.companymanager.services.TeamsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,7 +29,7 @@ public class TeamsController {
     @GetMapping("/teams/list-all")
     @JsonView(View.DetailedTeamsInfo.class)
     public List<Team> getAllTeams() {
-        return teamService.getAll();
+        return teamService.getAllTeams();
     }
 
     @GetMapping("/teams/add")
@@ -46,7 +41,7 @@ public class TeamsController {
 
     @PostMapping("/teams/add")
     public Team addNewTeamSubmit(@Valid @RequestBody Team team) {
-        teamService.save(team);
+        teamService.createTeam(team);
         employeeService.addTeamToManagingEmployees(team);
 
         return team;
@@ -69,28 +64,15 @@ public class TeamsController {
     @PutMapping("/teams/edit/{id}")
     public Team editTeam(@PathVariable("id") Integer id,
                          @Valid @RequestBody Team team) {
-        teamService.save(team);
+        teamService.createTeam(team);
         employeeService.addTeamToManagingEmployees(team);
 
         return team;
     }
 
-    @DeleteMapping("/teams/delete/{id}")
-    public void deleteTeam(@PathVariable("id") Integer id) {
-        teamService.deleteTeam(teamService.getTeam(id));
+    @DeleteMapping("/teams/{id}")
+    public void deleteTeam(@PathVariable("id") int id) {
+        teamService.deleteTeam(id);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public void handleValidationError(MethodArgumentNotValidException ex) {
-        System.out.println("Validation error occured!");
-    }
-
-    @ExceptionHandler(InvalidSalaryException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public void handleBadSalaryValueException(InvalidSalaryException ex) {
-        System.out.println("Invalid salary provided!");
-    }
 }

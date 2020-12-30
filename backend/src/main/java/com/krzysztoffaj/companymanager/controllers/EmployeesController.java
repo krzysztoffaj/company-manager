@@ -50,7 +50,7 @@ public class EmployeesController {
     @GetMapping("/employees/add")
     public ModelAndView setupAddEmployeeView() {
         modelAndView.addObject("allEmployees", employeeService.getAll());
-        modelAndView.addObject("allTeams", teamService.getAll());
+        modelAndView.addObject("allTeams", teamService.getAllTeams());
         modelAndView.setViewName("add-employee");
         return modelAndView;
     }
@@ -68,7 +68,7 @@ public class EmployeesController {
             System.out.println(editedEmployee);
             modelAndView.addObject("editedEmployee", editedEmployee);
             modelAndView.addObject("allEmployees", employeeService.getAll());
-            modelAndView.addObject("allTeams", teamService.getAll());
+            modelAndView.addObject("allTeams", teamService.getAllTeams());
             modelAndView.setViewName("edit-employee");
         } catch (EntityNotFoundException e) {
             modelAndView.setViewName("entity-not-found");

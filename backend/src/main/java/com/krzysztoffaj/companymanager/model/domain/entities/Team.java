@@ -22,31 +22,21 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "team_id")
-    @JsonView(View.BasicInfo.class)
     private int id;
 
-    @Column(name = "name")
-    @NotBlank
-    @Pattern(regexp = "^[a-zA-Z\\s]*$")
-    @Size(min = 2, max = 100)
-    @JsonView(View.BasicInfo.class)
     private String name;
 
     @Column(name = "pm_id")
-    @JsonView(View.DetailedTeamsInfo.class)
-    private Integer pmId;
+    private Employee projectManager;
 
     @Column(name = "po_id")
-    @JsonView(View.DetailedTeamsInfo.class)
-    private Integer poId;
+    private Employee productOwner;
 
-    @Column(name = "scrummaster_id")
-    @JsonView(View.DetailedTeamsInfo.class)
-    private Integer scrummasterId;
+    @OneToMany
+    @JoinColumn(name = "scrummaster_id")
+    private Employee scrumMaster;
 
     @ManyToMany(mappedBy = "teams")
-    @JsonView(View.DetailedTeamsInfo.class)
     private Set<Employee> members;
 
 }
