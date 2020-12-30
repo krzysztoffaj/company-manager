@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.infrastructure.View;
-import com.krzysztoffaj.companymanager.services.EmployeeService;
-import com.krzysztoffaj.companymanager.services.TeamService;
+import com.krzysztoffaj.companymanager.services.DefaultEmployeeService;
+import com.krzysztoffaj.companymanager.services.DefaultTeamService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +21,9 @@ import java.util.List;
 public class EmployeesController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private DefaultEmployeeService employeeService;
     @Autowired
-    private TeamService teamService;
+    private DefaultTeamService teamService;
 
     @Autowired
     private EntityManager entityManager;

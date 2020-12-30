@@ -2,18 +2,19 @@ package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.repositories.TeamsRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DefaultTeamService implements TeamService {
+@RequiredArgsConstructor
+public class DefaultTeamService {
 
-    @Autowired
-    TeamsRepository teamRepository;
+    private final TeamsRepository teamRepository;
 
-    @Override
+
     public Team get(Integer id) {
         if (id == null) {
             return null;
@@ -21,17 +22,14 @@ public class DefaultTeamService implements TeamService {
         return teamRepository.getOne(id);
     }
 
-    @Override
     public List<Team> getAll() {
         return teamRepository.findAll();
     }
 
-    @Override
     public void save(Team team) {
         teamRepository.save(team);
     }
 
-    @Override
     public Team castQueryParamsToTeamObject(String teamName, String pmId, String poId, String scrummasterId) {
         Team team = new Team();
         team.setName(teamName);
@@ -42,7 +40,6 @@ public class DefaultTeamService implements TeamService {
         return team;
     }
 
-    @Override
     public void updateTeamInfo(Integer teamId, String pmId, String poId, String scrummasterId) {
         Team team = get(teamId);
 
@@ -53,7 +50,6 @@ public class DefaultTeamService implements TeamService {
         save(team);
     }
 
-    @Override
     public void deleteTeam(Team team) {
         teamRepository.delete(team);
     }
@@ -65,4 +61,5 @@ public class DefaultTeamService implements TeamService {
             return Integer.parseInt(input);
         }
     }
+
 }

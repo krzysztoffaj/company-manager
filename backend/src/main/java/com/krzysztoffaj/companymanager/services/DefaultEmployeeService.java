@@ -4,6 +4,7 @@ import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.repositories.EmployeesRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,12 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class DefaultEmployeeService implements EmployeeService {
+@RequiredArgsConstructor
+public class DefaultEmployeeService {
 
-    @Autowired
-    private EmployeesRepository employeeRepository;
-    @Autowired
-    private TeamService teamService;
+    private final EmployeesRepository employeeRepository;
+    private final DefaultTeamService teamService;
 
-    @Override
     public Employee get(Integer id) {
         if (id == null) {
             return null;
@@ -27,17 +26,14 @@ public class DefaultEmployeeService implements EmployeeService {
         return employeeRepository.getOne(id);
     }
 
-    @Override
     public List<Employee> getAll() {
         return employeeRepository.findAll();
     }
 
-    @Override
     public void save(Employee employee) {
         employeeRepository.save(employee);
     }
 
-    @Override
     public void addTeamToManagingEmployees(Team newTeam) {
         Employee pm = get(newTeam.getPmId());
         Employee po = get(newTeam.getPoId());
@@ -60,7 +56,6 @@ public class DefaultEmployeeService implements EmployeeService {
         return query.trim().split("\\s+");
     }
 
-    @Override
     public String prepareTypedQuery(String input) {
         //TODO cleanup
         final String[] words = getWordsExtractedFromQuery(input);
@@ -83,7 +78,6 @@ public class DefaultEmployeeService implements EmployeeService {
         return query.toString();
     }
 
-    @Override
     public Employee saveEmployee(EmployeeWithTeamIds employeeWithTeamIds) {
         final Employee employee = employeeWithTeamIds.getEmployee();
 
@@ -97,8 +91,8 @@ public class DefaultEmployeeService implements EmployeeService {
         return employee;
     }
 
-    @Override
     public void deleteEmployee(Employee employee) {
         employeeRepository.delete(employee);
     }
+
 }
