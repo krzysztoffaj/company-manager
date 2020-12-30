@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class TeamController {
+public class TeamsController {
 
     @Autowired
     private EmployeeService employeeService;

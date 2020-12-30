@@ -1,7 +1,7 @@
 package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
-import com.krzysztoffaj.companymanager.repositories.TeamRepository;
+import com.krzysztoffaj.companymanager.repositories.TeamsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class DefaultTeamService implements TeamService {
 
     @Autowired
-    TeamRepository teamRepository;
+    TeamsRepository teamRepository;
 
     @Override
     public Team get(Integer id) {

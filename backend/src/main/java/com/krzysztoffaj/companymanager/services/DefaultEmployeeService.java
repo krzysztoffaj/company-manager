@@ -3,7 +3,7 @@ package com.krzysztoffaj.companymanager.services;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
-import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
+import com.krzysztoffaj.companymanager.repositories.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.Set;
 public class DefaultEmployeeService implements EmployeeService {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeesRepository employeeRepository;
     @Autowired
     private TeamService teamService;
 
