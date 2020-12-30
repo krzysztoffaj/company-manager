@@ -1,6 +1,7 @@
 package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.krzysztoffaj.companymanager.mappers.EmployeesMapper;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.infrastructure.View;
@@ -28,8 +29,8 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeesController {
 
-    private final EmployeesService employeeService;
-    private final TeamsService teamService;
+    private final EmployeesService employeesService;
+    private final EmployeesMapper employeesMapper;
 
 
 //    @GetMapping
@@ -41,32 +42,32 @@ public class EmployeesController {
 
     @GetMapping("/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") int id) {
-        return employeeService.getEmployee(id);
+        return employeesMapper.mapToDto(employeesService.getEmployee(id));
     }
 
     @GetMapping("/employees/list-all")
     public List<Employee> getAllEmployees() {
-        return employeeService.getAll();
+        return employeesService.getAll();
     }
 
     @GetMapping("/employees/search")
     public List<Employee> search(@RequestParam("query") String query) {
         Session session = entityManager.unwrap(org.hibernate.Session.class);
 
-        return session.createQuery(employeeService.prepareTypedQuery(query), Employee.class).getResultList();
+        return session.createQuery(employeesService.prepareTypedQuery(query), Employee.class).getResultList();
     }
 
 //    @GetMapping("/employees/add")
 //    public ModelAndView setupAddEmployeeView() {
-//        modelAndView.addObject("allEmployees", employeeService.getAll());
-//        modelAndView.addObject("allTeams", teamService.getAllTeams());
+//        modelAndView.addObject("allEmployees", employeesService.getAll());
+//        modelAndView.addObject("allTeams", teamsService.getAllTeams());1
 //        modelAndView.setViewName("add-employee");
 //        return modelAndView;
 //    }
 
     @PostMapping("/employees")
     public ResponseEntity<?> createEmployee(@RequestBody @Valid CreateEmployeeRequest request) {
-        final Employee employee = employeeService.createEmployee(request);
+        final Employee employee = employeesService.createEmployee(request);
 
         final URI uri = MvcUriComponentsBuilder
                 .fromMethodName(EmployeesController.class, "getEmployee", employee.getId())
@@ -79,11 +80,11 @@ public class EmployeesController {
 //    @GetMapping("/employees/edit/{id}")
 //    public ModelAndView setupEditEmployeeView(@PathVariable("id") Integer id) {
 //        try {
-//            Employee editedEmployee = employeeService.getEmployee(id);
+//            Employee editedEmployee = employeesService.getEmployee(id);
 //            System.out.println(editedEmployee);
 //            modelAndView.addObject("editedEmployee", editedEmployee);
-//            modelAndView.addObject("allEmployees", employeeService.getAll());
-//            modelAndView.addObject("allTeams", teamService.getAllTeams());
+//            modelAndView.addObject("allEmployees", employeesService.getAll());
+//            modelAndView.addObject("allTeams", teamsService.getAllTeams());
 //            modelAndView.setViewName("edit-employee");
 //        } catch (EntityNotFoundException e) {
 //            modelAndView.setViewName("entity-not-found");
@@ -95,13 +96,13 @@ public class EmployeesController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void editEmployee(@PathVariable("id") int id,
                              @RequestBody @Valid EditEmployeeRequest request) {
-        employeeService.editEmployee(id, request);
+        employeesService.editEmployee(id, request);
     }
 
     @DeleteMapping("/employees/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable("id") int id) {
-        employeeService.deleteEmployee(id);
+        employeesService.deleteEmployee(id);
     }
 
 }

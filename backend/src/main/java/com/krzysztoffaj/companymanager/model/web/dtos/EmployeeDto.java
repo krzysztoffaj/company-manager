@@ -1,4 +1,18 @@
 package com.krzysztoffaj.companymanager.model.web.dtos;
 
+import lombok.Data;
+
+import java.util.List;
+
+@Data
 public class EmployeeDto {
+
+    private int id;
+    private String firstName;
+    private String lastName;
+    private double salary;
+    private String position;
+    private int supervisorId;
+    private List<Integer> teamsIds;
+
 }

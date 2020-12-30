@@ -18,20 +18,20 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class EmployeesService {
 
-    private final TeamsService teamService;
-    private final EmployeesRepository employeeRepository;
+    private final TeamsService teamsService;
+    private final EmployeesRepository employeesRepository;
 
 
     public Employee getEmployee(int id) {
-        return employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+        return employeesRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
     public List<Employee> getAll() {
-        return employeeRepository.findAll();
+        return employeesRepository.findAll();
     }
 
     public void save(Employee employee) {
-        employeeRepository.save(employee);
+        employeesRepository.save(employee);
     }
 
     public void addTeamToManagingEmployees(Team newTeam) {
@@ -83,7 +83,7 @@ public class EmployeesService {
 
         Set<Team> teams = new HashSet<>();
         for (int teamId : employeeWithTeamIds.getTeams()) {
-            teams.add(teamService.getTeam(teamId));
+            teams.add(teamsService.getTeam(teamId));
         }
         employee.setTeams(teams);
 
@@ -92,7 +92,7 @@ public class EmployeesService {
     }
 
     public void deleteEmployee(int id) {
-        employeeRepository.delete(this.getEmployee(id));
+        employeesRepository.delete(this.getEmployee(id));
     }
 
     public Employee createEmployee(CreateEmployeeRequest request) {

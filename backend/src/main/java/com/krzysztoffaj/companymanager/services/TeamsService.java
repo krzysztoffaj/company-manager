@@ -14,20 +14,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeamsService {
 
-    private final TeamsRepository teamRepository;
+    private final TeamsRepository teamsRepository;
 
 
     public Team getTeam(int id) {
-        return teamRepository.findById(id).orElseThrow(TeamNotFoundException::new);
+        return teamsRepository.findById(id).orElseThrow(TeamNotFoundException::new);
     }
 
     public List<Team> getAllTeams() {
-        return teamRepository.findAll();
+        return teamsRepository.findAll();
     }
 
     public void createTeam(CreateTeamRequest team) {
-        teamRepository.save(team);
-        employeeService.addTeamToManagingEmployees(team);
+        teamsRepository.save(team);
+        employeesService.addTeamToManagingEmployees(team);
     }
 
     public void editTeam(EditTeamRequest request) {
@@ -35,7 +35,7 @@ public class TeamsService {
     }
 
     public void deleteTeam(int id) {
-        teamRepository.delete(this.getTeam(id));
+        teamsRepository.delete(this.getTeam(id));
     }
 
 

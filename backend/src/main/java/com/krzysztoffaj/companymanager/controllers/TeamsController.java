@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping("/api/teams")
 public class TeamsController {
 
-    private final EmployeesService employeeService;
-    private final TeamsService teamService;
+    private final EmployeesService employeesService;
+    private final TeamsService teamsService;
 
 
 //    @GetMapping("/teams")
@@ -30,20 +30,20 @@ public class TeamsController {
 
     @GetMapping("/teams/list-all")
     public List<Team> getAllTeams() {
-        return teamService.getAllTeams();
+        return teamsService.getAllTeams();
     }
 //
 //    @GetMapping("/teams/add")
 //    public ModelAndView setupAddNewTeamView() {
-//        modelAndView.addObject("allEmployees", employeeService.getAll());
+//        modelAndView.addObject("allEmployees", employeesService.getAll());
 //        modelAndView.setViewName("add-team");
 //        return modelAndView;
 //    }
 
     @PostMapping("/teams/add")
     public Team addNewTeamSubmit(@Valid @RequestBody Team team) {
-        teamService.createTeam(team);
-        employeeService.addTeamToManagingEmployees(team);
+        teamsService.createTeam(team);
+        employeesService.addTeamToManagingEmployees(team);
 
         return team;
     }
@@ -51,10 +51,10 @@ public class TeamsController {
     @GetMapping("/teams/edit/{id}")
     public ModelAndView setupEditTeamView(@PathVariable("id") Integer id) {
         try {
-            Team editedTeam = teamService.getTeam(id);
+            Team editedTeam = teamsService.getTeam(id);
             System.out.println(editedTeam);
             modelAndView.addObject("editedTeam", editedTeam);
-            modelAndView.addObject("allEmployees", employeeService.getAll());
+            modelAndView.addObject("allEmployees", employeesService.getAll());
             modelAndView.setViewName("edit-team");
         } catch (Exception e) {
             modelAndView.setViewName("entity-not-found");
@@ -66,13 +66,13 @@ public class TeamsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void editTeam(@PathVariable("id") Integer id,
                          @RequestBody @Valid EditTeamRequest request) {
-        teamService.editTeam(request);
+        teamsService.editTeam(request);
     }
 
     @DeleteMapping("/teams/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTeam(@PathVariable("id") int id) {
-        teamService.deleteTeam(id);
+        teamsService.deleteTeam(id);
     }
 
 }
