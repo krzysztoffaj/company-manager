@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.exceptions.InvalidSalaryException;
 import com.krzysztoffaj.companymanager.infrastructure.View;
-import com.krzysztoffaj.companymanager.services.DefaultEmployeeService;
-import com.krzysztoffaj.companymanager.services.DefaultTeamService;
+import com.krzysztoffaj.companymanager.services.EmployeesService;
+import com.krzysztoffaj.companymanager.services.TeamsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -19,9 +19,9 @@ import java.util.List;
 public class TeamsController {
 
     @Autowired
-    private DefaultEmployeeService employeeService;
+    private EmployeesService employeeService;
     @Autowired
-    private DefaultTeamService teamService;
+    private TeamsService teamService;
 
     private ModelAndView modelAndView = new ModelAndView();
 

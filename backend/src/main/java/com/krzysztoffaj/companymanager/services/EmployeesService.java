@@ -5,7 +5,6 @@ import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.repositories.EmployeesRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -14,10 +13,10 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class DefaultEmployeeService {
+public class EmployeesService {
 
+    private final TeamsService teamService;
     private final EmployeesRepository employeeRepository;
-    private final DefaultTeamService teamService;
 
     public Employee get(Integer id) {
         if (id == null) {
