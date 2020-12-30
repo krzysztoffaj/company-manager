@@ -1,4 +1,4 @@
-package com.krzysztoffaj.companymanager.infrastructure;
+package com.krzysztoffaj.companymanager.model.domain.enums;
 
 public enum EmployeePosition {
     PM,

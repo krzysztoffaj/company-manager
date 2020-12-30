@@ -2,7 +2,7 @@ package com.krzysztoffaj.companymanager.model.domain.entities;
 
 import com.fasterxml.jackson.annotation.*;
 import com.krzysztoffaj.companymanager.exceptions.InvalidSalaryException;
-import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
+import com.krzysztoffaj.companymanager.model.domain.enums.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 
 import javax.persistence.*;
