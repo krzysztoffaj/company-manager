@@ -1,5 +1,8 @@
 package com.krzysztoffaj.companymanager.model.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum EmployeePosition {
 
     PROJECT_MANAGER("Project manager"),
