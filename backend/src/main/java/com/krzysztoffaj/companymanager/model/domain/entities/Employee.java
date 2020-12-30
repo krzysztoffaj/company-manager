@@ -19,7 +19,6 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String firstName;
     private String lastName;
     private double salary;
@@ -32,7 +31,7 @@ public class Employee {
     private Employee supervisor;
 
     @ManyToMany
-    @JoinTable(name = "employee_team",
+    @JoinTable(name = "employees_teams",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "team_id")})
     private Set<Team> teams;

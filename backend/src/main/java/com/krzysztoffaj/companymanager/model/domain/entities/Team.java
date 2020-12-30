@@ -1,38 +1,34 @@
 package com.krzysztoffaj.companymanager.model.domain.entities;
 
-import com.fasterxml.jackson.annotation.*;
-import com.krzysztoffaj.companymanager.infrastructure.View;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "teams")
+@Table(name = "teams",
+        indexes = @Index(columnList = "name", unique = true))
 public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
 
-    @Column(name = "pm_id")
+    @ManyToOne
+    @JoinColumn(name = "project_manager_id")
     private Employee projectManager;
 
-    @Column(name = "po_id")
+    @ManyToOne
+    @JoinColumn(name = "product_owner_id")
     private Employee productOwner;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "scrummaster_id")
     private Employee scrumMaster;
 
