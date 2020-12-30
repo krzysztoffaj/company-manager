@@ -1,10 +1,9 @@
-package com.krzysztoffaj.companymanager.entities;
+package com.krzysztoffaj.companymanager.model.domain.entities;
 
 import com.fasterxml.jackson.annotation.*;
 import com.krzysztoffaj.companymanager.infrastructure.BadSalaryValueException;
 import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
 import com.krzysztoffaj.companymanager.infrastructure.View;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

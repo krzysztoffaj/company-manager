@@ -1,15 +1,12 @@
 package com.krzysztoffaj.companymanager.services;
 
-import com.krzysztoffaj.companymanager.entities.Employee;
-import com.krzysztoffaj.companymanager.entities.EmployeeWithTeamIds;
-import com.krzysztoffaj.companymanager.entities.Team;
-import com.krzysztoffaj.companymanager.infrastructure.EmployeePosition;
+import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
+import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
+import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

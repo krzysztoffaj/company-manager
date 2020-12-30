@@ -1,6 +1,6 @@
 package com.krzysztoffaj.companymanager.services;
 
-import com.krzysztoffaj.companymanager.entities.Team;
+import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 
 import java.util.List;
 

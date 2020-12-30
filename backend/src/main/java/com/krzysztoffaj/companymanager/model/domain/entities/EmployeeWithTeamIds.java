@@ -1,4 +1,4 @@
-package com.krzysztoffaj.companymanager.entities;
+package com.krzysztoffaj.companymanager.model.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.infrastructure.View;

@@ -1,6 +1,6 @@
 package com.krzysztoffaj.companymanager.infrastructure.competences;
 
-import com.krzysztoffaj.companymanager.entities.Employee;
+import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 
 public class CompetenceResolver {
     public Competence getCompetence(Employee employee) {

@@ -1,15 +1,13 @@
 package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.krzysztoffaj.companymanager.entities.Team;
+import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.infrastructure.BadSalaryValueException;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

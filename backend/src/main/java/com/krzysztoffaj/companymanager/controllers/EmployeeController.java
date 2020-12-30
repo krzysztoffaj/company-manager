@@ -1,26 +1,21 @@
 package com.krzysztoffaj.companymanager.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.krzysztoffaj.companymanager.entities.Employee;
-import com.krzysztoffaj.companymanager.entities.EmployeeWithTeamIds;
-import com.krzysztoffaj.companymanager.entities.Team;
+import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
+import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.infrastructure.View;
 import com.krzysztoffaj.companymanager.services.EmployeeService;
 import com.krzysztoffaj.companymanager.services.TeamService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 public class EmployeeController {
