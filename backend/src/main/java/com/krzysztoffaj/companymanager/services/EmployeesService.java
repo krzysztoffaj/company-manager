@@ -2,7 +2,6 @@ package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeeNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
-import com.krzysztoffaj.companymanager.model.domain.entities.EmployeeWithTeamIds;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
