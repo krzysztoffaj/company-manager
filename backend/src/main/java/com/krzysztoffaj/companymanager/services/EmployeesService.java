@@ -77,18 +77,6 @@ public class EmployeesService {
         return query.toString();
     }
 
-    public Employee saveEmployee(EmployeeWithTeamIds employeeWithTeamIds) {
-        final Employee employee = employeeWithTeamIds.getEmployee();
-
-        Set<Team> teams = new HashSet<>();
-        for (int teamId : employeeWithTeamIds.getTeams()) {
-            teams.add(teamsService.getTeam(teamId));
-        }
-        employee.setTeams(teams);
-
-        save(employee);
-        return employee;
-    }
 
     public void deleteEmployee(int id) {
         employeesRepository.delete(this.getEmployee(id));
