@@ -26,12 +26,12 @@ public class TeamsService {
         return teamsRepository.findById(id).orElseThrow(TeamNotFoundException::new);
     }
 
-    public Set<Team> getTeamsByIds(List<Integer> ids) {
-        return teamsRepository.findByIdIn(ids);
-    }
-
     public List<Team> getAllTeams() {
         return teamsRepository.findAll();
+    }
+
+    public Set<Team> getTeamsByIds(List<Integer> ids) {
+        return teamsRepository.findByIdIn(ids);
     }
 
     public Team createTeam(CreateTeamRequest request) {

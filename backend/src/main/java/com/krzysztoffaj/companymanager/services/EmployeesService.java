@@ -26,12 +26,12 @@ public class EmployeesService {
         return employeesRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public Set<Employee> getEmployeesByIds(List<Integer> ids) {
-        return employeesRepository.findByIdIn(ids);
-    }
-
     public List<Employee> getAll() {
         return employeesRepository.findAll();
+    }
+
+    public Set<Employee> getEmployeesByIds(List<Integer> ids) {
+        return employeesRepository.findByIdIn(ids);
     }
 
     public Set<Employee> getEmployeesByPosition(EmployeePosition position) {
@@ -39,7 +39,6 @@ public class EmployeesService {
     }
 
     private String[] getWordsExtractedFromQuery(String query) {
-        //TODO Only alphanumeric query. Cannot be more than 3 words
         if (!query.matches(".*\\w.*")) {
             return new String[0];
         }
@@ -47,7 +46,6 @@ public class EmployeesService {
     }
 
     public String prepareTypedQuery(String input) {
-        //TODO cleanup
         final String[] words = getWordsExtractedFromQuery(input);
         if(words.length == 0) {
             return "FROM Employee";
