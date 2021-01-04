@@ -17,8 +17,7 @@ public class CreateEmployeeRequest {
     private String lastName;
 
     @Positive
-    @Digits(fraction = 2, integer = 15)
-    private double salary;
+    private int salary;
 
     @NotBlank
     private String position;

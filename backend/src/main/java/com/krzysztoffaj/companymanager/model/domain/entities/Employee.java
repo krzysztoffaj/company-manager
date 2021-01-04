@@ -21,7 +21,7 @@ public class Employee {
     private Integer id;
     private String firstName;
     private String lastName;
-    private double salary;
+    private int salary;
 
     @Enumerated(EnumType.STRING)
     private EmployeePosition position;

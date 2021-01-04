@@ -20,8 +20,7 @@ public class EditEmployeeRequest {
     private String lastName;
 
     @Positive
-    @Digits(fraction = 2, integer = 15)
-    private double salary;
+    private int salary;
 
     @NotBlank
     private String position;

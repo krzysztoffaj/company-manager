@@ -3,11 +3,13 @@ package com.krzysztoffaj.companymanager.services;
 import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeeNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
+import com.krzysztoffaj.companymanager.model.domain.enums.EmployeePosition;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
 import com.krzysztoffaj.companymanager.repositories.EmployeesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -77,17 +79,30 @@ public class EmployeesService {
         return query.toString();
     }
 
+    public Employee createEmployee(CreateEmployeeRequest request) {
+        final Employee employee = new Employee();
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setSalary(request.getSalary());
+        employee.setPosition(EmployeePosition.getStatusByName(request.getPosition()));
+        employee.setSupervisor(this.getEmployee(request.getSupervisorId()));
+        employee.setTeams(teamsService.getTeamsByIds(request.getTeamsIds()));
+        return employee;
+    }
+
+    @Transactional
+    public void editEmployee(int id, EditEmployeeRequest request) {
+        final Employee employee = this.getEmployee(id);
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setSalary(request.getSalary());
+        employee.setPosition(EmployeePosition.getStatusByName(request.getPosition()));
+        employee.setSupervisor(this.getEmployee(request.getSupervisorId()));
+        employee.setTeams(teamsService.getTeamsByIds(request.getTeamsIds()));
+    }
 
     public void deleteEmployee(int id) {
         employeesRepository.delete(this.getEmployee(id));
-    }
-
-    public Employee createEmployee(CreateEmployeeRequest request) {
-        return null;
-    }
-
-    public void editEmployee(int id, EditEmployeeRequest request) {
-
     }
 
 }

@@ -10,7 +10,7 @@ public class EmployeeDto {
     private int id;
     private String firstName;
     private String lastName;
-    private double salary;
+    private int salary;
     private String position;
     private EmployeeBasicDto supervisor;
     private List<TeamBasicDto> teams;

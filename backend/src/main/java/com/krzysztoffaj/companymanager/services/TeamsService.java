@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,10 @@ public class TeamsService {
 
     public Team getTeam(int id) {
         return teamsRepository.findById(id).orElseThrow(TeamNotFoundException::new);
+    }
+
+    public Set<Team> getTeamsByIds(List<Integer> ids) {
+        return teamsRepository.findByIdIn(ids);
     }
 
     public List<Team> getAllTeams() {
