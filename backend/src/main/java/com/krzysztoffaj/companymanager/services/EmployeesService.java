@@ -38,6 +38,10 @@ public class EmployeesService {
         return employeesRepository.findByPosition(position);
     }
 
+    public Set<Employee> getEmployeesByInput(String input) {
+        return null;
+    }
+
     private String[] getWordsExtractedFromQuery(String query) {
         if (!query.matches(".*\\w.*")) {
             return new String[0];
