@@ -39,9 +39,8 @@ public class EmployeesController {
     }
 
     @GetMapping("/filtered")
-    public List<EmployeeDto> getEmployeesByInput(@RequestParam("query") String query) {
-//        return employeesService.prepareTypedQuery(query);
-        return null;
+    public List<EmployeeDto> getEmployeesByInput(@RequestParam("input") String input) {
+        return employeesMapper.mapToDtos(new HashSet<>(employeesService.getEmployeesByInput(input)));
     }
 
     @GetMapping("/product-owners")
