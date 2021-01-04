@@ -6,6 +6,7 @@ import com.krzysztoffaj.companymanager.model.web.requests.CreateTeamRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditTeamRequest;
 import com.krzysztoffaj.companymanager.repositories.TeamsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class TeamsService {
 
+    @Lazy
     private final EmployeesService employeesService;
     private final TeamsRepository teamsRepository;
 
@@ -38,6 +40,7 @@ public class TeamsService {
         team.setProductOwner(employeesService.getEmployee(request.getProductOwnerId()));
         team.setProjectManager(employeesService.getEmployee(request.getProjectManagerId()));
         team.setScrumMaster(employeesService.getEmployee(request.getScrumMasterId()));
+        team.setMembers(employeesService.getEmployeesByIds(request.getMembersIds()));
 
         return teamsRepository.save(team);
     }
@@ -50,6 +53,7 @@ public class TeamsService {
         team.setProductOwner(employeesService.getEmployee(request.getProductOwnerId()));
         team.setProjectManager(employeesService.getEmployee(request.getProjectManagerId()));
         team.setScrumMaster(employeesService.getEmployee(request.getScrumMasterId()));
+        team.setMembers(employeesService.getEmployeesByIds(request.getMembersIds()));
     }
 
     public void deleteTeam(int id) {

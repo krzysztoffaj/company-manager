@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +24,10 @@ public class EmployeesService {
 
     public Employee getEmployee(int id) {
         return employeesRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
+    }
+
+    public Set<Employee> getEmployeesByIds(List<Integer> ids) {
+        return employeesRepository.findByIdIn(ids);
     }
 
     public List<Employee> getAll() {
