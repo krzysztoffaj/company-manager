@@ -34,22 +34,8 @@ public class EmployeesService {
         return employeesRepository.findAll();
     }
 
-    public void save(Employee employee) {
-        employeesRepository.save(employee);
-    }
-
-    public void addTeamToManagingEmployees(Team newTeam) {
-        Employee pm = getEmployee(newTeam.getPmId());
-        Employee po = getEmployee(newTeam.getPoId());
-        Employee scrummaster = getEmployee(newTeam.getScrummasterId());
-
-        Employee[] employees = {pm, po, scrummaster};
-        for (Employee employee : employees) {
-            if (employee != null) {
-                employee.getTeams().add(newTeam);
-                save(employee);
-            }
-        }
+    public Set<Employee> getEmployeesByPosition(EmployeePosition position) {
+        return employeesRepository.findByPosition(position);
     }
 
     private String[] getWordsExtractedFromQuery(String query) {

@@ -2,12 +2,12 @@ package com.krzysztoffaj.companymanager.controllers;
 
 import com.krzysztoffaj.companymanager.mappers.EmployeesMapper;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
+import com.krzysztoffaj.companymanager.model.domain.enums.EmployeePosition;
 import com.krzysztoffaj.companymanager.model.web.dtos.EmployeeDto;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
 import com.krzysztoffaj.companymanager.services.EmployeesService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +42,21 @@ public class EmployeesController {
     public List<EmployeeDto> getEmployeesByInput(@RequestParam("query") String query) {
 //        return employeesService.prepareTypedQuery(query);
         return null;
+    }
+
+    @GetMapping("/product-owners")
+    public List<EmployeeDto> getProductOwners() {
+        return employeesMapper.mapToDtos(new HashSet<>(employeesService.getEmployeesByPosition(EmployeePosition.PRODUCT_OWNER)));
+    }
+
+    @GetMapping("/project-managers")
+    public List<EmployeeDto> getProjectManagers() {
+        return employeesMapper.mapToDtos(new HashSet<>(employeesService.getEmployeesByPosition(EmployeePosition.PROJECT_MANAGER)));
+    }
+
+    @GetMapping("/scrum-masters")
+    public List<EmployeeDto> getScrumMasters() {
+        return employeesMapper.mapToDtos(new HashSet<>(employeesService.getEmployeesByPosition(EmployeePosition.SCRUM_MASTER)));
     }
 
     @PostMapping
