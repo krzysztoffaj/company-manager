@@ -4,12 +4,11 @@ import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.web.dtos.TeamBasicDto;
 import com.krzysztoffaj.companymanager.model.web.dtos.TeamDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -18,6 +17,7 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class TeamsMapper {
 
+    @Lazy
     private final EmployeesMapper employeesMapper;
 
 
@@ -31,6 +31,13 @@ public class TeamsMapper {
         dto.setMembers(employeesMapper.mapToDtos(entity.getMembers()));
 
         return dto;
+    }
+
+    public List<TeamDto> mapToDtos(List<Team> entities) {
+        return entities.stream()
+                       .map(this::mapToDto)
+                       .sorted(comparing(TeamDto::getName))
+                       .collect(toList());
     }
 
     public TeamBasicDto mapToBasicDto(Team entity) {

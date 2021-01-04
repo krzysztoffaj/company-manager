@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -27,39 +28,23 @@ public class EmployeesController {
     private final EmployeesMapper employeesMapper;
 
 
-//    @GetMapping
-//    public List<EmployeeDto> setupEmployeesView() {
-//        modelAndView.setViewName("employees");
-//        return modelAndView;
-//    }
-
-
     @GetMapping("/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") int id) {
         return employeesMapper.mapToDto(employeesService.getEmployee(id));
     }
 
-    @GetMapping("/employees/list-all")
-    public List<Employee> getAllEmployees() {
-        return employeesService.getAll();
+    @GetMapping
+    public List<EmployeeDto> getAllEmployees() {
+        return employeesMapper.mapToDtos(new HashSet<>(employeesService.getAll()));
     }
 
-    @GetMapping("/employees/search")
-    public List<Employee> search(@RequestParam("query") String query) {
-        Session session = entityManager.unwrap(org.hibernate.Session.class);
-
-        return session.createQuery(employeesService.prepareTypedQuery(query), Employee.class).getResultList();
+    @GetMapping("/filtered")
+    public List<EmployeeDto> getEmployeesByInput(@RequestParam("query") String query) {
+//        return employeesService.prepareTypedQuery(query);
+        return null;
     }
 
-//    @GetMapping("/employees/add")
-//    public ModelAndView setupAddEmployeeView() {
-//        modelAndView.addObject("allEmployees", employeesService.getAll());
-//        modelAndView.addObject("allTeams", teamsService.getAllTeams());1
-//        modelAndView.setViewName("add-employee");
-//        return modelAndView;
-//    }
-
-    @PostMapping("/employees")
+    @PostMapping
     public ResponseEntity<?> createEmployee(@RequestBody @Valid CreateEmployeeRequest request) {
         final Employee employee = employeesService.createEmployee(request);
 
@@ -71,29 +56,14 @@ public class EmployeesController {
         return ResponseEntity.created(uri).build();
     }
 
-//    @GetMapping("/employees/edit/{id}")
-//    public ModelAndView setupEditEmployeeView(@PathVariable("id") Integer id) {
-//        try {
-//            Employee editedEmployee = employeesService.getEmployee(id);
-//            System.out.println(editedEmployee);
-//            modelAndView.addObject("editedEmployee", editedEmployee);
-//            modelAndView.addObject("allEmployees", employeesService.getAll());
-//            modelAndView.addObject("allTeams", teamsService.getAllTeams());
-//            modelAndView.setViewName("edit-employee");
-//        } catch (EntityNotFoundException e) {
-//            modelAndView.setViewName("entity-not-found");
-//        }
-//        return modelAndView;
-//    }
-
-    @PutMapping("/employees/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void editEmployee(@PathVariable("id") int id,
                              @RequestBody @Valid EditEmployeeRequest request) {
         employeesService.editEmployee(id, request);
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable("id") int id) {
         employeesService.deleteEmployee(id);

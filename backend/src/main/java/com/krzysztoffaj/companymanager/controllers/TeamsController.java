@@ -35,8 +35,8 @@ public class TeamsController {
     }
 
     @GetMapping
-    public List<Team> getAllTeams() {
-        return teamsService.getAllTeams();
+    public List<TeamDto> getAllTeams() {
+        return teamsMapper.mapToDtos(teamsService.getAllTeams());
     }
 
     @PostMapping
