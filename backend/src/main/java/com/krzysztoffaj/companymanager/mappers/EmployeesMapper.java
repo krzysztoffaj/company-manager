@@ -25,7 +25,7 @@ public class EmployeesMapper {
         dto.setLastName(entity.getLastName());
         dto.setSalary(entity.getSalary());
         dto.setPosition(entity.getPosition().getName());
-        dto.setSupervisor(this.mapToBasicDto(entity.getSupervisor()));
+        dto.setSupervisor(entity.getSupervisor() != null ? this.mapToBasicDto(entity.getSupervisor()) : null);
         dto.setTeams(teamsMapper.mapToBasicDtos(entity.getTeams()));
 
         return dto;
@@ -38,14 +38,21 @@ public class EmployeesMapper {
                         .collect(Collectors.toList());
     }
 
-
-    private EmployeeBasicDto mapToBasicDto(Employee entity) {
+    public EmployeeBasicDto mapToBasicDto(Employee entity) {
         final EmployeeBasicDto dto = new EmployeeBasicDto();
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
+        dto.setPosition(entity.getPosition().getName());
 
         return dto;
+    }
+
+    public List<EmployeeBasicDto> mapToBasicDtos(Set<Employee> employees) {
+        return employees.stream()
+                        .map(this::mapToBasicDto)
+                        .sorted(comparing(EmployeeBasicDto::getLastName))
+                        .collect(Collectors.toList());
     }
 
 }

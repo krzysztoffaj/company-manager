@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public enum EmployeePosition {
 
-    PROJECT_MANAGER("Project manager"),
-    PRODUCT_OWNER("Product owner"),
-    SCRUM_MASTER("Scrum master"),
+    PRODUCT_OWNER("Product Owner"),
+    PROJECT_MANAGER("Project Manager"),
+    SCRUM_MASTER("Scrum Master"),
     DEVELOPER("Developer"),
     DEVOPS_ENGINEER("DevOps Engineer"),
     TESTER("Tester"),

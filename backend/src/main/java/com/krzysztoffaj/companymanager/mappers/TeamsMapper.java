@@ -25,10 +25,10 @@ public class TeamsMapper {
         final TeamDto dto = new TeamDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setProjectManager(employeesMapper.mapToDto(entity.getProjectManager()));
-        dto.setProductOwner(employeesMapper.mapToDto(entity.getProductOwner()));
-        dto.setScrumMaster(employeesMapper.mapToDto(entity.getScrumMaster()));
-        dto.setMembers(employeesMapper.mapToDtos(entity.getMembers()));
+        dto.setProjectManager(employeesMapper.mapToBasicDto(entity.getProjectManager()));
+        dto.setProductOwner(employeesMapper.mapToBasicDto(entity.getProductOwner()));
+        dto.setScrumMaster(employeesMapper.mapToBasicDto(entity.getScrumMaster()));
+        dto.setMembers(employeesMapper.mapToBasicDtos(entity.getMembers()));
 
         return dto;
     }
