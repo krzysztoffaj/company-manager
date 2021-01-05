@@ -1,5 +1,6 @@
 package com.krzysztoffaj.companymanager.services;
 
+import com.krzysztoffaj.companymanager.exceptions.conflict.TeamAlreadyExistsException;
 import com.krzysztoffaj.companymanager.exceptions.notfound.TeamNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateTeamRequest;
@@ -35,12 +36,16 @@ public class TeamsService {
     }
 
     public Team createTeam(CreateTeamRequest request) {
+        if (teamsRepository.existsByName(request.getName())) {
+            throw new TeamAlreadyExistsException();
+        }
+
         final Team team = new Team();
         team.setName(request.getName());
         team.setProductOwner(employeesService.getEmployee(request.getProductOwnerId()));
         team.setProjectManager(employeesService.getEmployee(request.getProjectManagerId()));
         team.setScrumMaster(employeesService.getEmployee(request.getScrumMasterId()));
-        team.setMembers(employeesService.getEmployeesByIds(request.getMembersIds()));
+        team.setEmployees(employeesService.getEmployeesByIds(request.getEmployeesIds()));
 
         return teamsRepository.save(team);
     }
@@ -53,7 +58,7 @@ public class TeamsService {
         team.setProductOwner(employeesService.getEmployee(request.getProductOwnerId()));
         team.setProjectManager(employeesService.getEmployee(request.getProjectManagerId()));
         team.setScrumMaster(employeesService.getEmployee(request.getScrumMasterId()));
-        team.setMembers(employeesService.getEmployeesByIds(request.getMembersIds()));
+        team.setEmployees(employeesService.getEmployeesByIds(request.getEmployeesIds()));
     }
 
     public void deleteTeam(int id) {

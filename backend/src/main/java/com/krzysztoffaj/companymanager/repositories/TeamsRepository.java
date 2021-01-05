@@ -13,4 +13,6 @@ public interface TeamsRepository extends JpaRepository<Team, Integer> {
 
     Set<Team> findByIdIn(List<Integer> ids);
 
+    boolean existsByName(String name);
+
 }

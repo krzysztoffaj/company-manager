@@ -7,10 +7,13 @@ import com.krzysztoffaj.companymanager.model.domain.enums.EmployeePosition;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
 import com.krzysztoffaj.companymanager.repositories.EmployeesRepository;
+import com.krzysztoffaj.companymanager.specifications.EmployeesSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,7 +42,10 @@ public class EmployeesService {
     }
 
     public Set<Employee> getEmployeesByInput(String input) {
-        return null;
+        final List<String> values = new ArrayList<>();
+        values.add("tak");
+        values.add("nie");
+        return new HashSet<>(employeesRepository.findAll(EmployeesSpecification.hasValuesIterated(values)));
     }
 
     private String[] getWordsExtractedFromQuery(String query) {
@@ -78,7 +84,8 @@ public class EmployeesService {
         employee.setPosition(EmployeePosition.getStatusByName(request.getPosition()));
         employee.setSupervisor(this.getEmployee(request.getSupervisorId()));
         employee.setTeams(teamsService.getTeamsByIds(request.getTeamsIds()));
-        return employee;
+
+        return employeesRepository.save(employee);
     }
 
     @Transactional

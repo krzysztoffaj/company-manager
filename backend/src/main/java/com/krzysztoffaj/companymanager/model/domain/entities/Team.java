@@ -32,7 +32,10 @@ public class Team {
     @JoinColumn(name = "scrum_master_id")
     private Employee scrumMaster;
 
-    @ManyToMany(mappedBy = "teams")
-    private Set<Employee> members;
+    @ManyToMany
+    @JoinTable(name = "teams_employees",
+            joinColumns = {@JoinColumn(name = "team_id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id")})
+    private Set<Employee> employees;
 
 }

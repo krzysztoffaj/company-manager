@@ -46,7 +46,7 @@ VALUES  ('Technical Architecture', 1, 4, 7),
 
 
 
-INSERT INTO employees_teams (employee_id, team_id)
+INSERT INTO teams_employees (employee_id, team_id)
 VALUES  (1, 1),
         (2, 2),
         (3, 3),

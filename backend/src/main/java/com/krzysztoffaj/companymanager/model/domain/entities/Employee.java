@@ -30,10 +30,7 @@ public class Employee {
     @JoinColumn(name = "supervisor_id")
     private Employee supervisor;
 
-    @ManyToMany
-    @JoinTable(name = "employees_teams",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "team_id")})
+    @ManyToMany(mappedBy = "employees")
     private Set<Team> teams;
 
 }

@@ -12,6 +12,6 @@ public class TeamDto {
     private EmployeeBasicDto projectManager;
     private EmployeeBasicDto productOwner;
     private EmployeeBasicDto scrumMaster;
-    private List<EmployeeBasicDto> members;
+    private List<EmployeeBasicDto> employees;
 
 }

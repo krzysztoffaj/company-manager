@@ -15,14 +15,14 @@ public class EditTeamRequest {
     private String name;
 
     @Positive
-    private int projectManagerId;
+    private int productOwnerId;
 
     @Positive
-    private int productOwnerId;
+    private int projectManagerId;
 
     @Positive
     private int scrumMasterId;
 
-    private List<Integer> membersIds;
+    private List<Integer> employeesIds;
 
 }

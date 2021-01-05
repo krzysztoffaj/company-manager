@@ -29,16 +29,16 @@ ALTER TABLE teams OWNER TO company_manager;
 
 
 
-CREATE TABLE employees_teams
+CREATE TABLE teams_employees
 (
-    employee_id INTEGER NOT NULL REFERENCES employees,
     team_id     INTEGER NOT NULL REFERENCES teams,
+    employee_id INTEGER NOT NULL REFERENCES employees,
 
-    CONSTRAINT employees_teams_pkey
-        PRIMARY KEY (employee_id, team_id)
+    CONSTRAINT teams_employees_pkey
+        PRIMARY KEY (team_id, employee_id)
 );
 
-ALTER TABLE employees_teams OWNER TO company_manager;
+ALTER TABLE teams_employees OWNER TO company_manager;
 
 
 
