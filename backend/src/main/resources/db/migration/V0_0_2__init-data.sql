@@ -7,9 +7,9 @@ VALUES  ('John', 'White', 'PRODUCT_OWNER', 50000, NULL),
         ('Louis', 'Woods', 'PROJECT_MANAGER', 89500, 2),
         ('Anna', 'Lakes', 'PROJECT_MANAGER', 95000, 3),
 
-        ('Lukas', 'Mountains', 'Scrum master', 150005, 4),
-        ('Martin', 'Johnson', 'Scrum master', 17000, 5),
-        ('Jennifer', 'Morales', 'Scrum master', 12500, 6),
+        ('Lukas', 'Mountains', 'SCRUM_MASTER', 15000, 4),
+        ('Martin', 'Johnson', 'SCRUM_MASTER', 17000, 5),
+        ('Jennifer', 'Morales', 'SCRUM_MASTER', 12500, 6),
 
         ('Natalie', 'Jones', 'DEVELOPER', 15000, 1),
         ('Jerry', 'Circ', 'DEVELOPER', 10000, 2),
