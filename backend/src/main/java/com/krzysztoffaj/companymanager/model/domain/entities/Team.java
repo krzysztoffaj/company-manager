@@ -29,7 +29,7 @@ public class Team {
     private Employee productOwner;
 
     @ManyToOne
-    @JoinColumn(name = "scrummaster_id")
+    @JoinColumn(name = "scrum_master_id")
     private Employee scrumMaster;
 
     @ManyToMany(mappedBy = "teams")
