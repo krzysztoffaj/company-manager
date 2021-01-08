@@ -2,6 +2,7 @@ package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.exceptions.conflict.TeamAlreadyExistsException;
 import com.krzysztoffaj.companymanager.exceptions.notfound.TeamNotFoundException;
+import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateTeamRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditTeamRequest;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,12 +43,20 @@ public class TeamsService {
             throw new TeamAlreadyExistsException();
         }
 
+        final Employee productOwner = employeesService.getEmployee(request.getProductOwnerId());
+        final Employee projectManager = employeesService.getEmployee(request.getProjectManagerId());
+        final Employee scrumMaster = employeesService.getEmployee(request.getScrumMasterId());
+        final Set<Employee> otherMembers = employeesService.getEmployees(request.getEmployeesIds());
+
+        final Set<Employee> allMembers = new HashSet<>(otherMembers);
+        allMembers.addAll(Arrays.asList(productOwner, projectManager, scrumMaster));
+
         final Team team = new Team();
         team.setName(request.getName());
-        team.setProductOwner(employeesService.getEmployee(request.getProductOwnerId()));
-        team.setProjectManager(employeesService.getEmployee(request.getProjectManagerId()));
-        team.setScrumMaster(employeesService.getEmployee(request.getScrumMasterId()));
-        team.setEmployees(employeesService.getEmployeesByIds(request.getEmployeesIds()));
+        team.setProductOwner(productOwner);
+        team.setProjectManager(projectManager);
+        team.setScrumMaster(scrumMaster);
+        team.setEmployees(allMembers);
 
         return teamsRepository.save(team);
     }
@@ -54,11 +65,23 @@ public class TeamsService {
     public void editTeam(int id, EditTeamRequest request) {
         final Team team = this.getTeam(id);
 
+        if (!team.getName().equals(request.getName()) && teamsRepository.existsByName(request.getName())) {
+            throw new TeamAlreadyExistsException();
+        }
+
+        final Employee productOwner = employeesService.getEmployee(request.getProductOwnerId());
+        final Employee projectManager = employeesService.getEmployee(request.getProjectManagerId());
+        final Employee scrumMaster = employeesService.getEmployee(request.getScrumMasterId());
+        final Set<Employee> otherMembers = employeesService.getEmployees(request.getEmployeesIds());
+
+        final Set<Employee> allMembers = new HashSet<>(otherMembers);
+        allMembers.addAll(Arrays.asList(productOwner, projectManager, scrumMaster));
+
         team.setName(request.getName());
-        team.setProductOwner(employeesService.getEmployee(request.getProductOwnerId()));
-        team.setProjectManager(employeesService.getEmployee(request.getProjectManagerId()));
-        team.setScrumMaster(employeesService.getEmployee(request.getScrumMasterId()));
-        team.setEmployees(employeesService.getEmployeesByIds(request.getEmployeesIds()));
+        team.setProductOwner(productOwner);
+        team.setProjectManager(projectManager);
+        team.setScrumMaster(scrumMaster);
+        team.setEmployees(allMembers);
     }
 
     public void deleteTeam(int id) {

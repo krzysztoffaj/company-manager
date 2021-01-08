@@ -33,7 +33,7 @@ public class EmployeesService {
         return employeesRepository.findAll();
     }
 
-    public Set<Employee> getEmployeesByIds(List<Integer> ids) {
+    public Set<Employee> getEmployees(List<Integer> ids) {
         return employeesRepository.findByIdIn(ids);
     }
 
