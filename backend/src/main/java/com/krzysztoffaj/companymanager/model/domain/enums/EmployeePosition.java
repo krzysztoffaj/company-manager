@@ -21,8 +21,13 @@ public enum EmployeePosition {
     }
 
     public static EmployeePosition getStatusByName(String name) {
+        String fixedName = name;
+        if (fixedName.contains(" ")) {
+            fixedName = name.replace(" ", "_").toUpperCase();
+        }
+
         for (EmployeePosition position : values()) {
-            if (position.name.equals(name)) {
+            if (String.valueOf(position).equals(fixedName)) {
                 return position;
             }
         }
