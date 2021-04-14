@@ -1,6 +1,6 @@
 package com.krzysztoffaj.companymanager.model.domain.enums;
 
-import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeePositionNotFound;
+import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeePositionNotFoundException;
 import lombok.Getter;
 
 @Getter
@@ -31,7 +31,7 @@ public enum EmployeePosition {
                 return position;
             }
         }
-        throw new EmployeePositionNotFound();
+        throw new EmployeePositionNotFoundException();
     }
 
 
