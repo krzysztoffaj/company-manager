@@ -2,7 +2,6 @@ package com.krzysztoffaj.companymanager.services;
 
 import com.krzysztoffaj.companymanager.exceptions.notfound.EmployeeNotFoundException;
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
-import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.domain.enums.EmployeePosition;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateEmployeeRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditEmployeeRequest;
@@ -12,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,38 +40,8 @@ public class EmployeesService {
     }
 
     public Set<Employee> getEmployeesByInput(String input) {
-        final List<String> values = new ArrayList<>();
-        values.add("tak");
-        values.add("nie");
+        final String[] values = input.split(" ");
         return new HashSet<>(employeesRepository.findAll(EmployeesSpecification.hasValuesIterated(values)));
-    }
-
-    private String[] getWordsExtractedFromQuery(String query) {
-        if (!query.matches(".*\\w.*")) {
-            return new String[0];
-        }
-        return query.trim().split("\\s+");
-    }
-
-    public String prepareTypedQuery(String input) {
-        final String[] words = getWordsExtractedFromQuery(input);
-        if(words.length == 0) {
-            return "FROM Employee";
-        }
-
-        StringBuilder query = new StringBuilder();
-
-        query.append("FROM Employee WHERE ");
-        for (int i = 0; i < words.length - 1; i++) {
-            query.append("(first_name LIKE '%").append(words[i]).append("%' OR ");
-            query.append("last_name LIKE '%").append(words[i]).append("%' OR ");
-            query.append("position LIKE '%").append(words[i]).append("%') AND ");
-        }
-        query.append("(first_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
-        query.append("last_name LIKE '%").append(words[words.length - 1]).append("%' OR ");
-        query.append("position LIKE '%").append(words[words.length - 1]).append("%')");
-
-        return query.toString();
     }
 
     public Employee createEmployee(CreateEmployeeRequest request) {

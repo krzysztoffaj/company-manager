@@ -1,59 +1,46 @@
 package com.krzysztoffaj.companymanager.specifications;
 
 import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeesSpecification {
 
-    private static EntityManager entityManager;
-
     @NonNull
-    public static Specification<Employee> hasFirstName(String value) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), value.toLowerCase());
-    }
+    public static Specification<Employee> hasValuesIterated(String[] values) {
+        final Specification<Employee> specification = (Specification<Employee>) (root, criteriaQuery, criteriaBuilder) -> null;
 
-    @NonNull
-    public static Specification<Employee> hasLastName(String value) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("lastName")), value.toLowerCase());
-    }
-
-    @NonNull
-    public static Specification<Employee> hasPosition(String value) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("position")), value.toLowerCase());
-    }
-
-    @NonNull
-    public static Specification<Employee> hasFirstOrLastNameOrPosition(String value) {
-        return (root, query, criteriaBuilder) ->
-                        hasFirstName(value)
-                        .or(hasLastName(value))
-                        .or(hasPosition(value))
-                        .toPredicate(root, query, criteriaBuilder);
-    }
-
-    @NonNull
-    public static Specification<Employee> hasValuesIterated(List<String> values) {
-        final List<Specification<Employee>> specifications = new ArrayList<>();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-        for (int i = 0; i < values.size(); i++) {
-            if (i < values.size() - 2) {
-                specifications.add(hasFirstOrLastNameOrPosition(values.get(i)).and(hasFirstOrLastNameOrPosition(values.get(i + 1))));
-            } else if (i == values.size() - 2) {
-                specifications.add(hasFirstOrLastNameOrPosition(values.get(i)));
+        for (int i = 0; i < values.length; i++) {
+            if (i + 1 < values.length) {
+                specification.and(hasFirstOrLastName(values[i]).and(hasFirstOrLastName(values[i + 1])));
+            } else if (i == values.length - 1) {
+                specification.and(hasFirstOrLastName(values[i]));
             }
         }
-        return null;
+
+        return specification;
+    }
+
+
+    @NonNull
+    private static Specification<Employee> hasFirstName(String value) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")),  "%" + value.toLowerCase() + "%");
+    }
+
+    @NonNull
+    private static Specification<Employee> hasLastName(String value) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("lastName")), "%" + value.toLowerCase() + "%");
+    }
+
+    @NonNull
+    private static Specification<Employee> hasFirstOrLastName(String value) {
+        return (root, query, criteriaBuilder) ->
+                            hasFirstName(value)
+                            .or(hasLastName(value))
+                            .toPredicate(root, query, criteriaBuilder);
     }
 
 }
