@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class EmployeesService {
     }
 
     public Set<Employee> getEmployeesByInput(String input) {
-        final String[] values = input.split(" ");
+        final List<String> values = Arrays.asList(input.split(" "));
         return new HashSet<>(employeesRepository.findAll(EmployeesSpecification.hasValuesIterated(values)));
     }
 
