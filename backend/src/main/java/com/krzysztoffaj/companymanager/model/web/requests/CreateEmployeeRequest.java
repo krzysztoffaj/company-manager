@@ -2,7 +2,9 @@ package com.krzysztoffaj.companymanager.model.web.requests;
 
 import lombok.Getter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Getter

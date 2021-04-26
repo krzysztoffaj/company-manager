@@ -5,7 +5,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeesSpecification {

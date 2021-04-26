@@ -1,13 +1,10 @@
 package com.krzysztoffaj.companymanager.controllers;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.krzysztoffaj.companymanager.mappers.TeamsMapper;
-import com.krzysztoffaj.companymanager.model.domain.entities.Employee;
 import com.krzysztoffaj.companymanager.model.domain.entities.Team;
 import com.krzysztoffaj.companymanager.model.web.dtos.TeamDto;
 import com.krzysztoffaj.companymanager.model.web.requests.CreateTeamRequest;
 import com.krzysztoffaj.companymanager.model.web.requests.EditTeamRequest;
-import com.krzysztoffaj.companymanager.services.EmployeesService;
 import com.krzysztoffaj.companymanager.services.TeamsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
